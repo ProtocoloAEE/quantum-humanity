@@ -1,0 +1,13 @@
+numpy>=1.21.0
+scipy>=1.7.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+pinecone-client>=3.0.0
+weaviate-client>=4.0.0
+qdrant-client>=1.6.0
+web3>=6.0.0
+python-gnupg>=0.5.0
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
