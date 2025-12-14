@@ -1,0 +1,11 @@
+[33mae3d1b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m docs: Add validation results and update README with real metrics (5000+ trials)
+[33ma217c08[m Fix: Make seed immutable for noise resistance
+[33me51d941[m Fix: Ajustar umbral de deteccion para soportar 20% de ruido
+[33mc6976f1[m Borrar archivo duplicado txt
+[33m421e3c3[m Fix: Update tests import path
+[33md18ed03[m Add core source code
+[33ma59e557[m Final: Estructura v8 limpia y setup.py actualizado
+[33m89e316b[m Add setup.py for PyPI package
+[33ma6c1704[m Merge remote README and clean duplicate .txt files
+[33mecea2f5[m Initial release: AEE v8 enterprise with integrations and legal certification
+[33m81a024d[m Initial commit

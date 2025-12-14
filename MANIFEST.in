@@ -1,0 +1,17 @@
+# Incluir archivos de documentación
+include README.md
+include LICENSE
+include requirements.txt
+include VALIDATION.md
+
+# Incluir archivos de prueba
+recursive-include tests *.py
+
+# Incluir documentación
+recursive-include docs *.md
+
+# Excluir archivos innecesarios
+global-exclude __pycache__
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .DS_Store
