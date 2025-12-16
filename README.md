@@ -1,445 +1,331 @@
-# 🔐 AEE Protocol v0.2.3
+# 🔒 AEE Protocol v0.2.5 (Beta)
+**Vector Watermarking for AI Embeddings - Engine v8.3**
 
-**Scientific Watermarking for Vector Embeddings - Empirically Validated**
-
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-0.2.3-brightgreen)
-![Validation](https://img.shields.io/badge/validation-50k%2B%20trials-success)
-![Status](https://img.shields.io/badge/status-production--ready-orange)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Status](https://img.shields.io/badge/status-beta-yellow)
+![Validation](https://img.shields.io/badge/validation-5000%2B%20trials-success)
+![Noise Tolerance](https://img.shields.io/badge/noise%20tolerance-20%25-orange)
 
 ---
 
 ## 🎯 **What is AEE Protocol?**
 
-AEE Protocol is a **scientifically-grounded watermarking system** for vector embeddings that provides:
+AEE Protocol is an **open-source watermarking system** for vector embeddings that enables:
 
-🔹 **Proof of Ownership** - Mathematically prove vectors are yours  
-🔹 **Data Leakage Detection** - Identify stolen embeddings in vector databases  
-🔹 **Configurable Security** - Choose your false positive rate (0.1% to 5%)  
-🔹 **Noise Resilience** - Survive data corruption and transformations  
-🔹 **Blind Detection** - Verify without the original embedding  
+- 🔐 **Proof of Ownership** - Cryptographically mark your embeddings
+- 🔍 **Data Leakage Detection** - Identify stolen vectors in databases
+- 💪 **Noise Resilience** - Survive corruption and transformations
+- ⚡ **Zero Performance Impact** - <1ms injection time per vector
 
-**Use Case:** Protect sensitive embeddings in Pinecone, Weaviate, Qdrant, and other vector databases from unauthorized use or theft.
+**Use Case:** Protect vectorized data in Pinecone, Weaviate, Qdrant from unauthorized use.
 
 ---
 
-## 🚀 **Quick Start**
+## ❓ **Why AEE Protocol?**
+
+Vector embeddings are the "oil" of modern AI, but:
+- 🔓 **No protection**: Anyone can copy vectors from Pinecone/Weaviate
+- ⚖️ **No legal proof**: Impossible to prove ownership in disputes  
+- 🔍 **No blind detection**: You need the original to compare
+
+**AEE Protocol solves this mathematically**, not heuristically.
+
+- Watermark survives transformations (noise, compression, quantization)
+- Detection works without original vector (blind detection)
+- Cryptographic proof for legal disputes
+
+---
+
+## 📊 **Validation Results (5,000+ Independent Trials)**
+
+### Noise Resilience - Real World Performance
+
+| Noise Level | Survival Rate | Mean Score | Recommended Use |
+|-------------|---------------|------------|-----------------|
+| **σ = 0.05** | 100.0% | 0.2817 | ✅ Perfect - Production ready |
+| **σ = 0.10** | 99.6% | 0.1679 | ✅ Excellent - Recommended range |
+| **σ = 0.15** | 87.2% | 0.1145 | ✅ Good - Acceptable |
+| **σ = 0.20** | 67.3% | 0.0906 | ⚠️ Marginal - Edge of reliability |
+| **σ = 0.25** | 45.5% | 0.0714 | ❌ Unreliable - Not recommended |
+
+**Methodology:** Gaussian noise injection, 5,000 independent trials per level.  
+**Full details:** See [VALIDATION.md](./VALIDATION.md)
+
+### False Positive Analysis
+- **Current FPR:** 1.98% @ threshold 0.075
+- **Optimized FPR:** <0.5% @ threshold 0.12 (with TPR tradeoff)
+- **Distribution:** Gaussian (as expected from theory)
+
+**Production Recommendation:** Operate at **σ ≤ 0.15** for 87%+ reliability.
+
+---
+
+## ⚠️ **Beta Status & Known Limitations**
+
+### Current Version (v0.2.5)
+
+**Security Notice:**
+- Keys are derived deterministically from `user_id` for session persistence
+- This mode is **INSECURE for production** - anyone with your `user_id` can detect/remove marks
+- Use explicit `secret_key` parameter for real security (see below)
+
+**Known Limitations:**
+1. **FPR 1.98%** - High for very large databases (millions of vectors)
+2. **Not for AI Attribution** - Cannot detect if AI model was trained on your data
+3. **Single Watermark** - Not holographic (v0.3.0 will add redundancy)
+4. **Noise Ceiling** - Reliable only up to σ=0.20 (20% noise)
+
+**What it IS good for:**
+- ✅ Detecting direct embedding theft from vector databases
+- ✅ Proving ownership in legal disputes
+- ✅ Auditing data leakage incidents
+- ✅ Testing and research purposes
+
+---
+
+## ⚡ **Quick Start**
 
 ### Installation
+
+**From source (recommended for beta):**
 ```bash
-pip install aeeprotocol
-Basic Usage
-python
+git clone https://github.com/ProtocoloAEE/aee-protocol.git
+cd aee-protocol
+pip install -e .
+```
+
+**PyPI (coming in v0.3.0):**
+```bash
+pip install aeeprotocol  # Not yet available
+```
+
+### Basic Usage
+```python
 from aeeprotocol.sdk.client import AEEClient
 import numpy as np
 
-# Initialize with your identity and security preferences
-client = AEEClient(
-    user_id=123456,          # Your unique identifier (keep secret!)
-    strength=0.5,            # Watermark strength (0.3-0.7 recommended)
-    target_fpr=0.02          # Target false positive rate: 2%
-)
+# Initialize with your identity
+client = AEEClient(user_id=35664619, strength=0.50)
 
-# 1. Mark your embedding
+# 1. Mark your vector
 original_vector = np.random.randn(768).astype('float32')
-original_vector = original_vector / np.linalg.norm(original_vector)
-
 marked_vector, proof = client.watermark(original_vector)
-print(f"✅ Watermarked. Hash: {proof['watermarked_hash']}")
 
-# 2. Verify ownership (blind detection)
+# 2. Later, verify ownership
 result = client.verify(marked_vector)
 print(f"Ownership verified: {result['verified']}")
-print(f"Confidence score: {result['confidence_score']:.4f}")
-print(f"Threshold: {result['threshold']:.4f}")
-Integration with Pinecone
-python
+print(f"Confidence: {result['confidence_score']:.4f}")
+```
+
+### Secure Mode (Production)
+```python
+import base64
+
+# Generate secure key once
+key = AEEClient.generate_key()
+# Save this key securely! (password manager, env var, etc.)
+
+# Use it
+client = AEEClient(
+    user_id=35664619, 
+    secret_key=base64.b64decode(key)
+)
+```
+
+---
+
+## 🔌 **Integrations**
+
+### Pinecone
+```python
 from pinecone import Pinecone
 from aeeprotocol.sdk.client import AEEClient
+import numpy as np
 
 # Initialize
-pc = Pinecone(api_key="your-key")
+pc = Pinecone(api_key="YOUR_KEY")
 index = pc.Index("protected-index")
-client = AEEClient(user_id=123456, strength=0.5, target_fpr=0.02)
+client = AEEClient(user_id=35664619)
 
 # Watermark before storing
-embedding = get_embedding("Your sensitive text")
-marked_embedding, metadata = client.watermark(embedding)
+embedding = np.random.randn(768).astype('float32')
+marked_vec, proof = client.watermark(embedding)
 
-# Store with proof
 index.upsert(vectors=[{
-    "id": "doc_001",
-    "values": marked_embedding.tolist(),
-    "metadata": {
-        "aee_proof": metadata,
-        "content": "Original text"
-    }
+    "id": "vec_1",
+    "values": marked_vec.tolist(),
+    "metadata": {"aee_proof": proof}
 }])
 
-# Later audit: check for stolen embeddings
-stored = index.fetch(["doc_001"])["vectors"]["doc_001"]["values"]
-result = client.verify(np.array(stored))
+# Audit later
+stored_vec = index.fetch("vec_1")["vectors"]["vec_1"]["values"]
+result = client.verify(np.array(stored_vec))
 
 if result['verified']:
-    print("✅ Your intellectual property detected")
-    print(f"   Confidence: {result['confidence_level']:.1%}")
+    print("✅ Your data detected - ownership confirmed")
 else:
-    print("❌ Unknown or tampered vector")
-🧪 Scientific Validation (v8.3)
-Rigorous Statistical Testing (50,000+ trials)
-Configuration	Target FPR	Observed FPR	Noise Resistance (20% σ)	Status
-Balanced
-strength=0.5	2.00%	1.88%	44% survival	✅ Recommended
-Strict
-strength=0.5	1.00%	0.93%	42% survival	✅ Low FPR
-Very Strict
-strength=0.5	0.10%	0.04%	8% survival	✅ Forensic
-Low Strength
-strength=0.4	2.00%	2.06%	38% survival	✅ Low distortion
-High Strength
-strength=0.6	2.00%	1.99%	56% survival	✅ High robustness
-Noise Resilience Performance
-text
-Noise Level | Survival Rate | Average Score
------------ | ------------- | -------------
-   5% σ     |    100%       |     0.257
-  10% σ     |     98%       |     0.148
-  15% σ     |     90%       |     0.120
-  20% σ     |     44%       |     0.080
-  25% σ     |     26%       |     0.070
-  30% σ     |     24%       |     0.061
-*Based on 10,000+ trials per configuration. See VALIDATION.md for full methodology.*
+    print("❌ Not your data")
+```
 
-⚙️ How It Works
-Mathematical Foundation
-AEE Protocol v8.3 uses scientific threshold calculation based on statistical theory:
+### LangChain
+```python
+from langchain_pinecone import PineconeVectorStore
+from langchain_openai import OpenAIEmbeddings
+from aeeprotocol.sdk.client import AEEClient
 
-python
-# Threshold calculation for desired False Positive Rate (FPR)
-# For random vectors in 768 dimensions:
-# correlation ~ N(0, 1/√(n-3))
-# We compute: threshold = z_score / √(n-3)
-# where z_score = norm.ppf(1 - target_fpr/2)
+client = AEEClient(user_id=35664619)
 
-from scipy import stats
-dimension = 768
-target_fpr = 0.02  # 2%
-z_score = stats.norm.ppf(1 - target_fpr / 2)
-threshold = z_score / np.sqrt(dimension - 3)  # ≈ 0.0841
-Watermark Injection Process
-Direction Generation: Deterministic vector from user_id only
-
-Orthogonal Injection: watermarked = original + strength × direction
-
-Normalization: Maintain unit length for consistency
-
-Blind Detection: Regenerate same direction, compute correlation
-
-Key Innovation
-Unlike heuristic approaches, AEE Protocol mathematically guarantees the false positive rate you specify, making it predictable and reliable for production use.
-
-🎯 Configuration Guide
-Choosing Parameters
-python
-# CASE 1: General Monitoring (recommended)
-client = AEEClient(
-    user_id=123456,
-    strength=0.5,      # Balanced distortion/robustness
-    target_fpr=0.02    # 2% false alarms - good for continuous monitoring
-)
-
-# CASE 2: Forensic/Legal Evidence
-client = AEEClient(
-    user_id=123456,
-    strength=0.5,
-    target_fpr=0.001   # 0.1% FPR - very low false accusations
-)
-
-# CASE 3: High Noise Environments
-client = AEEClient(
-    user_id=123456,
-    strength=0.6,      # Stronger watermark
-    target_fpr=0.02    # But still manageable FPR
-)
-
-# CASE 4: Minimum Distortion
-client = AEEClient(
-    user_id=123456,
-    strength=0.4,      # Subtle watermark
-    target_fpr=0.02    # Standard FPR
-)
-Performance Characteristics
-Parameter	Range	Default	Effect
-strength	0.3-0.7	0.5	Higher = more robust, more distortion
-target_fpr	0.001-0.05	0.02	Lower = fewer false positives, harder detection
-Embedding Dim	384-1536	768	Works with common embedding models
-📊 Performance Metrics
-Metric	Value	Notes
-Injection Speed	< 1 ms/vector	CPU single-threaded
-Detection Speed	< 0.5 ms/vector	Correlation operation
-Memory Overhead	0 bytes	No extra storage needed
-Embedding Distortion	5-15%	Depends on strength parameter
-Batch Processing	10k vectors/sec	On modern CPU
-Dimension Support	Any	Auto-pads/truncates to 768
-🔬 Technical Details
-Architecture
-text
-aeeprotocol/
-├── 📁 core/
-│   └── engine.py           # Mathematical engine (v8.3)
-├── 📁 sdk/
-│   └── client.py          # User-friendly interface
-└── 📄 __init__.py
-Core Algorithm (v8.3 Improvements)
-python
-class AEEMathEngine:
-    def __init__(self, strength=0.5, target_fpr=0.02):
-        # Scientific threshold calculation (NEW in v8.3)
-        self.threshold = stats.norm.ppf(1-target_fpr/2) / sqrt(dim-3)
-        
-    def inject(self, embedding, user_id):
-        # 1. Deterministic direction from user_id
-        direction = self._compute_direction(user_id)
-        
-        # 2. Orthogonal injection
-        watermarked = embedding + self.strength * direction
-        
-        # 3. Maintain unit sphere
-        return watermarked / norm(watermarked)
-Why v8.3 is Different
-✅ No heuristic thresholds - Everything is mathematically calculated
-
-✅ Predictable FPR - You get exactly the false positive rate you specify
-
-✅ Transparent operation - No hidden parameters or magic numbers
-
-✅ Empirically validated - 50,000+ test cases confirm theory
-
-⚠️ Limitations & Considerations
-What AEE Protocol DOES Protect Against:
-✅ Direct embedding theft from vector databases
-
-✅ Unauthorized copying to competitor systems
-
-✅ Accidental leakage with minor corruption
-
-✅ Basic transformations (normalization, mild noise)
-
-What AEE Protocol Does NOT Protect Against:
-❌ AI model training on your data (different threat model)
-
-❌ Sophisticated adversarial attacks (research area)
-
-❌ Complete reconstruction from watermarked embeddings
-
-❌ user_id compromise (keep it secret!)
-
-Security Model
-Assumptions:
-
-Attacker doesn't know your user_id
-
-Attacker doesn't have many of your watermarked samples
-
-Attacker uses standard noise/addition attacks
-
-If these assumptions break:
-
-With 1000+ watermarked samples: attacker could estimate watermark
-
-If user_id leaks: watermark can be removed
-
-Sophisticated denoising could reduce watermark strength
-
-📈 Comparison with Alternatives
-Feature	AEE Protocol	Traditional Hashing	Learned Watermarking
-Blind Detection	✅ Yes	❌ No (needs original)	✅ Yes
-Noise Resistance	✅ 20% σ survived	❌ None	⚠️ Limited
-Configurable FPR	✅ 0.1%-5%	❌ Fixed	❌ Fixed
-Mathematical Guarantees	✅ Proven	✅ Proven	❌ Empirical
-Speed	✅ 1ms/vector	✅ Instant	❌ Slow (needs NN)
-Transparency	✅ Full	✅ Full	❌ Black box
-🛠️ Advanced Usage
-Batch Operations
-python
-# Watermark multiple embeddings at once
-embeddings = np.random.randn(100, 768).astype('float32')
-watermarked_batch, metadata_list = client.batch_watermark(embeddings)
-
-# Verify batch
-results = client.batch_verify(watermarked_batch)
-suspicious = [i for i, r in enumerate(results) if not r['verified']]
-Custom Integration
-python
-class ProtectedVectorDB:
-    def __init__(self, user_id):
-        self.client = AEEClient(user_id=user_id)
-        self.vectors = {}
+def secure_ingest(texts, metadatas):
+    """Inject watermarks before storage"""
+    embeddings = OpenAIEmbeddings()
+    raw_vecs = embeddings.embed_documents(texts)
     
-    def store(self, id, embedding):
-        marked, proof = self.client.watermark(embedding)
-        self.vectors[id] = {
-            'vector': marked,
-            'proof': proof,
-            'original_hash': hashlib.sha256(embedding.tobytes()).hexdigest()
-        }
+    secure_vecs = []
+    proofs = []
+    for raw in raw_vecs:
+        marked, proof = client.watermark(raw)
+        secure_vecs.append(marked)
+        proofs.append(proof)
     
-    def audit(self, external_db_vectors):
-        """Check if any vectors in external DB match ours"""
-        matches = []
-        for vec in external_db_vectors:
-            result = self.client.verify(vec)
-            if result['verified'] and result['confidence_level'] > 0.7:
-                matches.append(vec)
-        return matches
-Monitoring Dashboard (Example)
-python
-# Simple monitoring script
-import time
-from collections import deque
+    # Store with proof metadata
+    vectorstore = PineconeVectorStore.from_embeddings(
+        embeddings=list(zip(texts, secure_vecs)),
+        metadatas=[{**m, "aee_proof": p} for m, p in zip(metadatas, proofs)]
+    )
+```
 
-class AEEMonitor:
-    def __init__(self, client, window_size=1000):
-        self.client = client
-        self.detections = deque(maxlen=window_size)
+### LlamaIndex
+```python
+from llama_index.core import VectorStoreIndex
+from llama_index.embeddings.openai import OpenAIEmbedding
+from aeeprotocol.sdk.client import AEEClient
+
+class AEEWrapper:
+    """Wrapper that injects watermarks automatically"""
+    def __init__(self, model):
+        self.model = model
+        self.aee_client = AEEClient(user_id=35664619)
     
-    def monitor_stream(self, vector_stream):
-        """Monitor continuous stream of vectors"""
-        for vector in vector_stream:
-            result = self.client.verify(vector)
-            self.detections.append(result['verified'])
-            
-            # Alert if detection rate changes
-            detection_rate = sum(self.detections) / len(self.detections)
-            if detection_rate > 0.01:  # More than 1% detection
-                print(f"⚠️  High detection rate: {detection_rate:.2%}")
-🧪 Testing & Validation
-Run Full Test Suite
-bash
-# Install test dependencies
-pip install numpy scipy
+    def get_text_embedding(self, text):
+        raw = self.model.get_text_embedding(text)
+        marked, _ = self.aee_client.watermark(raw)
+        return marked.tolist()
 
-# Run comprehensive validation (50k+ trials)
-python auditor_test_v8.3.py
+# Usage
+secure_model = AEEWrapper(OpenAIEmbedding())
+index = VectorStoreIndex.from_documents(docs, embed_model=secure_model)
+```
 
-# Run noise resilience test
-python torture_test_noise.py
+---
 
-# Calculate your own FPR
-python -c "
-from scipy import stats
-dim = 768
-for fpr in [0.001, 0.01, 0.02, 0.05]:
-    z = stats.norm.ppf(1 - fpr/2)
-    th = z / (dim - 3)**0.5
-    print(f'FPR {fpr:.1%} -> threshold {th:.6f}')
-"
-Validation Methodology
-Statistical Validity: 10,000 random vectors per FPR test
+## 🏗️ **How It Works**
 
-Noise Testing: Gaussian noise at 5%, 10%, 15%, 20%, 25%, 30% levels
+### Mathematical Foundation
 
-Reproducibility: Fixed seeds for deterministic testing
+1. **Deterministic Direction Generation**
+   - Seed derived from user credentials
+   - Ensures consistency across detections
 
-Edge Cases: Zero vectors, duplicate vectors, abnormal values
+2. **Orthogonal Watermark Injection**
+```
+   Watermarked = Original + (strength × Direction)
+```
+   - Preserves semantic meaning
+   - Minimal quality degradation (<2%)
 
-See VALIDATION.md for complete methodology.
+3. **Blind Detection**
+   - Regenerate direction from user_id/secret_key
+   - Compute correlation score
+   - Threshold-based decision
 
-🤝 Contributing
+### Architecture
+```
+┌───────────────────────┐     ┌───────────────────────┐
+│   Your Identity       │     │   Vector Database     │
+│ (user_id + secret)    │     │ (Pinecone/Weaviate)   │
+└──────────┬────────────┘     └──────────▲────────────┘
+           │                              │
+           ▼                              │
+┌───────────────────────┐                │
+│   AEE Protocol Core   │────────────────┤
+│ (Deterministic Seed)  │   Watermarked  │
+│                       │    + Proof     │
+└───────────────────────┘                │
+```
+
+### Performance
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Injection Speed | <1ms/vector | CPU single-threaded |
+| Detection Speed | <0.5ms/vector | Correlation operation |
+| Memory Overhead | 0 bytes | No extra storage needed |
+| Embedding Distortion | <2% | At strength=0.5 |
+| Dimension Support | 384-1536 | Tested on 768 |
+
+---
+
+## 🗺️ **Roadmap**
+
+### v0.3.0 (Next Release)
+- 🎯 Holographic watermarking (3-chunk redundancy)
+- 📉 Improved FPR (~0.5%) and TPR (~75% @ 20% noise)
+- 📦 PyPI publication
+- 🔒 Enhanced security options
+
+### v0.4.0 (Future)
+- 🔐 Mandatory secret_key enforcement
+- 🧪 Extended attack resistance testing
+- 🌐 REST API for enterprise integration
+- 📊 Dashboard for watermark management
+
+---
+
+## 📚 **Documentation**
+
+- **[VALIDATION.md](./VALIDATION.md)** - Detailed test methodology and results
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines
+- **[docs/whitepaper.md](./docs/whitepaper.md)** - Technical deep dive
+
+---
+
+## 🤝 **Contributing**
+
 We welcome contributions in:
+- Statistical validation with larger datasets
+- Security audits and penetration testing
+- Integration with other vector databases
+- Performance optimization
 
-Statistical validation with larger datasets
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-Integration with more vector databases
+---
 
-Performance optimization for GPU/TPU
+## 📜 **License**
 
-Security audits and penetration testing
+MIT License - See [LICENSE](./LICENSE)
 
-Documentation improvements
+Free for commercial and research use.
 
-Development Setup
-bash
-# Clone repository
-git clone https://github.com/ProtocoloAEE/aee-protocol.git
-cd aee-protocol
+---
 
-# Install in development mode
-pip install -e .
+## 👤 **Credits**
 
-# Run tests
-python -m pytest tests/
-python auditor_test_v8.3.py
-Code Standards
-Follow PEP 8 style guide
+Created by **Franco Luciano Carricondo** (DNI 35.664.619)
 
-Include type hints for new functions
+**Building digital sovereignty from Argentina.** 🇦🇷
 
-Add tests for new features
+---
 
-Update documentation accordingly
+## 📞 **Contact & Support**
 
-📚 Documentation
-VALIDATION.md - Complete test methodology and results
+- 🐛 GitHub Issues: [Report bugs](https://github.com/ProtocoloAEE/aee-protocol/issues)
+- 📧 Email: francocarricondo@gmail.com
+- 💼 LinkedIn: [Franco Carricondo](https://linkedin.com/in/francocarricondo)
 
-ARCHITECTURE.md - Mathematical foundation and proofs
+---
 
-API Reference - Complete SDK documentation
-
-Examples - Practical use cases and integrations
-
-📄 License
-MIT License - See LICENSE file for details.
-
-Copyright © 2025 Franco Luciano Carricondo
-Building digital sovereignty from Argentina. 🇦🇷
-
-👤 Author & Contact
-Franco Luciano Carricondo
-🔗 LinkedIn: linkedin.com/in/francocarricondo
-📧 Email: francocarricondo@gmail.com
-🐙 GitHub: @ProtocoloAEE
-🐦 Twitter: @ProtocoloAEE
-
-Support & Community
-GitHub Issues: Report bugs or request features
-
-Discussions: Join the conversation
-
-Email: Direct support for enterprise users
-
-🔄 Changelog
-v0.2.3 (Current) - December 2025
-✅ Scientific threshold calculation (no more guessing)
-
-✅ Configurable false positive rates (0.1% to 5%)
-
-✅ 50,000+ validation trials across configurations
-
-✅ Improved documentation with empirical results
-
-✅ Better error handling and user experience
-
-v0.2.0 - December 2025
-Initial public release with basic watermarking
-
-Pinecone/Weaviate integration examples
-
-Basic validation (5,000 trials)
-
-🌟 Acknowledgments
-Statistical Foundation: Based on correlation distribution theory
-
-Embedding Models: Tested with Sentence Transformers, OpenAI embeddings
-
-Vector Databases: Compatible with Pinecone, Weaviate, Qdrant, Chroma
-
-Community: Early testers and feedback providers
-
-Last Updated: December 2025
-Validation Status: 50,000+ trials across 5 configurations
-Production Ready: Yes, with understood limitations
-Recommendation: Use strength=0.5, target_fpr=0.02 for general purpose
-
-💡 Tip: For production deployments, rotate user_id periodically and monitor detection rates for anomalies.
+**Last Updated:** December 15, 2024  
+**Status:** Beta - Functional with documented limitations  
+**Version:** 0.2.5 (Engine v8.3-Secure)
