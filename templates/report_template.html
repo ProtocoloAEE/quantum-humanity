@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificado de Evidencia</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { margin: 20px; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .content { margin-top: 20px; }
+        .qr-code { float: right; }
+        .section { margin-bottom: 15px; }
+        .section-title { font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 5px; }
+        pre { white-space: pre-wrap; word-wrap: break-word; background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Certificado de Evidencia Forense AEE</h1>
+        </div>
+        <div class="qr-code">
+            <img src="qrcode.png" width="120" height="120">
+        </div>
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Información del Certificado</div>
+                <p><strong>ID del Certificado:</strong> {{ id_sello }}</p>
+                <p><strong>Fecha y Hora (UTC):</strong> {{ timestamp }}</p>
+                <p><strong>Versión del Protocolo:</strong> {{ version }}</p>
+            </div>
+            <div class="section">
+                <div class="section-title">Firmante</div>
+                <pre>{{ firmante_details }}</pre>
+            </div>
+            <div class="section">
+                <div class="section-title">Hash de la Evidencia</div>
+                <pre>{{ hash_evidencia }}</pre>
+            </div>
+            <div class="section">
+                <div class="section-title">Firma Digital (Kyber-Dilithium)</div>
+                <pre>{{ firma_digital }}</pre>
+            </div>
+            <div class="section">
+                <div class="section-title">Clave Pública del Firmante</div>
+                <pre>{{ clave_publica_firmante }}</pre>
+            </div>
+             <div class="section">
+                <div class="section-title">Datos del Sello de Tiempo Cuántico (NTS)</div>
+                <pre>{{ nts_data }}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
