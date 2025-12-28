@@ -1,12 +1,8 @@
-# Byte-compiled / optimized / DLL files
+﻿# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -24,43 +20,15 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
 .pytest_cache/
+.coverage
+htmlcov/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# Environments
-.env
-.venv
+# Virtual environments
+.venv/
 env/
-venv/
+virtualenv/
 ENV/
-env.bak/
-venv.bak/
 
 # IDE
 .vscode/
@@ -72,8 +40,10 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# AEE Protocol specific
-torture_test_results_*.json
-*.log
-test_output/
-validation_results/
+# Demo/Web
+node_modules/
+
+# Secrets
+.env
+.env.local
+secrets.ini

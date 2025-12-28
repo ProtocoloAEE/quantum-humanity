@@ -1,0 +1,1690 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2025-12-27T06:48:59.298Z",
+        "id": "page_1",
+        "title": "https://ganamosnet.biz/bonus-promo",
+        "pageTimings": {
+          "onContentLoad": 1145.3470000014931,
+          "onLoad": 1146.4470000028086
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_fromCache": "disk",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "get",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 216173
+              },
+              {
+                "functionName": "value",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 81317
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 124437
+              },
+              {
+                "functionName": "value",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 124406
+              },
+              {
+                "functionName": "value",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 122611
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 88487
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 88559
+              },
+              {
+                "functionName": "56d7",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 88563
+              },
+              {
+                "functionName": "a",
+                "scriptId": "231",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                "lineNumber": 0,
+                "columnNumber": 566
+              },
+              {
+                "functionName": "r",
+                "scriptId": "231",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                "lineNumber": 0,
+                "columnNumber": 429
+              },
+              {
+                "functionName": "t",
+                "scriptId": "231",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                "lineNumber": 0,
+                "columnNumber": 292
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 40
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://va.tawk.to/v1/widget-settings?propertyId=6479ead6ad80445890f0a9e8&widgetId=1h1u3qlgn&sv=null",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://ganamosnet.biz/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "propertyId",
+              "value": "6479ead6ad80445890f0a9e8"
+            },
+            {
+              "name": "widgetId",
+              "value": "1h1u3qlgn"
+            },
+            {
+              "name": "sv",
+              "value": "null"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-max-age",
+              "value": "3600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"2-18-0\""
+            },
+            {
+              "name": "age",
+              "value": "387"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "GET,OPTIONS"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "date",
+              "value": "Sat, 27 Dec 2025 06:22:09 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-served-by",
+              "value": "visitor-application-preemptive-p2kh"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "access-control-allow-headers",
+              "value": "content-type,x-tawk-token"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=7200, s-maxage=1800"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9b46b8ca9b8b203f-EZE"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 3392,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.20.42.169",
+        "startedDateTime": "2025-12-27T06:49:03.252Z",
+        "time": 10.023000002547633,
+        "timings": {
+          "blocked": 9.04400000180793,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0.6499999985008035,
+          "receive": 0.32900000223889947,
+          "_blocked_queueing": 8.78500000180793,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "4338",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "post",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 215304
+              },
+              {
+                "functionName": "value",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 186891
+              },
+              {
+                "functionName": "value",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 186470
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 183811
+              },
+              {
+                "functionName": "h",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 175613
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 176936
+              },
+              {
+                "functionName": "",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 176023
+              },
+              {
+                "functionName": "l",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 181512
+              },
+              {
+                "functionName": "a",
+                "scriptId": "233",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                "lineNumber": 1,
+                "columnNumber": 181715
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "l",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 181583
+                },
+                {
+                  "functionName": "a",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 181715
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 181774
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 181655
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 183908
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 124595
+                },
+                {
+                  "functionName": "value",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 124546
+                },
+                {
+                  "functionName": "value",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 122611
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 88487
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 88559
+                },
+                {
+                  "functionName": "56d7",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 88563
+                },
+                {
+                  "functionName": "a",
+                  "scriptId": "231",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                  "lineNumber": 0,
+                  "columnNumber": 566
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "231",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                  "lineNumber": 0,
+                  "columnNumber": 429
+                },
+                {
+                  "functionName": "t",
+                  "scriptId": "231",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                  "lineNumber": 0,
+                  "columnNumber": 292
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 40
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://va.tawk.to/v1/session/start",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "va.tawk.to"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/v1/session/start"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "es-419,es;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "308"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "origin",
+              "value": "https://ganamosnet.biz"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://ganamosnet.biz/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "none"
+            },
+            {
+              "name": "sec-gpc",
+              "value": "1"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "x-tawk-token",
+              "value": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InZpc2l0b3ItYXBwbGljYXRpb24tc2VydmVyLTIwMjEwMjIifQ.eyJwaWQiOiI2NDc5ZWFkNmFkODA0NDU4OTBmMGE5ZTgiLCJ2aWQiOiI2NDc5ZWFkNmFkODA0NDU4OTBmMGE5ZTgtekpuUTRoSUxoRkJYX1Y3bFhQR3h5Iiwic2lkIjoiNjk0ZjdiMTE0MDExMmJlODFiZjgyMWE0IiwiaWF0IjoxNzY2ODE2NTI5LCJleHAiOjE3NjY4MTgzMjksImp0aSI6IktoTHhkU0NwTTlNTk4tVTN4S05FWCJ9.oIe9rzAw84eHKM2h6YlxBwAeUjpmlKP_nekNWHdt8YeVOQ2sL6Y7fXDT7OLyHDhVuGqYGwL9WWG1GDss32dlHw"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 308,
+          "postData": {
+            "mimeType": "application/json; charset=utf-8",
+            "text": "{\"p\":\"6479ead6ad80445890f0a9e8\",\"w\":\"1h1u3qlgn\",\"platform\":\"desktop\",\"tzo\":180,\"url\":\"https://ganamosnet.biz/bonus-promo\",\"vss\":\"vsa71.tawk.to\",\"consent\":false,\"wss\":\"min\",\"u\":\"1.7xanY39j3xkjyU3nWITb0z51k9VM1IWvZkakTIr1z7MQkd3jBahZRBOUHtFavZCtvha9kdp6YSweDlG5GaQq5LAoMzsJ1RroLuX9WJbVHGU7XsZSqEeirKLT\",\"uv\":3}"
+          }
+        },
+        "response": {
+          "status": 400,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-headers",
+              "value": "content-type,x-tawk-token"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "POST,OPTIONS"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "https://ganamosnet.biz"
+            },
+            {
+              "name": "access-control-max-age",
+              "value": "3600"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9b46e0514d844af0-EZE"
+            },
+            {
+              "name": "content-length",
+              "value": "64"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Sat, 27 Dec 2025 06:49:08 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=0; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-served-by",
+              "value": "visitor-application-preemptive-fkcg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 64,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 406,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.20.42.169",
+        "startedDateTime": "2025-12-27T06:49:03.254Z",
+        "time": 247.9419999991383,
+        "timings": {
+          "blocked": 7.346999997298234,
+          "dns": 5.885999999999999,
+          "ssl": 26.690999999999995,
+          "connect": 32.907,
+          "send": 0.240000000000002,
+          "wait": 201.0990000015311,
+          "receive": 0.46300000030896626,
+          "_blocked_queueing": 7.148999997298233,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_fromCache": "disk",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "f",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 19281
+              },
+              {
+                "functionName": "m",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 20022
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 21027
+              },
+              {
+                "functionName": "value",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165644
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165468
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165346
+                },
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165151
+                },
+                {
+                  "functionName": "read",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 68978
+                },
+                {
+                  "functionName": "loadOne",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69757
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69534
+                },
+                {
+                  "functionName": "prepareLoading",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69517
+                },
+                {
+                  "functionName": "load",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69564
+                },
+                {
+                  "functionName": "loadResources",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 77043
+                },
+                {
+                  "functionName": "a",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79123
+                },
+                {
+                  "functionName": "changeLanguage",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79444
+                },
+                {
+                  "functionName": "l",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 76255
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "init",
+                    "scriptId": "232",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                    "lineNumber": 1,
+                    "columnNumber": 76354
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88198
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88559
+                  },
+                  {
+                    "functionName": "56d7",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88563
+                  },
+                  {
+                    "functionName": "a",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 566
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 429
+                  },
+                  {
+                    "functionName": "t",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 292
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 40
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/en.json",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://ganamosnet.biz/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"4662c7c182dfe30065936bfa05f8c773\""
+            },
+            {
+              "name": "age",
+              "value": "335371"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "date",
+              "value": "Sat, 27 Dec 2025 03:35:07 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "last-modified",
+              "value": "Tue, 23 Dec 2025 05:56:16 GMT"
+            },
+            {
+              "name": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "x-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=2592000, immutable"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9b45c420dffbdf02-EZE"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 11595,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.20.42.169",
+        "startedDateTime": "2025-12-27T06:49:03.255Z",
+        "time": 1.9489999976940453,
+        "timings": {
+          "blocked": 1.3639999983494635,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0.21799999879323878,
+          "receive": 0.36700000055134296,
+          "_blocked_queueing": 1.0589999983494636,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_fromCache": "disk",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "f",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 19281
+              },
+              {
+                "functionName": "m",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 20022
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 21027
+              },
+              {
+                "functionName": "value",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165644
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165468
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165346
+                },
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165151
+                },
+                {
+                  "functionName": "read",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 68978
+                },
+                {
+                  "functionName": "loadOne",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69757
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69534
+                },
+                {
+                  "functionName": "prepareLoading",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69517
+                },
+                {
+                  "functionName": "load",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69564
+                },
+                {
+                  "functionName": "loadResources",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 77043
+                },
+                {
+                  "functionName": "a",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79123
+                },
+                {
+                  "functionName": "changeLanguage",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79444
+                },
+                {
+                  "functionName": "l",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 76255
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "init",
+                    "scriptId": "232",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                    "lineNumber": 1,
+                    "columnNumber": 76354
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88198
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88559
+                  },
+                  {
+                    "functionName": "56d7",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88563
+                  },
+                  {
+                    "functionName": "a",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 566
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 429
+                  },
+                  {
+                    "functionName": "t",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 292
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 40
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/en_dev.json",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://ganamosnet.biz/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "etag",
+              "value": "\"586d518585b166811a617b7f5060f71e\""
+            },
+            {
+              "name": "age",
+              "value": "59323"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "date",
+              "value": "Sat, 27 Dec 2025 03:35:07 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "last-modified",
+              "value": "Tue, 23 Dec 2025 05:56:16 GMT"
+            },
+            {
+              "name": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "x-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=2592000, immutable"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9b45c420dffcdf02-EZE"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 10639,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.20.42.169",
+        "startedDateTime": "2025-12-27T06:49:03.255Z",
+        "time": 1.7719999996188562,
+        "timings": {
+          "blocked": 1.2629999980006832,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0.16599999827775175,
+          "receive": 0.34300000334042124,
+          "_blocked_queueing": 0.9719999980006833,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_fromCache": "disk",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "f",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 19281
+              },
+              {
+                "functionName": "m",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 20022
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 21027
+              },
+              {
+                "functionName": "value",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165644
+              },
+              {
+                "functionName": "",
+                "scriptId": "232",
+                "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                "lineNumber": 1,
+                "columnNumber": 165468
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165346
+                },
+                {
+                  "functionName": "value",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 165151
+                },
+                {
+                  "functionName": "read",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 68978
+                },
+                {
+                  "functionName": "loadOne",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69757
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69534
+                },
+                {
+                  "functionName": "prepareLoading",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69517
+                },
+                {
+                  "functionName": "load",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 69564
+                },
+                {
+                  "functionName": "loadResources",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 77043
+                },
+                {
+                  "functionName": "a",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79123
+                },
+                {
+                  "functionName": "changeLanguage",
+                  "scriptId": "232",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-vendors.js",
+                  "lineNumber": 1,
+                  "columnNumber": 79444
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 81453
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "233",
+                  "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                  "lineNumber": 1,
+                  "columnNumber": 216258
+                }
+              ],
+              "parent": {
+                "description": "Promise.then",
+                "callFrames": [
+                  {
+                    "functionName": "get",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 216240
+                  },
+                  {
+                    "functionName": "value",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 81317
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 124437
+                  },
+                  {
+                    "functionName": "value",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 124406
+                  },
+                  {
+                    "functionName": "value",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 122611
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88487
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88559
+                  },
+                  {
+                    "functionName": "56d7",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 88563
+                  },
+                  {
+                    "functionName": "a",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 566
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 429
+                  },
+                  {
+                    "functionName": "t",
+                    "scriptId": "231",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-runtime.js",
+                    "lineNumber": 0,
+                    "columnNumber": 292
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "233",
+                    "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/js/twk-chunk-common.js",
+                    "lineNumber": 1,
+                    "columnNumber": 40
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/es.json",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://ganamosnet.biz/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"c81a6676493dff5b17681450aa86be85\""
+            },
+            {
+              "name": "age",
+              "value": "335370"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "date",
+              "value": "Sat, 27 Dec 2025 03:35:07 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "last-modified",
+              "value": "Tue, 23 Dec 2025 05:56:16 GMT"
+            },
+            {
+              "name": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "x-cache-status",
+              "value": "HIT"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=2592000, immutable"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9b45c4212fffdf02-EZE"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 13009,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.20.42.169",
+        "startedDateTime": "2025-12-27T06:49:03.264Z",
+        "time": 1.3409999992290977,
+        "timings": {
+          "blocked": 0.8229999966158066,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0.20400000181444922,
+          "receive": 0.31400000079884194,
+          "_blocked_queueing": 0.7099999966158066,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

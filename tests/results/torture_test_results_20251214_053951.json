@@ -1,0 +1,95 @@
+{
+  "timestamp": "2025-12-14T05:37:52.318804",
+  "model": "llama2:7b",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "strength": 0.35,
+  "tests": [
+    {
+      "text_idx": 1,
+      "iteration": 1,
+      "original": "El watermarking vectorial es una t\u00e9cnica criptogr\u00e1fica para proteger embeddings de inteligencia artificial de uso no autorizado.",
+      "rewritten": "The vector-based watermarking technique is a cryptographic method to protect artificial intelligence embeddings from unauthorized use.",
+      "detected": false,
+      "similarity": -0.11199545501602004,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 1,
+      "iteration": 2,
+      "original": "El watermarking vectorial es una t\u00e9cnica criptogr\u00e1fica para proteger embeddings de inteligencia artificial de uso no autorizado.",
+      "rewritten": "El watermarking vectorial es una t\u00e9cnica criptogr\u00e1fica avanzada que se utiliza para proteger las embeddings de inteligencia artificial (IA) de uso no autorizado. En t\u00e9rminos generales, un watermark es un s\u00edmbolo o marca que se adiciona a una imagen o contenido digital para identificar su propiedad o autenticidad. El watermarking vectorial, en particular, utiliza t\u00e9c",
+      "detected": false,
+      "similarity": -0.04347209774011947,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 1,
+      "iteration": 3,
+      "original": "El watermarking vectorial es una t\u00e9cnica criptogr\u00e1fica para proteger embeddings de inteligencia artificial de uso no autorizado.",
+      "rewritten": "Here are some alternative ways to express the same idea:\n\n1. Vector-based watermarking is a cryptographic technique for protecting artificial intelligence embeddings from unauthorized use.\n2. Watermarking involves embedding a hidden signature or pattern into an AI model's embeddings, making it difficult for hackers to steal or misuse the technology without leaving a trace.\n3. By adding a watermark to an AI",
+      "detected": false,
+      "similarity": -0.07948136183719282,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 2,
+      "iteration": 1,
+      "original": "Los embeddings son representaciones num\u00e9ricas de texto en espacios vectoriales de alta dimensi\u00f3n que capturan significado sem\u00e1ntico.",
+      "rewritten": "Embeddings are numerical representations of text in high-dimensional vector spaces that capture semantic meaning. In other words, they are complex mathematical models that use numbers to represent the meaning of text in a way that can be processed by computers. These embeddings are designed to capture the subtle nuances and meanings behind words and phrases, allowing machines to understand and interpret text in a more sophisticated manner. By representing text in this way, machines can perform tasks such as",
+      "detected": false,
+      "similarity": -0.0028323861332867906,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 2,
+      "iteration": 2,
+      "original": "Los embeddings son representaciones num\u00e9ricas de texto en espacios vectoriales de alta dimensi\u00f3n que capturan significado sem\u00e1ntico.",
+      "rewritten": "Embeddings are numerical representations of text in high-dimensional vector spaces that capture semantic meaning. In other words, they are mathematical structures that map text to points in a multidimensional space, allowing for complex analyses and computations to be performed on the text data. The embeddings capture the meaning and context of the text in a way that can be processed by machine learning algorithms, enabling tasks such as text classification, clustering, and recommendation systems. By representing",
+      "detected": false,
+      "similarity": -0.023403874121979088,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 2,
+      "iteration": 3,
+      "original": "Los embeddings son representaciones num\u00e9ricas de texto en espacios vectoriales de alta dimensi\u00f3n que capturan significado sem\u00e1ntico.",
+      "rewritten": "Here are some alternative ways to express the same idea:\n\n1. \"Embeddings are numerical representations of text in high-dimensional vector spaces that capture semantic meaning.\"\n2. \"Text embeddings are mathematical models that map words or phrases to vectors in a way that preserves their semantic significance.\"\n3. \"Embeddings are a means of converting text into a numerical format that retains its linguistic and semantic properties.\"\n4. \"In computer",
+      "detected": false,
+      "similarity": -0.06703128802811018,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 3,
+      "iteration": 1,
+      "original": "La trazabilidad de datos es cr\u00edtica en auditor\u00edas de modelos de lenguaje para verificar conformidad con regulaciones.",
+      "rewritten": "In simpler terms, the ability to track and trace data is crucial in language models' audits for ensuring compliance with regulations.",
+      "detected": false,
+      "similarity": 0.06745148370180472,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 3,
+      "iteration": 2,
+      "original": "La trazabilidad de datos es cr\u00edtica en auditor\u00edas de modelos de lenguaje para verificar conformidad con regulaciones.",
+      "rewritten": "Manteniendo el significado original, la tracci\u00f3n de datos es fundamental en las auditorias de modelos de lenguaje para evaluar la conformidad a regulaciones.",
+      "detected": false,
+      "similarity": 0.0045389972594470345,
+      "threshold": 0.13999999999999999
+    },
+    {
+      "text_idx": 3,
+      "iteration": 3,
+      "original": "La trazabilidad de datos es cr\u00edtica en auditor\u00edas de modelos de lenguaje para verificar conformidad con regulaciones.",
+      "rewritten": "Other ways to express the same idea:\n\n1. Traackability of data is crucial in language model audits to ensure compliance with regulations.\n2. Data traceability is essential for ensuring that language models adhere to regulatory standards during audits.\n3. The ability to track and monitor data is vital for effective language model auditing, as it allows for accurate assessment of compliance with regulations.\n4. Language model audits rely on",
+      "detected": false,
+      "similarity": 0.07190813309537739,
+      "threshold": 0.13999999999999999
+    }
+  ],
+  "summary": {
+    "total_tests": 9,
+    "watermarks_survived": 0,
+    "watermarks_lost": 9,
+    "survival_rate": 0.0
+  }
+}

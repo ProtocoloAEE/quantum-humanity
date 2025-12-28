@@ -1,89 +1,180 @@
-# ⚛️ AEE Protocol v0.5: Quantum-Resistant Data Sovereignty
+# 🔐 Protocolo AEE - Quantum Humanity v1.3
 
-**The first Vector Integrity Protocol secured by NIST-Standard Post-Quantum Cryptography (Kyber-768).**
-
-![Version](https://img.shields.io/badge/version-v0.5.0-purple)
-![Security](https://img.shields.io/badge/Security-Quantum%20Resistant-purple)
-![Standard](https://img.shields.io/badge/NIST-Kyber--768-success)
-![Defense](https://img.shields.io/badge/Llama2%20Defense-Verified-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-> **"Semantic watermarks fade. Cryptographic seals endure."**
+**Auditoría Ética y Evidencia Soberana**  
+*Estándar global de certificación ciudadana post-cuántica*
 
 ---
 
-## 🚨 The Paradigm Shift
+## 🎯 ¿Qué es el Protocolo AEE?
 
-### The Problem: AI Rewriting (The "Llama 2" Event)
-In our rigorous **Torture Tests (Dec 2025)**, we exposed a critical vulnerability in traditional vector watermarking (including our own v0.2-v0.4 architectures).
-*   **Attack:** Llama 2 (13b) aggressive paraphrasing.
-*   **Result:** The semantic drift caused by the AI rewriting removed the watermark in **100% of cases ($0/3$ detection)**.
-*   **Conclusion:** Watermarking is insufficient for Data Sovereignty in the GenAI era.
+El **Protocolo AEE (Auditoría Ética y Evidencia Soberana)** es un sistema de certificación digital que permite a cualquier ciudadano generar evidencia técnica con **validez legal**, utilizando criptografía determinista basada en identidad física y operación **100% offline**.
 
-### The Solution: v0.5 Immutability Architecture
-AEE Protocol v0.5 abandons probabilistic watermarking in favor of **Structural Immutability**, secured by **Post-Quantum Cryptography (PQC)**.
-
-We don't just hide a signature; we **seal the content's integrity**.
+### Principios Fundamentales
+1. **Soberanía real** - Ejecución en tu máquina, sin servidores
+2. **Identidad verificable** - Vinculada a DNI/documento real
+3. **Integridad criptográfica** - SHA3-512 post-cuántico
+4. **Transparencia total** - Código abierto auditable
+5. **Marco legal claro** - Cumple Ley 25.506 (Argentina)
 
 ---
 
-## 🛡️ Core Technology: Kyber-768
+## 🚀 Comenzar en 2 minutos
 
-AEE v0.5 implements **Kyber-768**, the Key Encapsulation Mechanism (KEM) selected by the **US NIST** as the standard for defense against future quantum computers.
+### Requisitos
+- Python 3.8+
+- Sistema operativo cualquiera (Windows, Linux, macOS)
+- Conexión a Internet (solo para descarga inicial)
 
-| Feature | Legacy Watermarking (v0.2) | **AEE v0.5 (Quantum)** |
-| :--- | :--- | :--- |
-| **Protection Type** | Probabilistic Signal | **Cryptographic Seal** |
-| **AI Resilience** | Fails against Paraphrasing | **Immutable (Tamper-Evident)** |
-| **Security Level** | Classical (RSA/AES) | **Post-Quantum (Kyber-768)** |
-| **Detection Logic** | Correlation > Threshold | **Hash Verification** |
+### Instalación
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/quantum-humanity/aee-protocol
+cd aee-protocol
+
+# 2. Verificar que funciona
+python kyber_engine.py
+
+# 3. Ejecutar certificador
+python certificar_evidencia_aee.py
+```
 
 ---
 
-## 🧪 Validation Results (Torture Test)
+## 📋 Uso Básico
 
-We subjected the v0.5 architecture to the same Llama 2 attack that broke previous versions.
+### Modo Interactivo (Recomendado para empezar)
+```bash
+python certificar_evidencia_aee.py
+# Seleccionar opción 1 y seguir las instrucciones
+```
 
-### Simulation Log:
-```text
-=== PROTOCOLO AEE v0.5: INMUTABILIDAD ESTRUCTURAL PQC ===
-1. Encryption: Session Key encapsulated with Kyber-768 (NIST Standard).
-2. Original Seal: 4758ec05068... (Immutable)
+### Modo Archivo (Para evidencia existente)
+```bash
+python certificar_evidencia_aee.py --modo archivo --archivo mi_evidencia.json
+```
 
-=== ATAQUE Llama 2 (Simulated) ===
-AI alters content -> Semantic structure changes.
+### Generar Ejemplo Demostrativo
+```bash
+python certificar_evidencia_aee.py --modo ejemplo
+```
 
-=== RESULTADO ===
-Original Hash: 4758ec...
-Attacked Hash: 95b6ca...
-STATUS: INTEGRITY ALERT TRIGGERED.
-Verdict: The AI successfully altered the content, but failed to forge the signature. The protocol correctly identified the asset as tampered, preserving the chain of custody.
-🚀 Quick Start (Architecture v0.5)
-Current v0.5 is an architectural release demonstrating PQC integration.
-Installation
-code
-Bash
-pip install aeeprotocol
-Concept of Operation
-code
-Python
-# Coming in SDK v0.5
-from aeeprotocol.pqc import KyberSeal
+---
 
-# 1. Encapsulate Data (Quantum Safe)
-seal = KyberSeal.protect(document_vector, user_identity)
+## 🏛️ Marco Legal (Argentina)
 
-# 2. Verify Integrity
-if seal.verify(document_vector):
-    print("✅ Content is Authentic and Untouched")
-else:
-    print("🚨 TAMPERING DETECTED: Content altered by AI")
-🗺️ Roadmap
-v0.5 (Current): PQC Architecture Validation & Llama 2 Defense Proof.
-v0.6 (Q1 2026): Native integration of Kyber-768 in the Python SDK.
-v1.0 (Q2 2026): Enterprise API for Google.org / NGO Data Sovereignty.
-👤 Author & Contact
-Franco Luciano Carricondo
-Founder & Lead Architect
-Building Digital Sovereignty from Argentina. 🇦🇷
-Verified against Llama 2:13b on Dec 16, 2025.
+### Base Jurídica
+- **Ley 25.506** - Firma Digital
+- **Ley 25.326** - Protección de Datos Personales  
+- **Ley 27.099** - Defensa del Consumidor
+- **Código Penal** - Art. 172 bis (Estafas informáticas)
+
+### Validez del Certificado
+Los certificados `.json` generados por este protocolo:
+- Son **actas de observación técnica ciudadana**
+- Tienen **integridad criptográfica verificable**
+- Están **vinculados a identidad real del auditor**
+- Constituyen **evidencia técnica preliminar**
+- **Requieren validación judicial** para uso formal
+
+### Responsabilidad
+**El auditor certificante asume responsabilidad plena** por la veracidad de la información certificada. Uso exclusivo para auditoría ética y protección del consumidor.
+
+---
+
+## 🔬 Ejemplo Real: Caso ganamosnet.biz
+
+### Evidencia Capturada
+```json
+{
+  "evidence": {
+    "url": "https://ganamosnet.biz/home",
+    "timestamp": "2025-12-28T05:16:10.168Z",
+    "results": {
+      "score": 25,
+      "findings": ["🟠 BSC Network Detectada"]
+    }
+  },
+  "integrity": "88095d343259f98cd199bde75d0df8c3378fd56e43ac5a2da0b603974941e79e"
+}
+```
+
+### Certificado Generado
+```bash
+# Procesar evidencia
+python certificar_evidencia_aee.py --modo archivo --archivo ganamosnet_evidencia.json
+
+# Resultado: QH-CERT-ganamosnet-biz-20251228-060000.json
+```
+
+### Verificación Independiente
+Cualquier perito puede verificar:
+```python
+# 1. Calcular hash de evidencia original
+# 2. Comparar con sello en certificado  
+# 3. Verificar clave pública del auditor
+# 4. Validar timestamp y contexto
+```
+
+---
+
+## 🛡️ Arquitectura Técnica
+
+### Componentes Principales
+1. **`kyber_engine.py`** - Motor de identidad soberana y sellado
+2. **`certificar_evidencia_aee.py`** - Interfaz de certificación
+3. **`qh_config.json`** - Configuración del auditor
+4. **`LICENSE`** - Licencia AGPLv3 (software libre)
+
+### Algoritmos Criptográficos
+- **SHA3-512** - Hash post-cuántico para integridad
+- **Derivación determinista** - Claves desde identidad física
+- **Sellado contextual** - Evidencia + Identidad + Tiempo
+- **Múltiples capas** - Robustez contra colisiones
+
+### Características de Seguridad
+- ✅ **Offline** - Sin conexión a internet requerida
+- ✅ **Determinista** - Resultados reproducibles
+- ✅ **Verificable** - Cualquiera puede auditar
+- ✅ **Transparente** - Código fuente completo disponible
+- ✅ **Post-cuántico** - Resistente a computación cuántica
+
+---
+
+## 🌍 Por qué es un Estándar Global
+
+### Adaptabilidad
+- **Argentina**: DNI + Ley 25.506
+- **España**: NIE + eIDAS
+- **México**: CURP + Ley de Firma Electrónica
+- **Brasil**: CPF + MP 2.200-2
+- **Cualquier país**: Documento oficial + marco legal local
+
+### Escalabilidad Ética
+```mermaid
+graph TD
+    A[1 Auditor] --&gt; B[1 Certificación verificable]
+    B --&gt; C[100 Auditores]
+    C --&gt; D[Red de inteligencia ciudadana]
+    D --&gt; E[Protección colectiva contra fraudes]
+```
+
+### Innovación Clave
+| Sistema Tradicional | Protocolo AEE |
+|-------------------|---------------|
+| Depende de corporaciones | Soberanía ciudadana |
+| Código cerrado | Código abierto auditable |
+| Validación centralizada | Verificación distribuida |
+| Complejo, costoso | Simple, gratuito, accesible |
+
+---
+
+## ⚖️ Licencia y Contribución
+
+### Licencia
+- **Software**: AGPLv3 - GNU Affero General Public License v3.0
+- **Certificados**: Propiedad intelectual del auditor certificante
+- **Uso**: Libre para auditoría ética y protección del consumidor
+
+### Contribuir
+1. **Reportar issues** - Problemas técnicos o de seguridad
+2. **Pull requests** -

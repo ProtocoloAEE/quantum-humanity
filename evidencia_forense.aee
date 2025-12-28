@@ -1,0 +1,87 @@
+{
+    "protocolo_reporte": "AEE-QH Forensic Report v1.2",
+    "fecha_generacion": "2025-12-27T04:15:56.210730",
+    "archivo_origen": "evidencia.har.txt",
+    "motor_pqc_disponible": true,
+    "estadisticas": {
+        "total_registros": 5,
+        "anomalias_detectadas": 1
+    },
+    "anomalias": [
+        {
+            "id_registro": 2,
+            "url": "https://va.tawk.to/v1/session/start",
+            "status": 400,
+            "alertas": [
+                "Status de error HTTP: 400"
+            ]
+        }
+    ],
+    "registros_sellados": [
+        {
+            "id_registro": 1,
+            "timestamp_original": "2025-12-27T06:49:03.252Z",
+            "url": "https://va.tawk.to/v1/widget-settings?propertyId=6479ead6ad80445890f0a9e8&widgetId=1h1u3qlgn&sv=null",
+            "status": 200,
+            "certificado_integridad": {
+                "protocolo": "AEE-QH v1.1",
+                "fecha_sellado": "2025-12-27T04:15:56.211859",
+                "hash_sha512": "285dcaf491f49979c87479d8f08b35f837ca3e2cfb25b825ab3bf330a8195eb0b683a0d8955c3b62d6152f3180649f0487b05c17b242a01c408ae9d5fa519c3f",
+                "integridad": "VERIFICADA (SHA-512)",
+                "error_pqc": "Fallo en el sellado PQC: 'KyberEngine' object has no attribute 'seal_data'"
+            }
+        },
+        {
+            "id_registro": 2,
+            "timestamp_original": "2025-12-27T06:49:03.254Z",
+            "url": "https://va.tawk.to/v1/session/start",
+            "status": 400,
+            "certificado_integridad": {
+                "protocolo": "AEE-QH v1.1",
+                "fecha_sellado": "2025-12-27T04:15:56.212484",
+                "hash_sha512": "ae48370294d46d84f0053a6c3c79a1479727885edd751bfc4ef0b072d4f57911bd3fac91c7efb85ba9294f3b90b46bef9e98eba20027fbe8215d714587b34cc1",
+                "integridad": "VERIFICADA (SHA-512)",
+                "error_pqc": "Fallo en el sellado PQC: 'KyberEngine' object has no attribute 'seal_data'"
+            }
+        },
+        {
+            "id_registro": 3,
+            "timestamp_original": "2025-12-27T06:49:03.255Z",
+            "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/en.json",
+            "status": 200,
+            "certificado_integridad": {
+                "protocolo": "AEE-QH v1.1",
+                "fecha_sellado": "2025-12-27T04:15:56.212567",
+                "hash_sha512": "e85312066e34214c30f5637d4caee7bf343e3c4979f3d1ed7f21c47a2cdb8f88518eefb846f7a3afb57aac55a0b6f7ee71baff8c6c8df120e1bdd9bdb15d99a7",
+                "integridad": "VERIFICADA (SHA-512)",
+                "error_pqc": "Fallo en el sellado PQC: 'KyberEngine' object has no attribute 'seal_data'"
+            }
+        },
+        {
+            "id_registro": 4,
+            "timestamp_original": "2025-12-27T06:49:03.255Z",
+            "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/en_dev.json",
+            "status": 200,
+            "certificado_integridad": {
+                "protocolo": "AEE-QH v1.1",
+                "fecha_sellado": "2025-12-27T04:15:56.212648",
+                "hash_sha512": "ea4fa3f3c4731466a0b59556b68be9875abf0bb3253b5b3a9ed92ea1bded3871304e5f05b67e71c8d9d851c466bce8aad79041c9169f68e6bee89517708d154e",
+                "integridad": "VERIFICADA (SHA-512)",
+                "error_pqc": "Fallo en el sellado PQC: 'KyberEngine' object has no attribute 'seal_data'"
+            }
+        },
+        {
+            "id_registro": 5,
+            "timestamp_original": "2025-12-27T06:49:03.264Z",
+            "url": "https://embed.tawk.to/_s/v4/app/694a2ed6f00/languages/es.json",
+            "status": 200,
+            "certificado_integridad": {
+                "protocolo": "AEE-QH v1.1",
+                "fecha_sellado": "2025-12-27T04:15:56.212726",
+                "hash_sha512": "5e8141bf6c7e273648f84447fb41e3ce4742e87999ce56a05f98ca334c23207c36545fa92fe8457818a33629e92751d7d5475589cffe36ac79b468ceb0a2d0ea",
+                "integridad": "VERIFICADA (SHA-512)",
+                "error_pqc": "Fallo en el sellado PQC: 'KyberEngine' object has no attribute 'seal_data'"
+            }
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  aee-kyber:
+    image: python:3.11-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: bash -c "apt update && apt install -y build-essential cmake && pip install liboqs-python numpy && python kyber_real.py"
