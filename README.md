@@ -1,53 +1,48 @@
-# 🔐 Protocolo AEE (Auditoría Ética y Evidencia) v2.0
+# 🔐 Protocolo AEE v2.0 - Auditoría Ética y Evidencia
 
-![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)
-![Licencia AGPLv3](https://img.shields.io/badge/Licencia-AGPLv3-green.svg)
-![Status Beta](https://img.shields.io/badge/Status-Beta-yellow.svg)
+**Sistema open-source de certificación soberana para evidencia digital con potencial validez legal**
 
-**Sistema de certificación soberana para evidencia digital con validez legal potencial**
-
----
-
-## ⚠️ IMPORTANTE: LEA PRIMERO
-
-**Esta herramienta está en fase BETA.**
-
-- No previene edición ANTES de la captura.
-- No reemplaza peritaje judicial oficial.
-- No garantiza aceptación automática en juicio.
-- Úsela como apoyo complementario y siempre consulte con un abogado.
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://python.org)
+[![Licencia AGPLv3](https://img.shields.io/badge/Licencia-AGPLv3-green.svg)](LICENSE)
+[![Beta](https://img.shields.io/badge/Estado-Beta-yellow.svg)]()
 
 ---
 
-## 🎯 ¿Qué es el Protocolo AEE?
+## ⚠️ IMPORTANTE: Lea esto primero
 
-El Protocolo AEE permite a cualquier ciudadano generar evidencia digital con mayor integridad y trazabilidad, útil como apoyo en denuncias por estafas, fraudes o manipulación digital.
+Esta herramienta está en **fase beta**.
 
-**No es prueba legal automática, pero dificulta la alteración posterior y proporciona elementos verificables.**
-
----
-
-## ✨ Características Principales (v2.0)
-
-### 🛡️ Blindaje Técnico y Legal
-- **Sellado de Tiempo Auditable**: Consenso de múltiples servidores NTP oficiales (Google, Cloudflare, pool.ntp.org, etc.) para fecha cierta.
-- **Hash Inmutable**: SHA-256 del archivo completo.
-- **Firma Digital Real**: Ed25519 con generación de claves aleatorias (entropía verdadera) y almacenamiento seguro en keyring del sistema operativo.
-- **Certificado JSON Verificable**: Incluye hash, timestamp, firma, clave pública e instrucciones de verificación.
-
-### 🔐 Criptografía Segura
-- Claves privadas nunca derivadas de DNI u otros datos públicos.
-- Firmas verificables offline por cualquiera.
-- Preparado para integración futura con BFA.ar (Blockchain Federal Argentina).
-
-### 👤 Soberanía Ciudadana
-- Funciona 100% offline.
-- No envía datos a servidores externos.
-- Código abierto y auditable.
+- No previene edición **antes** de la captura.
+- No reemplaza un peritaje judicial oficial.
+- No garantiza aceptación automática como prueba en juicio.
+- Úsela como **apoyo complementario** y siempre consulte con un abogado especializado.
 
 ---
 
-## 🚀 Instalación y Uso Rápido
+## 🎯 ¿Qué hace el Protocolo AEE?
+
+Permite a cualquier ciudadano generar evidencia digital con mayor integridad y trazabilidad:
+
+- Calcula hash inmutable (SHA-256)
+- Obtiene timestamp por consenso de múltiples servidores NTP oficiales
+- Firma digitalmente con Ed25519 (claves seguras con entropía real)
+- Genera certificado JSON verificable por cualquiera
+
+**Ideal como apoyo en denuncias por estafas digitales, fraudes o manipulación.**
+
+---
+
+## ✨ Características v2.0
+
+- Criptografía segura (Ed25519 + keyring del sistema operativo)
+- Timestamp robusto (consenso NTP multi-servidor)
+- Repo limpio y estructurado
+- Disclaimer legal claro
+- Preparado para futura integración con BFA.ar (Blockchain Federal Argentina)
+
+---
+
+## 🚀 Instalación y uso rápido
 
 ```bash
 git clone https://github.com/ProtocoloAEE/quantum-humanity.git
@@ -55,57 +50,45 @@ cd quantum-humanity
 pip install -r requirements.txt
 Pythonfrom aee.core import EvidenceProtocol
 
-# Inicializar (genera claves si no existen)
 protocol = EvidenceProtocol("tu@email.com")
-
-# Certificar un archivo
 cert = protocol.certify_file("captura_estafa.png", description="Conversación antes del bloqueo")
-
 print("Certificado generado:", cert["certification_id"])
 
-📁 Estructura del Proyecto
+📁 Estructura del proyecto
 textquantum-humanity/
-├── aee/                  # Código fuente principal
-├── tests/                # Pruebas unitarias
-├── docs/                 # Documentación adicional
-├── certificados/         # Certificados generados (creado automáticamente)
+├── aee/               # Código fuente principal
+├── tests/             # Pruebas unitarias
+├── docs/              # Documentación adicional
+├── certificados/      # Certificados generados (creado automáticamente)
+├── examples/          # Ejemplos de uso
 ├── requirements.txt
 ├── README.md
 └── LICENSE
 
-⚖️ Consideraciones Legales (Argentina)
+⚖️ Consideraciones legales (Argentina)
 Diseñado como apoyo para:
 
 Ley 25.506 (Firma Electrónica)
 Ley 24.240 (Defensa del Consumidor)
-Código Penal (estafas, fraudes)
+Código Penal (estafas y fraudes)
 
-Genera firma electrónica simple con integridad y autenticidad técnica. Para firma digital calificada, usar servicios oficiales (AFIP, ONTI, etc.).
+Genera firma electrónica simple con integridad y autenticidad técnica.
 
-🔜 Próximas Mejoras
+🔜 Próximas mejoras
 
 Integración BFA.ar (timestamp oficial argentino)
-Generación automática de PDF legible para jueces
+Generación automática de PDF para jueces
 Interfaz gráfica simple
 App móvil
 
 
 🤝 Contribuir
-¡Toda ayuda es bienvenida! Lee CONTRIBUTING.md (próximamente) para:
-
-Reportar bugs
-Sugerir mejoras
-Enviar pull requests
-
-
-📞 Contacto
-
-Issues en GitHub (bugs técnicos)
+¡Toda ayuda es bienvenida! Abre un issue o pull request.
 
 
 📜 Licencia
 AGPLv3 – Código abierto, auditable y modificable.
-La soberanía digital se ejerce con hechos, transparencia y código bueno.
-Gracias a la comunidad de r/argentina por el feedback que hizo posible esta v2.0.
+La soberanía digital se ejerce con transparencia, código bueno y comunidad.
+Gracias a r/argentina por el feedback que hizo posible esta v2.0.
 Franco Luciano Carricondo
 Diciembre 2025

@@ -5,58 +5,32 @@
     "pais": "AR",
     "jurisdiccion": "Buenos Aires, Argentina",
     "contacto": "protocolo@quantum-humanity.org",
-    "declaracion_etica": "Certifico bajo mi responsabilidad personal la veracidad de las observaciones técnicas documentadas mediante el Protocolo AEE de Quantum Humanity. Este acto de certificación ciudadana se realiza en ejercicio del derecho a la soberanía digital y protección del consumidor.",
-    "compromiso": "Utilizaré este sistema exclusivamente para auditoría ética, protección de derechos digitales y prevención del fraude, respetando siempre la legalidad y privacidad de los individuos."
+    "declaracion_etica": "Certifico bajo mi responsabilidad la veracidad de las observaciones técnicas documentadas mediante el Protocolo AEE."
   },
   "protocolo": {
     "version": "AEE-v1.3",
-    "nombre_completo": "Auditoría Ética y Evidencia Soberana",
     "algoritmo_hash": "SHA3-512",
-    "algoritmo_identidad": "Determinista basado en identidad física",
     "validez_estandar_dias": 365,
-    "repositorio_oficial": "https://github.com/quantum-humanity/aee-protocol",
-    "documentacion": "https://quantum-humanity.org/docs/aee-protocol",
-    "reporte_errores": "https://github.com/quantum-humanity/aee-protocol/issues",
-    "colaboracion": "https://github.com/quantum-humanity/aee-protocol/pulls",
-    "principios_tecnicos": [
-      "Soberanía offline (sin dependencia de servidores)",
-      "Transparencia total (código abierto verificable)",
-      "Determinismo criptográfico (resultados reproducibles)",
-      "Identidad física vinculada (no-repudio real)",
-      "Verificación independiente (cualquiera puede auditar)"
-    ]
+    "repositorio_oficial": "https://github.com/ProtocoloAEE/quantum-humanity",
+    "documentacion": "https://quantum-humanity.org/docs/aee-protocol"
   },
   "legal": {
     "leyes_aplicables": [
       "Ley 25.506 - Firma Digital (Argentina)",
-      "Ley 25.326 - Protección de Datos Personales (Argentina)",
-      "Ley 27.099 - Defensa del Consumidor (Argentina)",
-      "Código Penal Argentino - Artículo 172 bis (Estafas informáticas)",
-      "Constitución Nacional - Artículo 42 (Protección al consumidor)"
+      "Ley 25.326 - Protección de Datos Personales",
+      "Ley 27.099 - Defensa del Consumidor",
+      "Código Penal Argentino - Art. 172 bis (Estafas Informáticas)"
     ],
-    "advertencia": "ESTE CERTIFICADO CONSTITUYE EVIDENCIA TÉCNICA PRELIMINAR. REQUIERE VALIDACIÓN POR AUTORIDADES COMPETENTES Y/O PERITOS INFORMÁTICOS PARA USO JUDICIAL FORMAL. EL AUDITOR ASUME RESPONSABILIDAD PERSONAL POR LA VERACIDAD DE LA INFORMACIÓN CERTIFICADA.",
-    "responsabilidad": "El auditor certificante asume plena responsabilidad legal y ética por el contenido del certificado generado. Cualquier uso malicioso, fraudulento o ilegal de este sistema es responsabilidad exclusiva del usuario, no de los desarrolladores del protocolo.",
-    "uso_etico": "Este sistema debe utilizarse exclusivamente para: 1) Auditoría ética de servicios digitales, 2) Protección del consumidor contra fraudes, 3) Documentación técnica de observaciones legítimas, 4) Ejercicio del derecho a la soberanía digital ciudadana. QUEDA PROHIBIDO SU USO PARA: vigilancia ilegal, acoso, difamación, o cualquier actividad contraria a la ley.",
-    "licencia_software": "AGPLv3 - GNU Affero General Public License v3.0",
-    "propiedad_intelectual": "El Protocolo AEE es software libre. Los certificados generados son propiedad intelectual del auditor certificante, quien otorga licencia para su verificación pública."
+    "advertencia": "Este certificado constituye evidencia técnica preliminar. Requiere validación por autoridades competentes para uso judicial formal.",
+    "responsabilidad": "El auditor asume responsabilidad personal por la veracidad de la información certificada.",
+    "uso_etico": "Este sistema debe usarse exclusivamente para auditoría ética y protección del consumidor."
   },
   "contacto": {
     "organizacion": "Quantum Humanity",
-    "proposito": "Soberanía Digital Ciudadana y Protección del Consumidor",
-    "email_contacto": "contacto@quantum-humanity.org",
-    "email_reportes": "reportes@quantum-humanity.org",
-    "email_verificacion": "verificacion@quantum-humanity.org",
-    "web_oficial": "https://quantum-humanity.org",
-    "github_organizacion": "https://github.com/quantum-humanity",
-    "github_protocolo": "https://github.com/quantum-humanity/aee-protocol",
-    "documentacion": "https://quantum-humanity.org/docs",
-    "comunidad": "https://github.com/quantum-humanity/community"
-  },
-  "metadata": {
-    "fecha_creacion": "2025-12-28T06:00:00Z",
-    "ultima_actualizacion": "2025-12-28T06:00:00Z",
-    "version_config": "1.3",
-    "generado_por": "Protocolo AEE v1.3 - Quantum Humanity",
-    "hash_config": "8a3f7b2c9d1e5f4a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b"
+    "proposito": "Soberanía Digital Ciudadana",
+    "email": "contacto@quantum-humanity.org",
+    "web": "https://quantum-humanity.org",
+    "github": "https://github.com/quantum-humanity",
+    "reportes": "reportes@quantum-humanity.org"
   }
 }

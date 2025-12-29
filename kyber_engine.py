@@ -235,7 +235,7 @@ class QuantumSovereignEngine:
             "paso_4": "Validar que 'sello_soberano' coincida con recalculo",
             "paso_5": "Validar timestamp dentro de periodo razonable",
             "herramientas": "Cualquier implementación SHA3-512 (OpenSSL, Python, etc.)",
-            "codigo_verificacion": "Disponible en https://github.com/quantum-humanity/aee-protocol",
+            "codigo_verificacion": "Disponible en https://github.com/ProtocoloAEE/quantum-humanity",
             "contacto_verificacion": "verificacion@quantum-humanity.org"
         }
     

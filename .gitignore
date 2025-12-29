@@ -1,49 +1,29 @@
-﻿# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
+*.pyc
+*.pyd
+*.pyo
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-.pytest_cache/
-.coverage
-htmlcov/
 
-# Virtual environments
+# Jupyter Notebook files
+.ipynb_checkpoints
+
+# Virtual environment
 .venv/
+venv/
 env/
-virtualenv/
-ENV/
 
-# IDE
+# Editor files
 .vscode/
-.idea/
-*.swp
-*.swo
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Demo/Web
-node_modules/
-
-# Secrets
-.env
+# Private keys and sensitive data
+*.key
+*.pem
+*.env
 .env.local
-secrets.ini
+.env.*.local
+!aee/.gitkeep # If aee needs to be kept in git when empty
