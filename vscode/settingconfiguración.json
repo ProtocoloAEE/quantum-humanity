@@ -1,8 +1,0 @@
-{
-    "cloudcode.duetAI.enableInlineSuggestions": true,
-    "editor.inlineSuggest.enabled": true,
-    "python.languageServer": "Pylance",
-    "python.analysis.extraPaths": [
-        "./src"
-    ]
-}
