@@ -1,29 +1,19 @@
-# Byte-compiled / optimized / DLL files
+# Python temporales
 __pycache__/
-*.pyc
-*.pyd
-*.pyo
-*.egg-info/
-
-# Jupyter Notebook files
-.ipynb_checkpoints
-
-# Virtual environment
+*.py[cod]
+*$py.class
 .venv/
 venv/
 env/
 
-# Editor files
+# Base de Datos Local (Privada)
+*.db
+*.sqlite3
+
+# IDEs y Editores
 .vscode/
+.idea/
 
-# OS generated files
-.DS_Store
+# OS
 Thumbs.db
-
-# Private keys and sensitive data
-*.key
-*.pem
-*.env
-.env.local
-.env.*.local
-!aee/.gitkeep # If aee needs to be kept in git when empty
+desktop.ini

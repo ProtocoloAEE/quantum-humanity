@@ -1,0 +1,288 @@
+2025-12-30 04:48:41,963 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 04:48:42,365 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 04:48:42,369 - AEE-Protocol - INFO - Iniciando transacción forense: Operación de prueba
+2025-12-30 04:48:42,369 - AEE-Protocol - INFO - Transacción forense completada: Operación de prueba
+2025-12-30 04:56:13,137 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 04:56:13,137 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 04:56:13,137 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 04:56:13,146 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=fac420a55575be9c
+2025-12-30 04:56:13,147 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 04:56:13,147 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 04:56:13,153 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 04:56:13,504 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 04:56:13,510 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 04:56:13,510 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 04:56:13,510 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 04:56:13,510 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 04:56:13,510 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 04:56:13,512 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 04:56:13,512 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 04:56:13,512 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 04:56:13,513 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 04:56:13,515 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 04:56:13,515 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 04:56:13,516 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 04:56:13,836 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 04:56:13,838 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 04:56:13,838 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 04:56:13,838 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 04:56:13,839 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 04:56:13,839 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 04:56:13,840 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:05:32,636 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:05:32,636 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:05:32,636 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:05:32,645 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=03c913275c7d4d52
+2025-12-30 05:05:32,646 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:05:32,646 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:05:32,647 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:05:33,038 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:05:33,038 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:05:34.213155+00:00 (stdev=150.5ms)
+2025-12-30 05:05:33,039 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:05:33,039 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:05:33,039 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:05:33,039 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:05:33,039 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:05:33,040 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:05:33,041 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:05:33,041 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:05:33,041 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:05:33,044 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:05:33,044 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:05:33,045 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:05:33,399 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:05:33,399 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:05:34.590128+00:00 (stdev=141.42ms)
+2025-12-30 05:05:33,399 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:05:33,399 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:05:33,399 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:05:33,399 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:05:33,400 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:05:33,400 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:14:53,857 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:14:53,857 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:14:53,857 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:14:53,864 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=4d5e8bb1adfeef04
+2025-12-30 05:14:53,865 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:14:53,866 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:14:53,867 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:14:57,172 - AEE-Protocol - WARNING - Fallo al consultar time.apple.com: No response received from time.apple.com.
+2025-12-30 05:14:57,213 - AEE-Protocol - INFO - Outliers filtrados: 1
+2025-12-30 05:14:57,214 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:14:55.326685+00:00 (stdev=1615.39ms)
+2025-12-30 05:14:57,214 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:14:57,214 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:14:57,214 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:14:57,215 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:14:57,215 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:14:57,216 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:14:57,217 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:14:57,217 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:14:57,217 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:14:57,220 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:14:57,220 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:14:57,221 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:14:57,581 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:14:57,581 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:14:58.778182+00:00 (stdev=139.44ms)
+2025-12-30 05:14:57,581 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:14:57,581 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:14:57,582 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:14:57,582 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:14:57,582 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:14:57,583 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:17:44,706 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:17:44,706 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:17:44,707 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:17:44,714 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=62f93c8511d795b7
+2025-12-30 05:17:44,715 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:17:44,715 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:17:44,716 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:17:45,209 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:17:45,209 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:17:46.299308+00:00 (stdev=192.21ms)
+2025-12-30 05:17:45,210 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:17:45,210 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:17:45,210 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:17:45,211 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:17:45,211 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:17:45,212 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:17:45,212 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:17:45,213 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:17:45,213 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:17:45,216 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:17:45,216 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:17:45,217 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:17:45,899 - AEE-Protocol - INFO - Outliers filtrados: 1
+2025-12-30 05:17:45,899 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:17:46.719476+00:00 (stdev=301.69ms)
+2025-12-30 05:17:45,899 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:17:45,900 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:17:45,900 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:17:45,900 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:17:45,900 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:17:45,901 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:27:13,520 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:27:13,520 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:27:13,520 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:27:13,528 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=e3a86759731d7a4c
+2025-12-30 05:27:13,529 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:27:13,529 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:27:13,530 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:27:14,021 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:27:14,022 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:27:15.125143+00:00 (stdev=190.08ms)
+2025-12-30 05:27:14,022 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:27:14,023 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:27:14,023 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:27:14,023 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:27:14,023 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:27:14,024 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:27:14,025 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:27:14,025 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:27:14,025 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:27:14,028 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:27:14,028 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:27:14,029 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:27:14,499 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:27:14,499 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:27:15.607063+00:00 (stdev=184.8ms)
+2025-12-30 05:27:14,500 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:27:14,500 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:27:14,500 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:27:14,500 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:27:14,500 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:27:14,501 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:35:04,908 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:04,909 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:04,909 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:35:04,916 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=32983782e807c321
+2025-12-30 05:35:04,918 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:35:04,918 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:35:04,919 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:35:05,306 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:35:05,307 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:35:06.527112+00:00 (stdev=150.22ms)
+2025-12-30 05:35:05,307 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:05,307 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:05,307 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:35:05,308 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:35:05,308 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:35:05,309 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:35:05,309 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:05,310 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:05,310 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:35:05,313 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:35:05,313 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:35:05,314 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:35:05,671 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:35:05,672 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:35:06.910625+00:00 (stdev=142.01ms)
+2025-12-30 05:35:05,672 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:05,672 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:05,672 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:35:05,673 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:35:05,673 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:35:05,674 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:35:22,153 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:22,153 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:22,153 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:35:22,160 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=bfd6ece00b8d8458
+2025-12-30 05:35:22,161 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:35:22,161 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:35:22,162 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:35:22,525 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:35:22,526 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:35:23.764788+00:00 (stdev=141.6ms)
+2025-12-30 05:35:22,526 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:22,526 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:22,526 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:35:22,527 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:35:22,527 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:35:22,528 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:35:22,528 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:22,528 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:22,529 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:35:22,532 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:35:22,532 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:35:22,533 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:35:22,880 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:35:22,881 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:35:24.121066+00:00 (stdev=137.72ms)
+2025-12-30 05:35:22,881 - AEE-PQC-Hybrid - WARNING - Kyber-768 no disponible. Instalar: pip install kyber-py
+2025-12-30 05:35:22,881 - AEE-PQC-Hybrid - WARNING - El sistema funcionará solo con Ed25519 (modo clásico).
+2025-12-30 05:35:22,881 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:35:22,882 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:35:22,882 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:35:22,883 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:41:28,689 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 05:41:28,689 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-30 05:41:28,700 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=42fa928fbf07b0ff
+2025-12-30 05:41:28,701 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:41:28,701 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:41:28,702 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:41:29,082 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:41:29,082 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:41:30.323324+00:00 (stdev=146.47ms)
+2025-12-30 05:41:29,082 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 05:41:29,082 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:41:29,087 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:41:29,087 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:41:29,088 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:41:29,089 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 05:41:29,089 - AEE-PQC-Hybrid - INFO - Verificando firma dual (capa clásica)...
+2025-12-30 05:41:29,093 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:41:29,093 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:41:29,094 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:41:29,441 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:41:29,442 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:41:30.690715+00:00 (stdev=138.12ms)
+2025-12-30 05:41:29,442 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 05:41:29,442 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:41:29,447 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:41:29,447 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:41:29,448 - AEE-PQC-Hybrid - INFO - Verificando certificado híbrido de: test_evidence_file.txt
+2025-12-30 05:41:29,450 - AEE-Protocol - INFO - Iniciando transacción forense: Generación de certificado híbrido
+2025-12-30 05:41:29,451 - AEE-PQC-Hybrid - INFO - Generando certificado híbrido para: test_evidence_file.txt
+2025-12-30 05:41:29,451 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-30 05:41:29,799 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-30 05:41:29,800 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-30T08:41:31.049631+00:00 (stdev=137.39ms)
+2025-12-30 05:41:29,800 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 05:41:29,800 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-30 05:41:29,805 - AEE-PQC-Hybrid - INFO - Firma dual generada.
+2025-12-30 05:41:29,805 - AEE-Protocol - INFO - Transacción forense completada: Generación de certificado híbrido
+2025-12-30 05:41:29,805 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-30 22:50:03,790 - AEE-API-Server - INFO - ================================================================================
+2025-12-30 22:50:03,858 - AEE-API-Server - INFO - ================================================================================
+2025-12-31 01:26:22,622 - AEE-Database - INFO - Database URL: sqlite:///aee.db...
+2025-12-31 01:26:22,643 - AEE-API-Server - INFO - ================================================================================
+2025-12-31 01:26:22,667 - AEE-API-Server - INFO - ================================================================================
+2025-12-31 01:27:20,140 - AEE-Database - INFO - Database URL: sqlite:///aee.db...
+2025-12-31 01:27:20,174 - AEE-API-Server - INFO - ================================================================================
+2025-12-31 01:27:20,182 - AEE-API-Server - INFO - ================================================================================
+2025-12-31 01:31:17,925 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-31 01:32:52,576 - AEE-PQC-Hybrid - INFO - Kyber-768 disponible vía kyber_py.
+2025-12-31 01:32:52,577 - AEE-API - INFO - [CERTIFY] Iniciando para: evidencia_pericial_001.eml
+2025-12-31 01:32:52,577 - AEE-PQC-Hybrid - INFO - Generando par de claves híbrido...
+2025-12-31 01:32:52,626 - AEE-PQC-Hybrid - INFO - Par de claves híbrido generado: ID=956764d7636d9d97
+2025-12-31 01:32:52,626 - AEE-Protocol - INFO - Iniciando quórum NTP con 5 servidores
+2025-12-31 01:32:53,149 - AEE-Protocol - INFO - Outliers filtrados: 0
+2025-12-31 01:32:53,149 - AEE-Protocol - INFO - Quórum NTP exitoso: 2025-12-31T04:32:55.604267+00:00 (stdev=200.41ms)
+2025-12-31 01:32:53,149 - AEE-PQC-Hybrid - INFO - Generando firma dual...
+2025-12-31 02:43:41,462 - AEE-Database - INFO - Database URL: sqlite:///aee.db...
+2025-12-31 02:43:41,475 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 02:43:41,475 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 02:43:41,475 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 02:43:41,500 - AEE-API-Server - INFO - [DATABASE] Persistence layer initialized successfully
+2025-12-31 02:43:41,500 - AEE-API-Server - INFO - [STARTUP] Server ready for incoming forensic requests
+2025-12-31 02:43:41,500 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 02:43:41,602 - AEE-Database - INFO - Database URL: sqlite:///aee.db...
+2025-12-31 02:43:41,618 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 02:43:41,618 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 02:43:41,618 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 02:43:41,648 - AEE-API-Server - INFO - [DATABASE] Persistence layer initialized successfully
+2025-12-31 02:43:41,648 - AEE-API-Server - INFO - [STARTUP] Server ready for incoming forensic requests
+2025-12-31 02:43:41,648 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 02:45:48,795 - AEE-API-Server - INFO - [SHUTDOWN] Terminating AEE Protocol Server...
+2025-12-31 02:45:48,795 - AEE-API-Server - INFO - [SHUTDOWN] Closing active infrastructure connections
+2025-12-31 02:45:48,827 - AEE-API-Server - INFO - [SHUTDOWN] Terminating AEE Protocol Server...
+2025-12-31 02:45:48,827 - AEE-API-Server - INFO - [SHUTDOWN] Closing active infrastructure connections
+2025-12-31 02:59:59,217 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 02:59:59,217 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 02:59:59,217 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 02:59:59,218 - AEE-API-Server - CRITICAL - [DATABASE] Critical failure during initialization: 'DatabaseConfig' object has no attribute 'create_all'
+2025-12-31 03:01:41,447 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 03:01:41,447 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 03:01:41,447 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 03:01:41,447 - AEE-API-Server - CRITICAL - [DATABASE] Critical failure during initialization: 'DatabaseConfig' object has no attribute 'create_all'
+2025-12-31 03:02:27,617 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 03:02:27,617 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 03:02:27,617 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 03:02:27,618 - AEE-API-Server - CRITICAL - [DATABASE] Critical failure during initialization: 'DatabaseConfig' object has no attribute 'create_all'

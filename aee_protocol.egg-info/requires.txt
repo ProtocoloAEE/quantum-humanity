@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+psycopg2-binary
+cryptography
+kyber-py
+
+[dev]
+pytest
+black
+flake8
+mypy
