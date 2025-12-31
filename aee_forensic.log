@@ -286,3 +286,21 @@
 2025-12-31 03:02:27,617 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
 2025-12-31 03:02:27,617 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
 2025-12-31 03:02:27,618 - AEE-API-Server - CRITICAL - [DATABASE] Critical failure during initialization: 'DatabaseConfig' object has no attribute 'create_all'
+2025-12-31 04:40:18,940 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 04:40:18,941 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 04:40:18,941 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 04:40:18,943 - AEE-Database - INFO - [DATABASE] Tablas creadas exitosamente
+2025-12-31 04:40:18,943 - AEE-API-Server - INFO - [DATABASE] Persistence layer initialized successfully
+2025-12-31 04:40:18,943 - AEE-API-Server - INFO - [STARTUP] Server ready for incoming forensic requests
+2025-12-31 04:40:18,943 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 05:03:07,028 - AEE-API-Server - INFO - [SHUTDOWN] Terminating AEE Protocol Server...
+2025-12-31 05:03:07,028 - AEE-API-Server - INFO - [SHUTDOWN] Closing active infrastructure connections
+2025-12-31 05:03:08,003 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 05:03:08,003 - AEE-API-Server - INFO - [STARTUP] AEE Protocol v2.1.0-HARDENED - Forensic Certification Engine
+2025-12-31 05:03:08,003 - AEE-API-Server - INFO - [STARTUP] Initializing Infrastructure Components...
+2025-12-31 05:03:08,004 - AEE-Database - INFO - [DATABASE] Tablas creadas exitosamente
+2025-12-31 05:03:08,005 - AEE-API-Server - INFO - [DATABASE] Persistence layer initialized successfully
+2025-12-31 05:03:08,005 - AEE-API-Server - INFO - [STARTUP] Server ready for incoming forensic requests
+2025-12-31 05:03:08,005 - AEE-API-Server - INFO - --------------------------------------------------------------------------------
+2025-12-31 05:03:50,482 - AEE-API-Server - INFO - [SHUTDOWN] Terminating AEE Protocol Server...
+2025-12-31 05:03:50,482 - AEE-API-Server - INFO - [SHUTDOWN] Closing active infrastructure connections
