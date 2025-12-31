@@ -1,17 +1,19 @@
-# 🛡️ Protocolo AEE v2.1-HARDENED
-### *Estándar de Preservación y Autenticidad de Evidencia Digital*
+# 🛡️ AEE Protocol: Quantum Humanity
+**Protocolo de Aseguramiento de Evidencia Electrónica con Criptografía Post-Cuántica**
 
-El **Protocolo AEE** es una herramienta de grado forense diseñada para la captura y sellado criptográfico de activos digitales. Alineado con la **Ley 25.506 (Firma Digital Argentina)**, este motor garantiza que cualquier archivo capturado sea inalterable y verificable ante la justicia.
+Este sistema representa la vanguardia en integridad digital, diseñado para resistir amenazas actuales y futuras (Computación Cuántica). 
 
-## 🚀 Pilares Tecnológicos
-* **Integridad:** Hash SHA-256 de 256 bits para detección de alteraciones bit a bit.
-* **Autenticidad:** Criptografía de curva elíptica **Ed25519** para firma digital de autor.
-* **Temporalidad:** Consenso de tiempo global vía NTP (Quórum de servidores de Google, Microsoft y Cloudflare).
-* **Cadena de Custodia:** Captura de metadatos de bajo nivel (Inodos, Device IDs, File Size).
+## 🚀 Características Principales
+* **Hibridación Criptográfica**: Combina la robustez de **Ed25519** con la resistencia cuántica de **ML-KEM (Kyber-768)**.
+* **Consenso NTP Quórum**: Sellado de tiempo distribuido para validez forense inalterable.
+* **Arquitectura de Auditoría**: Registro inmutable de cada interacción con la evidencia mediante SQLAlchemy.
+* **API Forense**: Interfaz lista para integración en flujos de peritaje judicial.
 
-## 🛠️ Cómo usarlo
-1.  **Certificar:** Ejecuta `python ejemplo_forense.py` para generar un certificado sellado.
-2.  **Verificar:** Ejecuta `python verificar_aee.py`. El sistema validará la firma y el contenido automáticamente.
+## 🛠️ Stack Tecnológico
+- **Lenguaje**: Python 3.13+
+- **Framework**: FastAPI
+- **Persistencia**: SQLite con lógica de auditoría blindada.
+- **Seguridad**: Motor híbrido PQC.
 
-## ⚖️ Validez Legal
-Este protocolo implementa mecanismos de **No-Repudio**, fundamentales para transformar un simple indicio digital en una evidencia con valor probatorio superior.
+## ⚖️ Objetivo Judicial
+Garantizar la cadena de custodia digital eliminando el riesgo de manipulación y asegurando el no-repudio a largo plazo.
