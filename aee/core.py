@@ -480,8 +480,35 @@ class IntegrityVerifier:
     def verificar_integridad_total(self, archivo_path: Path, certificado: Dict[str, Any]) -> Dict[str, Any]:
         """
         Verificación atómica de integridad completa de un certificado AEE.
+        
+        Modelo de Seguridad v2.1:
+        - Verificación atómica: todas las verificaciones deben pasar o se aborta
+        - No permite degradación silenciosa: fallos críticos se propagan como excepciones
+        - Orden de verificación: Hash → Timestamp → Firma (fail-fast)
+        - Errores de formato/estructura lanzan excepciones (no se retorna False silenciosamente)
+        
+        Args:
+            archivo_path: Ruta al archivo original a verificar
+            certificado: Diccionario con certificado AEE completo
+            
+        Returns:
+            Dict con resultados de verificación:
+            - es_valido: True solo si todas las verificaciones pasan
+            - verificaciones: Dict con estado de cada componente
+            - resumen: Mensaje descriptivo del resultado
+            
+        Raises:
+            FileNotFoundError: Si el archivo no existe
+            ValueError: Si el certificado tiene estructura inválida
+            RuntimeError: Si hay error crítico en operaciones criptográficas
         """
         logger.info(f"Iniciando verificación de integridad total para: {archivo_path.name}")
+        
+        # Validación inicial (no se permite degradación silenciosa)
+        if not archivo_path.exists():
+            raise FileNotFoundError(f"Archivo no encontrado: {archivo_path}")
+        if not certificado or not isinstance(certificado, dict):
+            raise ValueError("certificado debe ser un diccionario válido")
         
         resultados = {
             'archivo_verificado': str(archivo_path),
@@ -499,7 +526,7 @@ class IntegrityVerifier:
             auditor = certificado.get('auditor', {})
             firma_digital = certificado.get('firma_digital', {})
 
-            # 1. Verificar hash del archivo
+            # 1. Verificar hash del archivo (fail-fast)
             hash_ok, hash_msg = self.verificar_hash_archivo(
                 archivo_path,
                 evidencia.get('hash_sha256', '')
@@ -510,7 +537,7 @@ class IntegrityVerifier:
                 logger.error(f"{resultados['resumen']} - {hash_msg}")
                 return resultados
 
-            # 2. Verificar timestamp NTP
+            # 2. Verificar timestamp NTP (fail-fast)
             ts_ok, ts_msg = self.verificar_timestamp_quorum(sello_temporal)
             resultados['verificaciones']['sello_temporal'] = {'exitoso': ts_ok, 'mensaje': ts_msg}
             if not ts_ok:
@@ -518,12 +545,12 @@ class IntegrityVerifier:
                 logger.error(f"{resultados['resumen']} - {ts_msg}")
                 return resultados
 
-            # 3. Verificar firma digital
+            # 3. Verificar firma digital (fail-fast)
             payload_firmado = firma_digital.get('payload_firmado', {})
             if not payload_firmado:
-                 resultados['resumen'] = "No se encontró el payload firmado en el certificado."
-                 logger.error(resultados['resumen'])
-                 return resultados
+                error_msg = "No se encontró el payload firmado en el certificado."
+                logger.error(error_msg)
+                raise ValueError(error_msg)
 
             mensaje_canonico = CanonicalJSONSerializer.serialize(payload_firmado).encode('utf-8')
             
@@ -543,9 +570,15 @@ class IntegrityVerifier:
             resultados['resumen'] = "VERIFICACIÓN EXITOSA: La evidencia es íntegra y auténtica."
             logger.info(resultados['resumen'])
 
+        except (FileNotFoundError, ValueError) as e:
+            # Errores de formato/estructura se propagan (no se ocultan)
+            logger.error(f"Error de validación en verificación: {e}", exc_info=True)
+            raise
         except Exception as e:
+            # Errores críticos inesperados se propagan
             resultados['resumen'] = f"Error crítico durante la verificación: {str(e)}"
             logger.error(resultados['resumen'], exc_info=True)
+            raise RuntimeError(f"Error crítico en verificación (no se permite degradación silenciosa): {str(e)}") from e
         
         return resultados
 

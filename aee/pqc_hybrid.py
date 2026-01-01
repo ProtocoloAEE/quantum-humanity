@@ -222,23 +222,58 @@ class HybridCryptoEngine:
         return keypair
     
     def firmar_dual(self, mensaje_canonical: str, keypair: HybridKeyPair) -> DualSignature:
-        """Genera firma dual: Ed25519 (clásica) + Kyber-768 (post-cuántica)."""
+        """
+        Genera firma dual: Ed25519 (clásica) + Kyber-768 (post-cuántica).
+        
+        Modelo de Seguridad v2.1:
+        - Implementa cumplimiento estricto del Principio de Kerckhoffs
+        - No permite degradación silenciosa: fallos criptográficos lanzan excepciones
+        - Garantiza que la firma Ed25519 es siempre generada (requisito crítico)
+        - El sello PQC es opcional pero su ausencia no compromete la verificación pública
+        
+        Args:
+            mensaje_canonical: Mensaje serializado canónicamente (RFC 8785)
+            keypair: Par de claves híbrido (Ed25519 + Kyber-768)
+            
+        Returns:
+            DualSignature: Firma dual con capa clásica obligatoria y PQC opcional
+            
+        Raises:
+            RuntimeError: Si la generación de firma Ed25519 falla (no se permite degradación)
+            ValueError: Si los parámetros son inválidos
+        """
         logger.info("Generando firma dual...")
+        
+        if not mensaje_canonical or not isinstance(mensaje_canonical, str):
+            raise ValueError("mensaje_canonical debe ser una cadena no vacía")
+        if not keypair or not keypair.ed25519_private:
+            raise ValueError("keypair debe contener clave privada Ed25519 válida")
+        
         mensaje_bytes = mensaje_canonical.encode('utf-8')
         
-        # 1. Firma clásica Ed25519
-        if HSM_ENABLED and HSM_TYPE != 'mock':
-            from aee.infrastructure.hsm import hsm_adapter
-            signature_classic = hsm_adapter.sign_with_ed25519(mensaje_bytes, keypair.key_id)
-            logger.info(f"✓ Signed with {HSM_TYPE} HSM")
-        else:
-            ed_private_key = ed25519.Ed25519PrivateKey.from_private_bytes(keypair.ed25519_private)
-            signature_classic = ed_private_key.sign(mensaje_bytes)
+        # 1. Firma clásica Ed25519 (OBLIGATORIA - no se permite fallo silencioso)
+        try:
+            if HSM_ENABLED and HSM_TYPE != 'mock':
+                from aee.infrastructure.hsm import hsm_adapter
+                signature_classic = hsm_adapter.sign_with_ed25519(mensaje_bytes, keypair.key_id)
+                logger.info(f"✓ Signed with {HSM_TYPE} HSM")
+            else:
+                ed_private_key = ed25519.Ed25519PrivateKey.from_private_bytes(keypair.ed25519_private)
+                signature_classic = ed_private_key.sign(mensaje_bytes)
+        except Exception as e:
+            logger.error(f"Fallo crítico en generación de firma Ed25519: {e}")
+            raise RuntimeError(
+                f"Error en firma Ed25519 (no se permite degradación silenciosa): {str(e)}"
+            ) from e
         
-        # 2. Sello post-cuántico Kyber-768 (si está disponible)
+        # 2. Sello post-cuántico Kyber-768 (opcional - fallos no abortan el proceso)
         pqc_seal, pqc_auth_tag = None, None
         if KYBER_AVAILABLE and keypair.kyber_public:
-            pqc_seal, pqc_auth_tag, _ = self._encapsular_hibrido(mensaje_canonical, keypair)
+            try:
+                pqc_seal, pqc_auth_tag, _ = self._encapsular_hibrido(mensaje_canonical, keypair)
+            except Exception as e:
+                logger.warning(f"Sello PQC no pudo ser generado (continuando sin él): {e}")
+                # No lanzamos excepción - el sello PQC es opcional para verificación pública
         
         dual_sig = DualSignature(
             signature_classic=signature_classic,
@@ -246,7 +281,7 @@ class HybridCryptoEngine:
             pqc_auth_tag=pqc_auth_tag,
             timestamp=datetime.now(timezone.utc).isoformat()
         )
-        logger.info("✓ Firma dual generada.")
+        logger.info("Firma dual generada exitosamente.")
         return dual_sig
         
     def verificar_dual(
@@ -255,8 +290,37 @@ class HybridCryptoEngine:
         """
         Verifica la capa de firma clásica (Ed25519), que es públicamente verificable.
         La capa PQC solo puede ser verificada por un auditor con la clave privada.
+        
+        Modelo de Seguridad v2.1:
+        - Verificación Ed25519 es obligatoria y determinística
+        - No permite degradación silenciosa: errores criptográficos se propagan
+        - InvalidSignature se trata como fallo explícito (no como advertencia)
+        - Errores de formato/parámetros lanzan excepciones (no retornan False silenciosamente)
+        
+        Args:
+            mensaje_canonical: Mensaje serializado canónicamente a verificar
+            dual_signature: Firma dual a verificar
+            clave_publica_ed25519: Clave pública Ed25519 en formato raw (32 bytes)
+            
+        Returns:
+            Tuple[bool, Dict]: (éxito_verificación, detalles_detallados)
+            - éxito_verificación: True solo si Ed25519 es válida
+            - detalles: Dict con estado de cada componente
+            
+        Raises:
+            ValueError: Si los parámetros son inválidos (formato incorrecto, None, etc.)
+            RuntimeError: Si hay error crítico en operaciones criptográficas (no InvalidSignature)
         """
         logger.info("Verificando firma dual (capa clásica)...")
+        
+        # Validación de parámetros (no se permite degradación silenciosa)
+        if not mensaje_canonical or not isinstance(mensaje_canonical, str):
+            raise ValueError("mensaje_canonical debe ser una cadena no vacía")
+        if not dual_signature or not dual_signature.signature_classic:
+            raise ValueError("dual_signature debe contener signature_classic válida")
+        if not clave_publica_ed25519 or len(clave_publica_ed25519) != 32:
+            raise ValueError("clave_publica_ed25519 debe ser exactamente 32 bytes")
+        
         resultado = {
             'ed25519_valido': False, 
             'kyber_valido': None, 
@@ -265,16 +329,23 @@ class HybridCryptoEngine:
         }
         mensaje_bytes = mensaje_canonical.encode('utf-8')
 
-        # 1. Verificar Ed25519 (públicamente verificable)
+        # 1. Verificar Ed25519 (públicamente verificable) - OBLIGATORIO
         try:
             ed_public_key = ed25519.Ed25519PublicKey.from_public_bytes(clave_publica_ed25519)
             ed_public_key.verify(dual_signature.signature_classic, mensaje_bytes)
             resultado['ed25519_valido'] = True
             resultado['mensaje_ed25519'] = 'Firma Ed25519 válida.'
         except InvalidSignature:
+            # InvalidSignature es un fallo explícito, no un error de sistema
+            resultado['ed25519_valido'] = False
             resultado['mensaje_ed25519'] = 'Firma Ed25519 inválida.'
+            logger.warning("Verificación Ed25519 falló: firma inválida")
         except Exception as e:
-            resultado['mensaje_ed25519'] = f'Error en verificación Ed25519: {e}'
+            # Errores no esperados (formato, clave corrupta, etc.) se propagan
+            logger.error(f"Error crítico en verificación Ed25519: {e}")
+            raise RuntimeError(
+                f"Error crítico en verificación Ed25519 (no se permite degradación silenciosa): {str(e)}"
+            ) from e
 
         # 2. Sello PQC (no es públicamente verificable)
         kyber_presente = dual_signature.pqc_seal and dual_signature.pqc_auth_tag
