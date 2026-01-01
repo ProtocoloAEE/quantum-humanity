@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from datetime import datetime, timezone
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
 
@@ -63,12 +64,22 @@ class NotarioAEE:
         """
         Crea un certificado de evidencia digital para un archivo.
         
+        Modelo de Seguridad v2.1:
+        - Transacción forense con rollback automático en caso de error
+        - Verificación de existencia de archivo antes de procesar
+        - Quórum NTP obligatorio (no se permite timestamp local como fallback)
+        - Firma Ed25519 obligatoria (no se permite degradación silenciosa)
+        
         Args:
             file_path_str: Ruta al archivo que se va a certificar.
             certificado_output_path_str: Ruta donde se guardará el certificado JSON.
         
         Returns:
             Ruta al certificado generado.
+            
+        Raises:
+            FileNotFoundError: Si el archivo no existe
+            RuntimeError: Si falla la generación de firma o timestamp NTP
         """
         file_path = Path(file_path_str)
         certificado_output_path = Path(certificado_output_path_str)
@@ -76,9 +87,15 @@ class NotarioAEE:
         if not file_path.exists():
             raise FileNotFoundError(f"El archivo a certificar no existe: {file_path}")
 
-        # 1. Obtener timestamp de consenso
-        ntp_quorum = RobustNTPQuorum()
-        timestamp_data = ntp_quorum.obtener_timestamp_consenso()
+        # 1. Obtener timestamp de consenso (OBLIGATORIO - no se permite fallback local)
+        try:
+            ntp_quorum = RobustNTPQuorum()
+            timestamp_data = ntp_quorum.obtener_timestamp_consenso()
+        except Exception as e:
+            logger.error(f"Fallo crítico en obtención de timestamp NTP: {e}")
+            raise RuntimeError(
+                f"Error en quórum NTP (no se permite degradación silenciosa): {str(e)}"
+            ) from e
 
         # 2. Calcular hash del archivo
         file_hash = self._calcular_hash_archivo(file_path)
@@ -100,7 +117,14 @@ class NotarioAEE:
         payload_canonico_bytes = payload_canonico_str.encode('utf-8')
 
         # 6. Firmar el payload canónico
-        signature = self._private_key.sign(payload_canonico_bytes).hex()
+        # Modelo de Seguridad v2.1: No se permite degradación silenciosa
+        try:
+            signature = self._private_key.sign(payload_canonico_bytes).hex()
+        except Exception as e:
+            logger.error(f"Fallo crítico en firma Ed25519: {e}")
+            raise RuntimeError(
+                f"Error en firma digital (no se permite degradación silenciosa): {str(e)}"
+            ) from e
 
         # 7. Construir el certificado final completo
         certificado = {
