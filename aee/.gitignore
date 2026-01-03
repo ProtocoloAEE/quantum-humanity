@@ -33,6 +33,11 @@ certificados/
 claves/
 *.backup
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Test files
 test*.txt
 prueba*.txt

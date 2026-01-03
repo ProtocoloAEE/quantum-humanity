@@ -28,8 +28,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger('AEE-Telegram-Bot')
 
-# Token del bot (debe estar en variable de entorno)
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
+# Token del bot (configurado para @CertificadorOficialBot)
+# Puede venir de variable de entorno o configurarse directamente
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '8551824212:AAG2ese5vIVrxUjrV7Uv4fPVEAAPa6Y6BQs')
 
 # Motor criptográfico global
 crypto_engine = HybridCryptoEngine()
@@ -43,24 +44,14 @@ def calculate_file_hash(file_bytes: bytes) -> str:
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Comando /start con mensaje vendedor"""
-    welcome_message = """
-🛡️ *Bienvenido al Certificador de Evidencia AEE*
+    """Comando /start con mensaje profesional"""
+    welcome_message = """🛡️ *Bienvenido al Certificador Oficial AEE*
 
-Envía tu captura de chat o documento para blindarlo *HOY MISMO* con:
+Tu evidencia digital, blindada para siempre.
 
-✅ *Integridad Post-Cuántica* - Resistente a computadoras cuánticas
-✅ *Firma Digital Ed25519* - Verificación pública instantánea
-✅ *Timestamp Consensuado* - Temporalidad verificable
-✅ *Certificado Inmutable* - Tu evidencia protegida para siempre
+¿Tienes una captura de chat, contrato o foto que quieres proteger? Envíala ahora. Nuestro motor aplicará un sello de *Integridad Post-Cuántica* y registro *Merkle Tree* para que nadie pueda negar su existencia ni alterar su contenido en el futuro.
 
-*¿Cómo funciona?*
-1. Envía una imagen (JPG, PNG) o PDF
-2. El bot calculará el hash y generará un certificado único
-3. Recibirás un ID de certificado y hash para verificación
-
-*¡Blinda tu evidencia ahora!* 🚀
-    """
+✅ Privado | ✅ Inmutable | ✅ A prueba de futuro."""
     await update.message.reply_text(welcome_message, parse_mode='Markdown')
 
 
@@ -179,9 +170,9 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    """Inicia el bot de Telegram"""
+    """Inicia el bot de Telegram @CertificadorOficialBot"""
     if not TELEGRAM_BOT_TOKEN:
-        logger.error("TELEGRAM_BOT_TOKEN no está configurado. Configúralo como variable de entorno.")
+        logger.error("TELEGRAM_BOT_TOKEN no está configurado.")
         return
 
     # Crear aplicación
@@ -193,7 +184,8 @@ def main():
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
 
     # Iniciar bot
-    logger.info("🤖 Bot de Telegram iniciado")
+    logger.info("🤖 @CertificadorOficialBot iniciado y escuchando mensajes...")
+    logger.info("✅ Bot en modo polling - Listo para recibir certificaciones")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
