@@ -1,4 +1,4 @@
-# AEE Protocol v2.2.0 - Dependencias
+# AEE Protocol v2.4.0 - Dependencias
 # Motor de Certificación de Evidencia Digital con Seguridad Híbrida Post-Cuántica
 
 # Core Dependencies
@@ -19,6 +19,12 @@ sqlalchemy>=2.0.0
 
 # NTP
 ntplib>=0.4.0
+
+# Telegram Bot
+python-telegram-bot>=20.0
+
+# Image Processing
+Pillow>=10.0.0
 
 # Utilities
 python-dateutil>=2.8.0

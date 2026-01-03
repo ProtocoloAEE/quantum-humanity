@@ -333,3 +333,52 @@ async def verify(
 @router.get("/health")
 async def health(): 
     return {"status": "OK", "version": "2.3.0"}
+
+
+@router.get("/verify/{cert_id}")
+async def verify_certificate_id(
+    cert_id: str,
+    db: Session = Depends(get_db)
+):
+    """
+    Endpoint simple para verificar certificado por ID o Hash
+    Útil para links de verificación desde Telegram
+    """
+    try:
+        from aee.infrastructure.database import CertificateModel
+        
+        # Buscar certificado por ID o hash
+        if len(cert_id) == 64:
+            # Es un hash SHA-256 completo
+            cert = db.query(CertificateModel).filter(
+                CertificateModel.hash_sha256 == cert_id.lower()
+            ).first()
+        else:
+            # Buscar por ID (primeros caracteres del UUID)
+            cert = db.query(CertificateModel).filter(
+                CertificateModel.id.like(f"{cert_id}%")
+            ).first()
+        
+        if not cert:
+            return {
+                "valido": False,
+                "mensaje": "Certificado no encontrado",
+                "cert_id": cert_id
+            }
+        
+        return {
+            "valido": True,
+            "mensaje": "Certificado válido",
+            "cert_id": cert.id,
+            "hash_sha256": cert.hash_sha256,
+            "fecha_certificacion": cert.fecha_certificacion.isoformat() if cert.fecha_certificacion else None,
+            "estado": cert.estado,
+            "filename": cert.filename
+        }
+    except Exception as e:
+        logger.error(f"Error verificando certificado {cert_id}: {e}")
+        return {
+            "valido": False,
+            "mensaje": f"Error al verificar: {str(e)}",
+            "cert_id": cert_id
+        }
