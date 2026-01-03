@@ -169,6 +169,19 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def verify_bot_connection(application: Application):
+    """Verifica que el bot esté conectado correctamente"""
+    try:
+        bot = application.bot
+        bot_info = await bot.get_me()
+        logger.info(f"Bot conectado: @{bot_info.username} - {bot_info.first_name}")
+        print(f"Bot conectado: @{bot_info.username}")
+        return True
+    except Exception as e:
+        logger.error(f"Error conectando bot: {e}")
+        return False
+
+
 def main():
     """Inicia el bot de Telegram @CertificadorOficialBot"""
     if not TELEGRAM_BOT_TOKEN:
@@ -183,10 +196,16 @@ def main():
     application.add_handler(MessageHandler(filters.PHOTO | filters.Document.ALL, handle_document))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
 
+    # Verificar conexión antes de iniciar polling
+    async def post_init(app: Application):
+        await verify_bot_connection(app)
+    
+    application.post_init = post_init
+
     # Iniciar bot
     logger.info("🤖 @CertificadorOficialBot iniciado y escuchando mensajes...")
     logger.info("✅ Bot en modo polling - Listo para recibir certificaciones")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 
 
 if __name__ == "__main__":
