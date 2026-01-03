@@ -58,7 +58,10 @@ Tu evidencia digital, blindada para siempre.
 async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Procesa documentos (imágenes y PDFs) enviados por el usuario"""
     try:
-        logger.info(f"📥 Archivo recibido de usuario {update.effective_user.id}")
+        user_id = update.effective_user.id
+        username = update.effective_user.username or "sin_username"
+        logger.info(f"📥 Archivo recibido de usuario {user_id} (@{username})")
+        print(f"\n📥 Archivo recibido de usuario {user_id} (@{username})")
         
         # Obtener el archivo
         if update.message.photo:
@@ -174,7 +177,12 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print(f"\n✅ CERTIFICACIÓN EXITOSA - ID: {cert_id_short} - Hash: {file_hash[:16]}...")
 
     except Exception as e:
-        logger.error(f"Error procesando documento: {e}", exc_info=True)
+        error_msg = f"Error procesando documento: {e}"
+        logger.error(error_msg, exc_info=True)
+        print(f"\n❌ ERROR EN CERTIFICACIÓN: {error_msg}")
+        print(f"   Tipo de error: {type(e).__name__}")
+        import traceback
+        traceback.print_exc()
         await update.message.reply_text(f"❌ Error al procesar el archivo: {str(e)}")
 
 
