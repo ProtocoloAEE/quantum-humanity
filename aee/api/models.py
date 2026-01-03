@@ -1,20 +1,44 @@
 # Archivo: src/aee/api/models.py
 # ============================================================================
 # PYDANTIC MODELS - Esquemas de validación para API REST
+# Versión: 2.2.0 - Validación estricta con regex y límites de tamaño
 # ============================================================================
 
 from pydantic import BaseModel, Field, FileUrl, validator
 from typing import Optional, Dict, Any
 from datetime import datetime
 import uuid
+import re
+import json
 
 class MetadataInput(BaseModel):
-    """Metadata opcional para certificado"""
-    caso_numero: Optional[str] = Field(None, description="Número de expediente/caso")
-    perito_nombre: Optional[str] = Field(None, description="Nombre del perito")
-    perito_email: Optional[str] = Field(None, description="Email del perito")
-    institucion: Optional[str] = Field(None, description="Institución (Fiscalía, PGN, etc)")
+    """Metadata opcional para certificado con límites de tamaño estrictos"""
+    caso_numero: Optional[str] = Field(None, max_length=100, description="Número de expediente/caso")
+    perito_nombre: Optional[str] = Field(None, max_length=200, description="Nombre del perito")
+    perito_email: Optional[str] = Field(None, max_length=255, description="Email del perito")
+    institucion: Optional[str] = Field(None, max_length=200, description="Institución (Fiscalía, PGN, etc)")
     notas: Optional[str] = Field(None, max_length=500, description="Notas adicionales")
+    
+    @validator('*', pre=True)
+    def validate_metadata_size(cls, v):
+        """Valida que el tamaño total de metadatos no supere 10KB"""
+        if v is None:
+            return v
+        # Calcular tamaño aproximado en bytes
+        if isinstance(v, str):
+            size_bytes = len(v.encode('utf-8'))
+            if size_bytes > 10000:  # 10KB límite por campo
+                raise ValueError(f'Campo de metadata excede 10KB: {size_bytes} bytes')
+        return v
+    
+    def model_dump_json(self, **kwargs) -> str:
+        """Serializa y valida tamaño total de metadatos"""
+        data = self.dict(exclude_none=True)
+        json_str = json.dumps(data, ensure_ascii=False)
+        total_size = len(json_str.encode('utf-8'))
+        if total_size > 10240:  # 10KB límite total
+            raise ValueError(f'Metadata total excede 10KB: {total_size} bytes')
+        return json_str
     
     class Config:
         json_schema_extra = {
@@ -28,21 +52,37 @@ class MetadataInput(BaseModel):
 
 
 class CertifyRequest(BaseModel):
-    """Request para endpoint /certify"""
-    filename: str = Field(..., description="Nombre del archivo")
+    """Request para endpoint /certify con validación estricta v2.2.0"""
+    filename: str = Field(..., max_length=500, description="Nombre del archivo (máx 500 chars)")
     file_hash: str = Field(..., description="SHA256 del archivo en hex (64 chars)")
-    file_size_bytes: int = Field(..., gt=0, description="Tamaño del archivo")
+    file_size_bytes: int = Field(..., gt=0, le=10**12, description="Tamaño del archivo (máx 1TB)")
     metadata: Optional[MetadataInput] = None
     
     @validator('file_hash')
-    def validate_hash(cls, v):
+    def validate_hash_strict(cls, v):
+        """Validación estricta de hash SHA256 con regex"""
+        if not isinstance(v, str):
+            raise ValueError('file_hash debe ser una cadena')
+        v = v.strip().lower()
         if len(v) != 64:
-            raise ValueError('SHA256 debe tener 64 caracteres hexadecimales')
-        try:
-            int(v, 16)
-        except ValueError:
-            raise ValueError('SHA256 debe ser válido hexadecimal')
-        return v.lower()
+            raise ValueError('SHA256 debe tener exactamente 64 caracteres hexadecimales')
+        if not re.match(r'^[0-9a-f]{64}$', v):
+            raise ValueError('SHA256 debe contener solo caracteres hexadecimales (0-9, a-f)')
+        return v
+    
+    @validator('filename')
+    def validate_filename(cls, v):
+        """Valida que el filename no contenga caracteres peligrosos"""
+        if not isinstance(v, str):
+            raise ValueError('filename debe ser una cadena')
+        # Rechazar path traversal y caracteres peligrosos
+        dangerous_chars = ['..', '/', '\\', '\x00', '<', '>', '|', ':', '*', '?']
+        for char in dangerous_chars:
+            if char in v:
+                raise ValueError(f'filename contiene caracteres peligrosos: {char}')
+        if len(v.encode('utf-8')) > 500:
+            raise ValueError('filename excede 500 bytes')
+        return v
     
     class Config:
         json_schema_extra = {
@@ -80,7 +120,7 @@ class NTPQuorumResponse(BaseModel):
 class CertificateResponse(BaseModel):
     """Response de /certify - Certificado híbrido completo"""
     certificado_id: str = Field(default_factory=lambda: str(uuid.uuid4()), description="ID único del certificado")
-    hash_sha256: str = Field(..., description="SHA256 del archivo")
+    hash_sha256: str = Field(..., description="SHA256 del archivo (64 chars hex)")
     timestamp_ntp: Dict[str, Any] = Field(..., description="Quórum NTP consenso")
     archivo: Dict[str, Any] = Field(..., description="Info del archivo")
     metadata: Optional[Dict[str, Any]] = None
@@ -89,6 +129,18 @@ class CertificateResponse(BaseModel):
     version_protocolo: str = Field(default="2.2.0-HybridPQC")
     fecha_certificacion: str = Field(..., description="ISO 8601 UTC")
     estado: str = Field(default="VIGENTE", description="VIGENTE, REVOCADO, EXPIRADO")
+    
+    @validator('hash_sha256')
+    def validate_hash_strict(cls, v):
+        """Validación estricta de hash SHA256"""
+        if not isinstance(v, str):
+            raise ValueError('hash_sha256 debe ser una cadena')
+        v = v.strip().lower()
+        if len(v) != 64:
+            raise ValueError('SHA256 debe tener exactamente 64 caracteres hexadecimales')
+        if not re.match(r'^[0-9a-f]{64}$', v):
+            raise ValueError('SHA256 debe contener solo caracteres hexadecimales (0-9, a-f)')
+        return v
     
     class Config:
         json_schema_extra = {
@@ -103,15 +155,21 @@ class CertificateResponse(BaseModel):
 
 
 class VerifyRequest(BaseModel):
-    """Request para endpoint /verify"""
-    file_hash: str = Field(..., description="SHA256 del archivo a verificar")
+    """Request para endpoint /verify con validación estricta v2.2.0"""
+    file_hash: str = Field(..., description="SHA256 del archivo a verificar (64 chars hex)")
     certificado: CertificateResponse = Field(..., description="Certificado AEE completo")
     
     @validator('file_hash')
-    def validate_hash(cls, v):
+    def validate_hash_strict(cls, v):
+        """Validación estricta de hash SHA256 con regex"""
+        if not isinstance(v, str):
+            raise ValueError('file_hash debe ser una cadena')
+        v = v.strip().lower()
         if len(v) != 64:
-            raise ValueError('SHA256 debe tener 64 caracteres')
-        return v.lower()
+            raise ValueError('SHA256 debe tener exactamente 64 caracteres hexadecimales')
+        if not re.match(r'^[0-9a-f]{64}$', v):
+            raise ValueError('SHA256 debe contener solo caracteres hexadecimales (0-9, a-f)')
+        return v
     
     class Config:
         json_schema_extra = {
