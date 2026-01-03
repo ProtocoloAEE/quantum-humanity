@@ -332,4 +332,4 @@ async def verify(
 
 @router.get("/health")
 async def health(): 
-    return {"status": "OK", "version": "2.2.0"}
+    return {"status": "OK", "version": "2.3.0"}

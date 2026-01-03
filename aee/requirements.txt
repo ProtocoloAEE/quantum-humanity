@@ -1,0 +1,25 @@
+# AEE Protocol v2.2.0 - Dependencias
+# Motor de Certificación de Evidencia Digital con Seguridad Híbrida Post-Cuántica
+
+# Core Dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Cryptography
+cryptography>=41.0.0
+
+# Post-Quantum Cryptography (al menos una de estas)
+# kyber-py>=0.2.0  # Opción 1: kyber-py
+# pqcrypto>=0.1.0  # Opción 2: pqcrypto
+
+# Database
+sqlalchemy>=2.0.0
+
+# NTP
+ntplib>=0.4.0
+
+# Utilities
+python-dateutil>=2.8.0
+

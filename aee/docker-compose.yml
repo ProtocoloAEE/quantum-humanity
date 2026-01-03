@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  aee-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aee-protocol-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./aee.db
+      - HSM_ENABLED=false
+      - HSM_TYPE=mock
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./aee:/app/aee
+      - ./logs:/app/logs
+      - aee-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/v1/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - aee-network
+
+volumes:
+  aee-data:
+    driver: local
+
+networks:
+  aee-network:
+    driver: bridge
+
