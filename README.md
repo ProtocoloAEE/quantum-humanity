@@ -358,10 +358,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: support@aee-bot.io
-- 💬 Discord: [Community Server](https://discord.gg/aee-bot)
+
 - 🐛 Issues: [GitHub Issues](https://github.com/aee-bot/aee-protocol/issues)
-- 📖 Documentation: [Wiki](https://github.com/aee-bot/aee-protocol/wiki)
+
 
 ---
 
