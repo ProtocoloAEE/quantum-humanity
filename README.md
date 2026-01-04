@@ -15,21 +15,21 @@
 
 </div>
 
-## 🎯 Overview
+## Overview
 
 AEE Bot is a professional digital preservation system that provides cryptographic certification of file integrity through Telegram. It combines SHA-256 hashing, SQLite persistence, and professional PDF certificate generation to create a complete forensic evidence solution.
 
-### ✨ Key Features
+### Key Features
 
-- 🔐 **Cryptographic Integrity**: SHA-256 hashing (NIST FIPS 180-4 compliant)
-- 📄 **Professional Certificates**: PDF-based forensic evidence certificates
-- 💾 **Enterprise Database**: SQLite with optimized indexing
-- 🤖 **Telegram Integration**: Inline buttons for seamless user experience
-- 📊 **User History**: Complete preservation tracking with `/historial`
-- 🚀 ** Ready**: Reserved fields for / signatures
-- 🔍 **Forensic Logging**: Complete audit trail with DEBUG-level logging
+- **Cryptographic Integrity**: SHA-256 hashing (NIST FIPS 180-4 compliant)
+- **Professional Certificates**: PDF-based forensic evidence certificates
+- **Enterprise Database**: SQLite with optimized indexing
+- **Telegram Integration**: Inline buttons for seamless user experience
+- **User History**: Complete preservation tracking with `/historial`
+- **Signature Ready**: Reserved fields for digital signatures
+- **Forensic Logging**: Complete audit trail with DEBUG-level logging
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -58,11 +58,11 @@ python main.py
 
 1. **Start the bot**: Send `/start` to your bot
 2. **Preserve a file**: Send any photo or document
-3. **Get certificate**: Press the "📜 Descargar Certificado PDF" button
+3. **Get certificate**: Press the "Descargar Certificado PDF" button
 4. **Verify integrity**: Use `/verificar` to compare files
 5. **View history**: Send `/historial` to see your preservations
 
-## 📋 Commands
+## Commands
 
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -70,7 +70,7 @@ python main.py
 | `/verificar` | Compare file integrity with previous hash | Reply to hash message with `/verificar` + new file |
 | `/historial` | Show your last 5 preservations | `/historial` |
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ├── main.py                 # Entry point with database initialization
@@ -89,7 +89,7 @@ python main.py
     └── telegram_bot.py    # Main bot logic with handlers
 ```
 
-## 🔧 Technical Details
+## Technical Details
 
 ### Database Schema
 
@@ -124,13 +124,13 @@ Each PDF certificate includes:
 
 ### Security Features
 
-- ✅ **Hash Uniqueness**: Database constraint prevents duplicates
-- ✅ **User Validation**: Only owners can download their certificates
-- ✅ **Timestamp Integrity**: UTC timestamps with RFC 3339 format
-- ✅ **Audit Trail**: Complete logging of all operations
-- ✅ **Legal Clarity**: Clear scope of certification
+- **Hash Uniqueness**: Database constraint prevents duplicates
+- **User Validation**: Only owners can download their certificates
+- **Timestamp Integrity**: UTC timestamps with RFC 3339 format
+- **Audit Trail**: Complete logging of all operations
+- **Legal Clarity**: Clear scope of certification
 
-## 📊 Usage Statistics
+## Usage Statistics
 
 Monitor your system with the built-in database inspector:
 
@@ -145,7 +145,7 @@ This shows:
 - Integrity verification results
 - Index optimization status
 
-## 🔍 Database Inspection
+## Database Inspection
 
 The `inspect_database.py` utility provides comprehensive database analysis:
 
@@ -163,7 +163,7 @@ Tamano: 16384 bytes (16.00 KB)
 📋 ESQUEMA DE TABLAS
 --------------------------------------------------------------------------------
 
-📌 Tabla: preservations
+Tabla: preservations
 
   Columnas:
     • id: INTEGER NOT NULL [PRIMARY KEY]
@@ -176,7 +176,7 @@ Tamano: 16384 bytes (16.00 KB)
     • _signature: TEXT NULL
 
 --------------------------------------------------------------------------------
-📊 ESTADÍSTICAS
+ESTADÍSTICAS
 --------------------------------------------------------------------------------
 
   Total de registros: 2
@@ -184,7 +184,7 @@ Tamano: 16384 bytes (16.00 KB)
   Usuarios únicos: 1
 ```
 
-## 🌍 Environment Configuration
+## Environment Configuration
 
 Create a `.env` file with your configuration:
 
@@ -202,7 +202,7 @@ DATABASE_PATH=aee_preservations.db
 CERTIFICATES_DIR=./certificates/
 ```
 
-## 📦 Dependencies
+## Dependencies
 
 | Package | Version | Purpose |
 |---------|--------|---------|
@@ -213,7 +213,7 @@ CERTIFICATES_DIR=./certificates/
 | `asyncio` | 3.4.3 | Async Support |
 | `pydantic` | 2.5.0 | Data Validation |
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### Docker Deployment
 
@@ -250,19 +250,19 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### What is Certified
-- ✅ **Binary Integrity**: SHA-256 hash of the exact file bytes
-- ✅ **Timestamp**: UTC time of preservation
-- ✅ **User Identity**: Telegram user who performed preservation
-- ✅ **File Metadata**: Size, name, and MIME type
+- **Binary Integrity**: SHA-256 hash of the exact file bytes
+- **Timestamp**: UTC time of preservation
+- **User Identity**: Telegram user who performed preservation
+- **File Metadata**: Size, name, and MIME type
 
 ### What is NOT Certified
-- ❌ **Content Veracity**: Truthfulness or accuracy of information
-- ❌ **Legal Compliance**: Whether content follows laws or regulations
-- ❌ **Authorship**: Who created or owns the content
-- ❌ **Context**: Appropriateness or meaning of the content
+- **Content Veracity**: Truthfulness or accuracy of information
+- **Legal Compliance**: Whether content follows laws or regulations
+- **Authorship**: Who created or owns the content
+- **Context**: Appropriateness or meaning of the content
 
 ### Best Practices
 - Keep your bot token secure
@@ -270,7 +270,7 @@ WantedBy=multi-user.target
 - Monitor logs for unusual activity
 - Validate certificates independently when needed
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
@@ -296,17 +296,17 @@ python -m pytest
 python main.py
 ```
 
-## 📈 Roadmap
+## Roadmap
 
 See [ROADMAP.md](ROADMAP.md) for detailed development plans:
 
-- **v3.1**:  Integration (/)
+- **v3.1**: Digital Signature Integration
 - **v3.2**: Blockchain Integration (Merkle Trees, Smart Contracts)
 - **v3.3**: Analytics Dashboard (Web Interface, Reporting)
 - **v3.4**: Multi-Platform Support (Discord, Slack, WhatsApp)
 - **v3.5**: Enterprise Features (LDAP, SIEM, Compliance)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -345,29 +345,28 @@ ls -la ./certificates/
 3. Create a new issue with detailed information
 4. Join our community Discord (link in repository)
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [python-telegram-bot](https://python-telegram-bot.org/) for the excellent Telegram framework
 - [SQLAlchemy](https://www.sqlalchemy.org/) for powerful database ORM
 - [ReportLab](https://www.reportlab.com/) for PDF generation capabilities
 - [NIST](https://www.nist.gov/) for SHA-256 and cryptographic standards
 
-## 📞 Support
+## Support
 
-
-- 🐛 Issues: [GitHub Issues](https://github.com/aee-bot/aee-protocol/issues)
+- Issues: [GitHub Issues](https://github.com/aee-bot/aee-protocol/issues)
 
 
 ---
 
 <div align="center">
 
-**[⭐ Star this repo](https://github.com/aee-bot/aee-protocol) if it helped you!**
+**[Star this repo](https://github.com/aee-bot/aee-protocol) if it helped you!**
 
-Made with ❤️ by the AEE Team
+Made with dedication by the AEE Team
 
 </div>

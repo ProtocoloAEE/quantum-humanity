@@ -222,7 +222,7 @@ class CertificateGenerator:
             
             # 3. BLOQUE DE INTEGRIDAD (El más importante)
             story.append(Paragraph(
-                "🔒 INTEGRIDAD CRIPTOGRÁFICA",
+                "INTEGRIDAD CRIPTOGRÁFICA",
                 styles['Heading2']
             ))
             
@@ -245,7 +245,7 @@ class CertificateGenerator:
             
             # 4. INFORMACIÓN DEL ARCHIVO
             story.append(Paragraph(
-                "📄 PROPIEDADES DEL ARCHIVO",
+                "PROPIEDADES DEL ARCHIVO",
                 styles['Heading2']
             ))
             
@@ -284,7 +284,7 @@ class CertificateGenerator:
             
             # 5. DISCLAIMER LEGAL
             story.append(Paragraph(
-                "⚠️ AVISO LEGAL",
+                "AVISO LEGAL",
                 styles['Heading2']
             ))
             
@@ -308,7 +308,7 @@ class CertificateGenerator:
             
             # 6. ESPECIFICACIONES TÉCNICAS
             story.append(Paragraph(
-                "🔧 ESPECIFICACIONES TÉCNICAS",
+                "ESPECIFICACIONES TÉCNICAS",
                 styles['Heading2']
             ))
             
@@ -365,9 +365,9 @@ class CertificateGenerator:
             if output_path:
                 with open(output_path, 'wb') as f:
                     f.write(pdf_content)
-                logger.info(f"✅ Certificado guardado: {output_path}")
+                logger.info(f"Certificado guardado: {output_path}")
             
-            logger.info(f"✅ Certificado generado exitosamente (tamaño: {len(pdf_content)} bytes)")
+            logger.info(f"Certificado generado exitosamente (tamaño: {len(pdf_content)} bytes)")
             
             return pdf_content
             
@@ -376,7 +376,7 @@ class CertificateGenerator:
             raise
             
         except Exception as e:
-            logger.exception(f"❌ Error al generar certificado: {type(e).__name__}: {e}")
+            logger.exception(f"Error al generar certificado: {type(e).__name__}: {e}")
             raise
     
     @staticmethod

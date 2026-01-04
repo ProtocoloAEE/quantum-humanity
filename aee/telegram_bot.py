@@ -108,7 +108,7 @@ async def verify_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not message.photo:
             logger.warning("verify_command: Sin foto en mensaje actual")
             await message.reply_text(
-                "❌ Debes enviar una foto o documento junto con `/verificar`.",
+                "Debes enviar una foto o documento junto con `/verificar`.",
                 parse_mode="Markdown"
             )
             return
@@ -125,24 +125,24 @@ async def verify_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             logger.exception(f"Error descargando archivo: {type(e).__name__}: {e}")
             await message.reply_text(
-                f"❌ Error al descargar el archivo: {str(e)}",
+                f"Error al descargar el archivo: {str(e)}",
                 parse_mode="Markdown"
             )
             return
         
         # VERIFICACIÓN FINAL
         if original_hash == new_hash:
-            logger.info("✅ Hashes coinciden")
+            logger.info("Hashes coinciden")
             await message.reply_text(
-                "✅ **INTEGRIDAD CONFIRMADA**\n\n"
+                "**INTEGRIDAD CONFIRMADA**\n\n"
                 f"El archivo es idéntico al original.\n"
                 f"`{new_hash}`",
                 parse_mode="Markdown"
             )
         else:
-            logger.warning(f"❌ Hashes NO coinciden!")
+            logger.warning(f"Hashes NO coinciden!")
             await message.reply_text(
-                "❌ **INTEGRIDAD VIOLADA**\n\n"
+                "**INTEGRIDAD VIOLADA**\n\n"
                 f"El archivo ha sido modificado.\n\n"
                 f"Original: `{original_hash}`\n"
                 f"Actual:   `{new_hash}`",
@@ -152,7 +152,7 @@ async def verify_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logger.exception(f"Error en verify_command: {type(e).__name__}: {e}")
         await message.reply_text(
-            f"❌ Error: {str(e)}",
+            f"Error: {str(e)}",
             parse_mode="Markdown"
         )
 
@@ -171,13 +171,13 @@ async def historial_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         if not records:
             await update.message.reply_text(
-                "📭 No tienes preservaciones registradas aún.",
+                "No tienes preservaciones registradas aún.",
                 parse_mode="Markdown"
             )
             return
         
         # Construir mensaje
-        historial_text = f"📋 **Tu historial ({len(records)} preservaciones):**\n\n"
+        historial_text = f"**Tu historial ({len(records)} preservaciones):**\n\n"
         
         for i, record in enumerate(records[-5:], 1):  # Últimas 5
             timestamp = record.timestamp_utc.strftime("%Y-%m-%d %H:%M:%S")
@@ -192,7 +192,7 @@ async def historial_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logger.exception(f"Error en historial_command: {type(e).__name__}: {e}")
         await message.reply_text(
-            f"❌ Error al obtener historial: {str(e)}",
+            f"Error al obtener historial: {str(e)}",
             parse_mode="Markdown"
         )
 
@@ -233,7 +233,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif message.photo:
             if len(message.photo) == 0:
                 logger.warning("photo existe pero está vacía")
-                await message.reply_text("❌ No se recibió imagen válida.")
+                await message.reply_text("No se recibió imagen válida.")
                 return
             
             file_id = message.photo[-1].file_id
@@ -245,14 +245,14 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             logger.info("Mensaje sin foto ni documento")
             await message.reply_text(
-                "❌ Por favor, envía una **foto** o **documento**.",
+                "Por favor, envía una **foto** o **documento**.",
                 parse_mode="Markdown"
             )
             return
         
         if not file_id:
             logger.error("file_id es None")
-            await message.reply_text("❌ Error: No se pudo extraer el ID del archivo.")
+            await message.reply_text("Error: No se pudo extraer el ID del archivo.")
             return
         
         logger.info(f"File ID: {file_id[:20]}... (tipo: {file_type})")
@@ -266,7 +266,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except FileNotFoundError as e:
             logger.error(f"Archivo no encontrado: {e}")
             await message.reply_text(
-                "❌ El archivo no está disponible en los servidores de Telegram.",
+                "El archivo no está disponible en los servidores de Telegram.",
                 parse_mode="Markdown"
             )
             return
@@ -274,7 +274,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             logger.exception(f"Error descargando archivo: {type(e).__name__}: {e}")
             await message.reply_text(
-                f"❌ Error al descargar: {type(e).__name__}",
+                f"Error al descargar: {type(e).__name__}",
                 parse_mode="Markdown"
             )
             return
@@ -286,7 +286,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
         except Exception as e:
             logger.exception(f"Error calculando SHA-256: {type(e).__name__}: {e}")
-            await message.reply_text(f"❌ Error al procesar el archivo: {str(e)}")
+            await message.reply_text(f"Error al procesar el archivo: {str(e)}")
             return
         
         # VALIDACIÓN 5: Registrar en BD
@@ -315,27 +315,27 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             logger.exception(f"Error en BD: {type(e).__name__}: {e}")
             await message.reply_text(
-                f"❌ Error al registrar preservación: {str(e)}",
+                f"Error al registrar preservación: {str(e)}",
                 parse_mode="Markdown"
             )
             return
         
-        # ✅ ÉXITO: Enviar reporte con botón de certificado
+        # ÉXITO: Enviar reporte con botón de certificado
         reporte = (
-            f"✅ **PRESERVACIÓN TÉCNICA REGISTRADA**\n\n"
+            f"**PRESERVACIÓN TÉCNICA REGISTRADA**\n\n"
             f"**Tipo de archivo:** {file_type.upper()}\n"
             f"**Tamaño:** {len(file_content):,} bytes\n"
             f"**Timestamp:** {datetime.utcnow().isoformat()}Z\n"
             f"**Algoritmo:** SHA-256\n\n"
             f"**Hash:** `{file_hash}`\n\n"
-            f"💡 *Puedes usar `/verificar` para comparar integridad*"
+            f"*Puedes usar `/verificar` para comparar integridad*"
         )
         
         # Crear botón de descarga de certificado
         keyboard = InlineKeyboardMarkup([
             [
                 InlineKeyboardButton(
-                    "📜 Descargar Certificado PDF",
+                    "Descargar Certificado PDF",
                     callback_data=f"cert_{preservation.id}"
                 )
             ]
@@ -347,7 +347,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logger.exception(f"Error en preserve_message: {type(e).__name__}: {e}")
         await message.reply_text(
-            f"❌ **ERROR INESPERADO**\n\n`{type(e).__name__}: {str(e)}`",
+            f"**ERROR INESPERADO**\n\n`{type(e).__name__}: {str(e)}`",
             parse_mode="Markdown"
         )
 
@@ -373,16 +373,16 @@ async def handle_certificate_download(update: Update, context: ContextTypes.DEFA
         record = DatabaseManager.get_preservation_by_id(preservation_id)
         
         if not record:
-            await query.answer("❌ Certificado no encontrado.", show_alert=True)
+            await query.answer("Certificado no encontrado.", show_alert=True)
             return
         
         if record.user_id != user_id:
-            await query.answer("❌ No tienes permiso para descargar este certificado.", show_alert=True)
+            await query.answer("No tienes permiso para descargar este certificado.", show_alert=True)
             logger.warning(f"Intento de acceso no autorizado: user={user_id}, owner={record.user_id}")
             return
         
         # Notificar al usuario
-        await query.answer("📜 Generando certificado PDF...", show_alert=False)
+        await query.answer("Generando certificado PDF...", show_alert=False)
         
         logger.info(f"Generando certificado para preservación ID={preservation_id}")
         
@@ -392,7 +392,7 @@ async def handle_certificate_download(update: Update, context: ContextTypes.DEFA
             
         except Exception as e:
             logger.exception(f"Error generando PDF: {type(e).__name__}: {e}")
-            await query.answer(f"❌ Error al generar PDF: {str(e)}", show_alert=True)
+            await query.answer(f"Error al generar PDF: {str(e)}", show_alert=True)
             return
         
         # Enviar PDF como documento
@@ -402,7 +402,7 @@ async def handle_certificate_download(update: Update, context: ContextTypes.DEFA
             document=pdf_bytes,
             filename=filename,
             caption=(
-                f"📜 **Certificado de Preservación Digital**\n\n"
+                f"**Certificado de Preservación Digital**\n\n"
                 f"ID: {preservation_id}\n"
                 f"Hash: `{record.file_hash[:32]}...`\n"
                 f"Archivo: {record.file_name}"
@@ -410,15 +410,15 @@ async def handle_certificate_download(update: Update, context: ContextTypes.DEFA
             parse_mode="Markdown"
         )
         
-        logger.info(f"✅ Certificado enviado al usuario: {filename}")
+        logger.info(f"Certificado enviado al usuario: {filename}")
         
     except ValueError as e:
         logger.warning(f"Validación fallida: {e}")
-        await query.answer(f"❌ Error: {str(e)}", show_alert=True)
+        await query.answer(f"Error: {str(e)}", show_alert=True)
         
     except Exception as e:
         logger.exception(f"Error en handle_certificate_download: {type(e).__name__}: {e}")
-        await query.answer(f"❌ Error: {type(e).__name__}", show_alert=True)
+        await query.answer(f"Error: {type(e).__name__}", show_alert=True)
 
 
 # ============================================================================
@@ -434,7 +434,7 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update and update.effective_message:
         try:
             await update.effective_message.reply_text(
-                f"❌ Error en el sistema: {type(context.error).__name__}",
+                f"Error en el sistema: {type(context.error).__name__}",
                 parse_mode="Markdown"
             )
         except:
@@ -477,7 +477,7 @@ def main():
         # Error handler
         app.add_error_handler(error_handler)
         
-        logger.info("✅ Todos los handlers registrados")
+        logger.info("Todos los handlers registrados")
         logger.info("--- AEE BOT INICIADO Y LISTO ---")
         
         app.run_polling(close_loop=False, allowed_updates=None)

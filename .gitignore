@@ -226,11 +226,7 @@ bot_sessions/
 webhook_data/
 user_data/
 
-#  cryptography files
-pq_keys/
-pq_signatures/
-_keys/
-_keys/
+# cryptography files
 
 # Monitoring and metrics
 metrics/
