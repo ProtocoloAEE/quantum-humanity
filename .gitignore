@@ -386,6 +386,14 @@ user_files/
 audit_report*.txt
 *_forensic.log
 
+# Test files
+aee/test_*.py
+aee/tests/
+
+# Legacy docs
+aee/FINAL_SECURITY_REPORT.md
+aee/RELEASE_NOTES_v*.md
+
 # Legacy and obsolete files
 legacy/
 old/

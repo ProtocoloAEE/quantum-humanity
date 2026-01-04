@@ -319,7 +319,7 @@ class CertificateGenerator:
                 "<b>Resistencia Criptográfica:</b> 256 bits<br/>"
                 "<b>Colisiones Esperadas:</b> 2^256 (teóricamente irrealizables)<br/>"
                 "<b>Estándar:</b> RFC 6234, NIST SP 800-14<br/>"
-                "<b>Sistema de Preservación:</b> AEE v3.0 (Post-Quantum Hybrid)"
+                "<b>Sistema de Preservación:</b> AEE v3.0 (Criptografía Estándar)"
             )
             
             story.append(Paragraph(specs_text, styles['Normal']))
@@ -327,19 +327,19 @@ class CertificateGenerator:
             story.append(Spacer(1, 0.3*cm))
             
             # 7. FIRMA DIGITAL (placeholder para futuro)
-            if record.pqc_signature:
+            if record.cryptographic_signature:
                 story.append(Paragraph(
-                    "✅ FIRMA POST-CUÁNTICA",
+                    "FIRMA CRIPTOGRÁFICA",
                     styles['Heading2']
                 ))
                 
                 story.append(Spacer(1, 0.15*cm))
                 
-                sig_text = f"<font face='Courier' size='8'>{record.pqc_signature[:100]}...</font>"
+                sig_text = f"<font face='Courier' size='8'>{record.cryptographic_signature[:100]}...</font>"
                 story.append(Paragraph(sig_text, styles['Normal']))
             else:
                 story.append(Paragraph(
-                    "⏳ Firma Post-Cuántica: (Reservada para implementación futura - Dilithium/Kyber)",
+                    "Firma Criptográfica: (Reservada para implementación futura)",
                     styles['Disclaimer']
                 ))
             

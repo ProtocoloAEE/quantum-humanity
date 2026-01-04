@@ -1,6 +1,6 @@
-python-telegram-bot==20.7
+python-telegram-bot==20.8
 asyncio==3.4.3
-pydantic==2.5.0
+pydantic==2.5.2
 python-dotenv==1.0.0
 SQLAlchemy==2.0.23
 reportlab==4.0.7

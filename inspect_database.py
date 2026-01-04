@@ -120,7 +120,7 @@ def inspect_database():
                     file_size,
                     user_id,
                     timestamp_utc,
-                    pqc_signature
+                    cryptographic_signature
                 FROM preservations
                 ORDER BY timestamp_utc DESC
             """)
@@ -135,7 +135,7 @@ def inspect_database():
                 file_size = record[4]
                 user_id = record[5]
                 timestamp = record[6]
-                pqc_sig = record[7]
+                cryptographic_sig = record[7]
                 
                 print(f"\n  [{i}] ID: {record_id}")
                 print(f"      Archivo: {file_name}")
@@ -145,10 +145,10 @@ def inspect_database():
                 print(f"      Timestamp UTC: {timestamp}")
                 print(f"      Hash SHA-256: {file_hash}")
                 
-                if pqc_sig:
-                    print(f"      Firma PQC: {pqc_sig[:50]}...")
+                if cryptographic_sig:
+                    print(f"      Firma Criptográfica: {cryptographic_sig[:50]}...")
                 else:
-                    print(f"      Firma PQC: [Pendiente de implementación]")
+                    print(f"      Firma Criptográfica: [Pendiente de implementación]")
                 
                 print()
         

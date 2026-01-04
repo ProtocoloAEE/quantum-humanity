@@ -453,7 +453,7 @@ def main():
     from aee.database import init_database
     init_database()
     
-    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8551824212:AAG2ese5vIVrxUjrV7Uv4fPVEAAPa6Y6BQs")
+    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "tu_bot_token_aqui")
     
     logger.info(f"Iniciando AEE Bot con token: {TOKEN[:20]}...")
     

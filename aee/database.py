@@ -37,7 +37,7 @@ class PreservationRecord(Base):
         file_size: Tamaño del archivo en bytes
         user_id: ID del usuario de Telegram que subió el archivo
         timestamp_utc: Marca de tiempo UTC de la preservación (RFC 3339)
-        pqc_signature: Campo reservado para firma post-cuántica (Dilithium/Kyber)
+        cryptographic_signature: Campo reservado para firma criptográfica futura
     """
     __tablename__ = 'preservations'
     
@@ -48,7 +48,7 @@ class PreservationRecord(Base):
     file_size = Column(Integer, nullable=False)
     user_id = Column(String(20), nullable=False, index=True)
     timestamp_utc = Column(DateTime, nullable=False, default=datetime.utcnow)
-    pqc_signature = Column(Text, nullable=True)  # Para Dilithium/Kyber futuro
+    cryptographic_signature = Column(Text, nullable=True)  # Campo reservado para firma criptográfica
     
     def __repr__(self):
         return (
@@ -70,7 +70,7 @@ class PreservationRecord(Base):
             'file_size': self.file_size,
             'user_id': self.user_id,
             'timestamp_utc': self.timestamp_utc.isoformat() + 'Z',
-            'pqc_signature': self.pqc_signature
+            'cryptographic_signature': self.cryptographic_signature
         }
 
 
@@ -115,10 +115,10 @@ class DatabaseManager:
             Base.metadata.create_all(bind=cls._engine)
             
             cls._initialized = True
-            logger.info("✅ Base de datos inicializada correctamente")
+            logger.info("Base de datos inicializada correctamente")
             
         except Exception as e:
-            logger.exception(f"❌ Error al inicializar base de datos: {type(e).__name__}: {e}")
+            logger.exception(f"Error al inicializar base de datos: {type(e).__name__}: {e}")
             raise
     
     @classmethod
@@ -180,7 +180,7 @@ class DatabaseManager:
             session.commit()
             
             logger.info(
-                f"✅ Preservación registrada: ID={preservation.id}, "
+                f"Preservación registrada: ID={preservation.id}, "
                 f"Hash={file_hash[:16]}..., User={user_id}"
             )
             
@@ -288,14 +288,14 @@ class DatabaseManager:
                 session.close()
     
     @classmethod
-    def update_pqc_signature(cls, file_hash: str, signature: str) -> bool:
+    def update_cryptographic_signature(cls, file_hash: str, signature: str) -> bool:
         """
-        Actualiza la firma post-cuántica de un registro.
-        (Para uso futuro con Dilithium/Kyber)
+        Actualiza la firma criptográfica de un registro.
+        (Para uso futuro con algoritmos criptográficos avanzados)
         
         Args:
             file_hash: Hash SHA-256
-            signature: Firma PQC en hexadecimal
+            signature: Firma criptográfica en hexadecimal
         
         Returns:
             True si se actualizó, False si no encontró el registro
@@ -308,17 +308,17 @@ class DatabaseManager:
             
             if not record:
                 logger.warning(f"Registro no encontrado para actualizar: {file_hash}")
+                session.rollback()
                 return False
             
-            record.pqc_signature = signature
-            session.commit()
+            record.cryptographic_signature = signature
             
-            logger.info(f"✅ Firma PQC actualizada: {file_hash[:16]}...")
+            logger.info(f"Firma criptográfica actualizada: {file_hash[:16]}...")
             
             return True
             
         except Exception as e:
-            logger.exception(f"Error en update_pqc_signature: {type(e).__name__}: {e}")
+            logger.exception(f"Error en update_cryptographic_signature: {type(e).__name__}: {e}")
             if session:
                 session.rollback()
             return False
@@ -383,7 +383,7 @@ class DatabaseManager:
             session.delete(record)
             session.commit()
             
-            logger.info(f"✅ Registro eliminado: {file_hash[:16]}...")
+            logger.info(f"Registro eliminado: {file_hash[:16]}...")
             
             return True
             
