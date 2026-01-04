@@ -26,7 +26,7 @@ AEE Bot is a professional digital preservation system that provides cryptographi
 - 💾 **Enterprise Database**: SQLite with optimized indexing
 - 🤖 **Telegram Integration**: Inline buttons for seamless user experience
 - 📊 **User History**: Complete preservation tracking with `/historial`
-- 🚀 **Post-Quantum Ready**: Reserved fields for Dilithium/Kyber signatures
+- 🚀 ** Ready**: Reserved fields for / signatures
 - 🔍 **Forensic Logging**: Complete audit trail with DEBUG-level logging
 
 ## 🚀 Quick Start
@@ -102,7 +102,7 @@ CREATE TABLE preservations (
     file_size INTEGER NOT NULL,                  -- File size in bytes
     user_id VARCHAR(20) NOT NULL,                -- Telegram user ID
     timestamp_utc DATETIME NOT NULL,              -- UTC timestamp
-    pqc_signature TEXT                            -- Post-quantum signature (reserved)
+    _signature TEXT                            --  signature (reserved)
 );
 
 -- Performance indexes
@@ -119,7 +119,7 @@ Each PDF certificate includes:
 - **File Properties**: Name, MIME type, size
 - **Legal Disclaimer**: Scope and limitations
 - **Technical Specs**: NIST compliance information
-- **Post-Quantum Field**: Reserved for future signatures
+- ** Field**: Reserved for future signatures
 - **Footer**: Generation timestamp and system info
 
 ### Security Features
@@ -173,7 +173,7 @@ Tamano: 16384 bytes (16.00 KB)
     • file_size: INTEGER NOT NULL
     • user_id: VARCHAR(20) NOT NULL
     • timestamp_utc: DATETIME NOT NULL
-    • pqc_signature: TEXT NULL
+    • _signature: TEXT NULL
 
 --------------------------------------------------------------------------------
 📊 ESTADÍSTICAS
@@ -300,7 +300,7 @@ python main.py
 
 See [ROADMAP.md](ROADMAP.md) for detailed development plans:
 
-- **v3.1**: Post-Quantum Integration (Dilithium/Kyber)
+- **v3.1**:  Integration (/)
 - **v3.2**: Blockchain Integration (Merkle Trees, Smart Contracts)
 - **v3.3**: Analytics Dashboard (Web Interface, Reporting)
 - **v3.4**: Multi-Platform Support (Discord, Slack, WhatsApp)

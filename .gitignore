@@ -226,11 +226,11 @@ bot_sessions/
 webhook_data/
 user_data/
 
-# Post-quantum cryptography files
+#  cryptography files
 pq_keys/
 pq_signatures/
-dilithium_keys/
-kyber_keys/
+_keys/
+_keys/
 
 # Monitoring and metrics
 metrics/
