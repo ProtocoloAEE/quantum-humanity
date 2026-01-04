@@ -1,89 +1,178 @@
-# SPECIFICATION.md
-1. Propósito
+# Especificación Técnica – Protocolo AEE
 
-El Protocolo AEE (Anclaje de Evidencia Electrónica) define un mecanismo de preservación temprana para archivos digitales, orientado a fijar su estado técnico en un momento determinado del tiempo.
+**Versión:** 1.0.0  
+**Fecha:** 04 de enero de 2026
 
-Su función es probar existencia, integridad y momento, sin realizar análisis forense ni emitir juicios periciales.
+## 1. Alcance Técnico
 
-AEE constituye la Fase 0 de un pipeline probatorio más amplio.
+El Protocolo AEE (Acta de Evidencia Electrónica) es un sistema técnico auxiliar que permite la preservación inmediata de evidencia digital mediante:
 
-2. Alcance
+- **Cálculo criptográfico de integridad:** Algoritmo SHA-256 (NIST FIPS 180-4)
+- **Registro temporal:** Timestamp UTC según RFC 3339
+- **Persistencia:** Base de datos SQLite con estructura normalizada
+- **Comprobante técnico:** Documento PDF con metadatos y hash
 
-El protocolo AEE:
+### 1.1 Funcionalidades Técnicas
 
-Captura el archivo en su estado original
+- Recepción de archivos digitales (imágenes, documentos) vía Telegram Bot
+- Cálculo automático de hash SHA-256 del contenido binario
+- Almacenamiento persistente con identificación única
+- Generación de certificado PDF con información técnica
+- Verificación posterior de integridad mediante comparación de hash
+- Consulta de historial de preservaciones por usuario
 
-Calcula un hash criptográfico (SHA-256)
+## 2. Separación Técnica vs. Jurídica
 
-Registra un timestamp UTC
+### 2.1 Lo que el Sistema Certifica (Alcance Técnico)
 
-Genera un registro técnico reproducible
+El Protocolo AEE certifica únicamente:
 
-Produce un certificado verificable
+1. **Integridad del binario:** El hash SHA-256 del archivo preservado
+2. **Existencia temporal:** El timestamp UTC del momento de preservación
+3. **Identidad del usuario:** El ID de Telegram que realizó la preservación
+4. **Metadatos del archivo:** Nombre, tamaño, tipo MIME (cuando disponibles)
 
-El protocolo AEE no:
+### 2.2 Lo que el Sistema NO Certifica
 
-Analiza contenido
+El Protocolo AEE **NO** certifica:
 
-Detecta manipulaciones visuales
+- **Veracidad del contenido:** La exactitud, verdad o autenticidad de la información contenida
+- **Autoría:** Quién creó o generó el archivo original
+- **Contexto:** Las circunstancias, intenciones o implicaciones del contenido
+- **Legalidad:** La conformidad con normativa vigente
+- **Manipulación previa:** Alteraciones que pudieran haber ocurrido antes de la preservación
 
-Determina autoría
+## 3. Limitaciones Técnicas
 
-Sustituye pericias forenses
+### 3.1 Limitaciones del Hash Criptográfico
 
-Emite conclusiones legales
+- El hash SHA-256 garantiza que el archivo no ha sido alterado **desde** la preservación, no antes
+- No detecta manipulaciones que ocurrieron antes del registro en el sistema
+- Dos archivos diferentes pueden tener el mismo hash solo teóricamente (resistencia a colisión: 2^256)
 
-3. Principios de diseño
-3.1 Preservación temprana
+### 3.2 Limitaciones del Timestamp
 
-El valor probatorio aumenta cuanto menor es la distancia temporal entre la creación/adquisición del archivo y su fijación técnica.
+- El timestamp refleja el momento de preservación, no necesariamente el momento de creación del archivo
+- Depende de la sincronización del sistema operativo del servidor
+- No incluye validación mediante NTP o autoridad certificadora de tiempo
 
-3.2 No intrusividad
+### 3.3 Limitaciones del Almacenamiento
 
-El protocolo no modifica el archivo original ni introduce transformaciones sobre su contenido.
+- La base de datos SQLite es local y no está replicada
+- No existe respaldo automático fuera del servidor
+- La persistencia depende de la integridad del sistema de archivos del servidor
 
-3.3 Reproducibilidad
+### 3.4 Limitaciones del Canal de Entrada
 
-Cualquier tercero debe poder verificar:
+- La recepción vía Telegram depende de la infraestructura de Telegram
+- El bot no puede verificar la identidad real del usuario (solo el ID de Telegram)
+- No existe validación de dos factores o autenticación adicional
 
-El hash
+## 4. Delimitación Jurídica
 
-El algoritmo utilizado
+### 4.1 Disclaimers Legales (Argentina)
 
-El momento registrado
+El Protocolo AEE es una **herramienta técnica auxiliar** que debe entenderse en los siguientes términos:
 
-3.4 Neutralidad técnica
+#### No es un Instrumento Público
 
-AEE no interpreta ni evalúa el significado del contenido preservado.
+El certificado emitido por el sistema **NO** constituye un instrumento público según la normativa argentina. No reemplaza actas notariales, certificaciones oficiales ni documentos públicos.
 
-4. Flujo operativo (alto nivel)
+#### No es una Certificación Notarial
 
-Recepción del archivo
+El sistema **NO** realiza certificación notarial. No implica intervención de escribano público ni validez notarial. El comprobante técnico es un documento generado automáticamente sin intervención humana que valide su contenido.
 
-Cálculo de hash SHA-256
+#### No Reemplaza Pericia Informática o Forense
 
-Obtención de timestamp UTC
+El Protocolo AEE **NO** reemplaza:
 
-Registro técnico estructurado
+- Pericia informática formal
+- Análisis forense de evidencia digital
+- Dictamen pericial judicial
+- Evaluación técnica por profesionales especializados
 
-Emisión de certificado
+#### Admisibilidad Probatoria
 
-5. Relación con otras disciplinas
+La **admisibilidad probatoria** del contenido preservado mediante este sistema queda sujeta a:
 
-AEE es complementario a:
+- La normativa procesal vigente (Código Procesal Civil y Comercial de la Nación, Código Procesal Penal, etc.)
+- La valoración de la autoridad judicial competente
+- Los requisitos específicos de cada procedimiento
+- La evaluación caso por caso según las circunstancias
 
-Informática forense
+**El Protocolo AEE no garantiza la admisibilidad ni la valoración probatoria** del material preservado.
 
-Análisis pericial
+### 4.2 Uso Recomendado
 
-Técnicas de similitud perceptual (pHash, DCT)
+Este sistema está orientado a la **preconstitución técnica de evidencia**, permitiendo:
 
-Estas disciplinas requieren un punto de partida confiable que AEE provee, pero no reemplaza.
+- Preservación inmediata cuando se detecta eventual relevancia probatoria
+- Registro técnico previo a procedimientos formales
+- Documentación auxiliar para asesoramiento legal posterior
+- Registro de integridad como complemento de otros métodos de preservación
 
-6. Marco conceptual
+**Se recomienda consultar con asesores legales** sobre la estrategia probatoria adecuada para cada caso.
 
-El protocolo se alinea con prácticas aceptadas de preservación de evidencia digital, incluyendo principios doctrinarios de fijación temprana y cadena de custodia técnica.
+## 5. Arquitectura Técnica
 
-7. Estado del proyecto
+### 5.1 Componentes
 
-Este documento define el núcleo conceptual del Protocolo AEE. Cualquier implementación debe adherir estrictamente a estos principios.
+- **Bot de Telegram:** Interfaz de usuario para recepción de archivos
+- **Motor de Hash:** Cálculo SHA-256 del contenido binario
+- **Base de Datos:** SQLite con tabla `preservations`
+- **Generador de PDF:** Creación de certificado técnico con ReportLab
+- **API de Verificación:** (Reservado para implementación futura)
+
+### 5.2 Esquema de Base de Datos
+
+```sql
+CREATE TABLE preservations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    file_hash VARCHAR(64) UNIQUE NOT NULL,
+    file_name VARCHAR(255),
+    mime_type VARCHAR(100),
+    file_size INTEGER NOT NULL,
+    user_id VARCHAR(20) NOT NULL,
+    timestamp_utc DATETIME NOT NULL,
+    _signature TEXT NULL
+);
+
+CREATE INDEX ix_preservations_file_hash ON preservations(file_hash);
+CREATE INDEX ix_preservations_user_id ON preservations(user_id);
+```
+
+### 5.3 Formato del Certificado PDF
+
+El certificado incluye:
+
+- Encabezado identificatorio
+- ID de preservación
+- Timestamp UTC
+- Hash SHA-256 completo
+- Metadatos del archivo
+- Disclaimers legales
+- Especificaciones técnicas del algoritmo
+
+## 6. Referencias Técnicas
+
+- **SHA-256:** NIST FIPS 180-4, RFC 6234
+- **Timestamp:** RFC 3339 (ISO 8601)
+- **SQLite:** Versión 3.x
+- **Telegram Bot API:** python-telegram-bot 20.7+
+
+## 7. Mantenimiento y Evolución
+
+Esta especificación corresponde a la versión 1.0.0 (MVP). Futuras versiones pueden incluir:
+
+- Integración de firma digital
+- Validación mediante NTP
+- Replicación de base de datos
+- API REST para verificación externa
+
+Los cambios en la especificación se documentarán en este archivo con versionado semántico.
+
+---
+
+**Documento técnico-jurídico**  
+Protocolo AEE v1.0.0  
+04 de enero de 2026
