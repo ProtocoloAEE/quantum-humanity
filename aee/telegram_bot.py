@@ -11,6 +11,7 @@ import os
 import asyncio
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, File
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
@@ -471,9 +472,12 @@ def main():
     from aee.database import init_database
     init_database()
     
-    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8551824212:AAHk_Yuo333K6Kl_fj3tVu8uV72_s0wjKtc")
+    # Cargar variables de entorno
+    load_dotenv()
     
-    logger.info(f"Iniciando AEE Bot con token: {TOKEN[:20]}...")
+    TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+    
+    logger.info(f"Iniciando AEE Bot con token: {TOKEN[:20] if TOKEN else None}...")
     
     try:
         app = ApplicationBuilder().token(TOKEN).build()
