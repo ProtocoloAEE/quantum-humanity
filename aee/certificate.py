@@ -1,438 +1,311 @@
 """
-aee/certificate.py
-Generador de certificados de preservación digital en formato PDF profesional.
-Diseño de acta pericial técnica con garantías criptográficas.
+Módulo de generación de certificados PDF de preservación digital
 """
-
-import logging
+import os
+from pathlib import Path
 from datetime import datetime
-from io import BytesIO
-from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import inch, cm
-from reportlab.lib.colors import HexColor, black, grey
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, 
-    PageBreak, Image
-)
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib import colors
-from reportlab.pdfgen import canvas
-import hashlib
-from aee.database import DatabaseManager, PreservationRecord
+import logging
 
 logger = logging.getLogger(__name__)
 
-# ============================================================================
-# CONFIGURACIÓN DE ESTILOS
-# ============================================================================
+# Configuración de rutas ABSOLUTAS
+BASE_DIR = Path(__file__).parent.parent.resolve()
+OUTPUT_DIR = BASE_DIR / "certificates"
 
-class CertificateStyles:
-    """Estilos profesionales para el certificado PDF."""
-    
-    @staticmethod
-    def get_styles():
-        """Retorna estilos personalizados para el certificado."""
-        styles = getSampleStyleSheet()
-        
-        # Encabezado principal
-        styles.add(ParagraphStyle(
-            name='CertTitle',
-            parent=styles['Heading1'],
-            fontSize=20,
-            textColor=HexColor('#1a1a1a'),
-            spaceAfter=12,
-            alignment=1,  # Centro
-            fontName='Helvetica-Bold'
-        ))
-        
-        # Subtítulo
-        styles.add(ParagraphStyle(
-            name='CertSubtitle',
-            parent=styles['Normal'],
-            fontSize=11,
-            textColor=HexColor('#333333'),
-            spaceAfter=6,
-            alignment=1,
-            fontName='Helvetica'
-        ))
-        
-        # Sección de metadatos
-        styles.add(ParagraphStyle(
-            name='MetadataLabel',
-            parent=styles['Normal'],
-            fontSize=9,
-            textColor=HexColor('#666666'),
-            spaceAfter=2,
-            fontName='Helvetica-Bold'
-        ))
-        
-        styles.add(ParagraphStyle(
-            name='MetadataValue',
-            parent=styles['Normal'],
-            fontSize=9,
-            textColor=HexColor('#333333'),
-            spaceAfter=4,
-            fontName='Courier'  # Monoespaciado para datos técnicos
-        ))
-        
-        # Hash SHA-256 (monoespaciado, destacado)
-        styles.add(ParagraphStyle(
-            name='HashValue',
-            parent=styles['Normal'],
-            fontSize=10,
-            textColor=HexColor('#000000'),
-            backColor=HexColor('#f0f0f0'),
-            spaceAfter=12,
-            fontName='Courier-Bold',
-            leftIndent=10,
-            rightIndent=10
-        ))
-        
-        # Disclaimer legal
-        styles.add(ParagraphStyle(
-            name='Disclaimer',
-            parent=styles['Normal'],
-            fontSize=8,
-            textColor=HexColor('#666666'),
-            spaceAfter=8,
-            fontName='Helvetica-Oblique',
-            leftIndent=10,
-            rightIndent=10
-        ))
-        
-        return styles
+# Crear directorio si no existe
+OUTPUT_DIR.mkdir(exist_ok=True)
 
+logger.info(f"📁 Directorio de certificados: {OUTPUT_DIR}")
+logger.info(f"📁 CWD actual: {os.getcwd()}")
 
-# ============================================================================
-# GENERADOR DE CERTIFICADOS
-# ============================================================================
 
 class CertificateGenerator:
-    """
-    Generador de certificados de preservación digital.
-    Produce PDFs profesionales con diseño de acta pericial.
-    """
-    
-    @staticmethod
-    def generate_certificate(preservation_id: int, output_path: str = None) -> bytes:
+    """Generador de certificados PDF de preservación digital"""
+
+    def __init__(self, preservation_record):
         """
-        Genera un certificado PDF para una preservación registrada.
-        
+        Inicializa el generador con un registro de preservación
+
         Args:
-            preservation_id: ID del registro de preservación en BD
-            output_path: Ruta para guardar (opcional). Si es None, retorna bytes.
-        
+            preservation_record: Objeto PreservationRecord de SQLAlchemy
+        """
+        self.record = preservation_record
+        self.styles = getSampleStyleSheet()
+        self._setup_custom_styles()
+
+        # Debug log
+        logger.info(f"🔍 Generando certificado para hash: {self.record.file_hash[:16]}...")
+
+    def _setup_custom_styles(self):
+        """Configura estilos personalizados para el documento"""
+        # Estilo para título
+        self.styles.add(ParagraphStyle(
+            name='CustomTitle',
+            parent=self.styles['Title'],
+            fontSize=24,
+            textColor=colors.HexColor('#1a1a1a'),
+            spaceAfter=30,
+            alignment=TA_CENTER,
+            fontName='Helvetica-Bold'
+        ))
+
+        # Estilo para subtítulos
+        self.styles.add(ParagraphStyle(
+            name='CustomHeading',
+            parent=self.styles['Heading2'],
+            fontSize=14,
+            textColor=colors.HexColor('#2c3e50'),
+            spaceAfter=12,
+            spaceBefore=12,
+            fontName='Helvetica-Bold'
+        ))
+
+        # Estilo para texto normal
+        self.styles.add(ParagraphStyle(
+            name='CustomBody',
+            parent=self.styles['Normal'],
+            fontSize=10,
+            textColor=colors.HexColor('#34495e'),
+            alignment=TA_LEFT,
+            fontName='Helvetica'
+        ))
+
+    def _create_header(self):
+        """Crea el encabezado del certificado"""
+        elements = []
+
+        # Título principal
+        title = Paragraph(
+            "CERTIFICADO DE PRESERVACIÓN DIGITAL",
+            self.styles['CustomTitle']
+        )
+        elements.append(title)
+
+        # Subtítulo con protocolo
+        subtitle = Paragraph(
+            "Protocolo AEE - Autenticidad, Evidencia y Existencia",
+            self.styles['CustomBody']
+        )
+        elements.append(subtitle)
+        elements.append(Spacer(1, 0.3*inch))
+
+        return elements
+
+    def _format_file_size(self, size_bytes):
+        """Formatea el tamaño del archivo de forma legible"""
+        if size_bytes < 1024:
+            return f"{size_bytes} bytes"
+        elif size_bytes < 1024 * 1024:
+            return f"{size_bytes / 1024:.2f} KB"
+        elif size_bytes < 1024 * 1024 * 1024:
+            return f"{size_bytes / (1024 * 1024):.2f} MB"
+        else:
+            return f"{size_bytes / (1024 * 1024 * 1024):.2f} GB"
+
+    def _create_record_info(self):
+        """Crea la sección de información del registro"""
+        elements = []
+
+        # Título de sección
+        section_title = Paragraph(
+            "INFORMACIÓN DEL REGISTRO",
+            self.styles['CustomHeading']
+        )
+        elements.append(section_title)
+
+        # Formatear timestamp
+        timestamp_str = self.record.timestamp_utc.strftime('%Y-%m-%d %H:%M:%S UTC')
+
+        # Formatear tamaño de archivo
+        file_size_str = self._format_file_size(self.record.file_size)
+
+        # Datos en tabla
+        data = [
+            ['Hash SHA-256:', self.record.file_hash],
+            ['ID de Registro:', str(self.record.id)],
+            ['Fecha de Preservación:', timestamp_str],
+            ['Nombre del Archivo:', self.record.file_name or 'Sin nombre'],
+            ['Tipo MIME:', self.record.mime_type or 'Desconocido'],
+            ['Tamaño del Archivo:', file_size_str],
+            ['Usuario ID:', self.record.user_id],
+            ['Estado:', 'Preservado y Verificado'],
+        ]
+
+        # Agregar firma criptográfica si existe
+        if self.record.cryptographic_signature:
+            sig_preview = self.record.cryptographic_signature[:50] + "..." if len(self.record.cryptographic_signature) > 50 else self.record.cryptographic_signature
+            data.append(['Firma Criptográfica:', sig_preview])
+
+        table = Table(data, colWidths=[2*inch, 4.5*inch])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#ecf0f1')),
+            ('TEXTCOLOR', (0, 0), (-1, -1), colors.HexColor('#2c3e50')),
+            ('ALIGN', (0, 0), (0, -1), 'RIGHT'),
+            ('ALIGN', (1, 0), (1, -1), 'LEFT'),
+            ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+            ('FONTNAME', (1, 0), (1, -1), 'Courier'),
+            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bdc3c7')),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('LEFTPADDING', (0, 0), (-1, -1), 8),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 8),
+            ('TOPPADDING', (0, 0), (-1, -1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+        ]))
+
+        elements.append(table)
+        elements.append(Spacer(1, 0.3*inch))
+
+        return elements
+
+    def _create_verification_section(self):
+        """Crea la sección de verificación del certificado"""
+        elements = []
+
+        section_title = Paragraph(
+            "VERIFICACIÓN DE AUTENTICIDAD",
+            self.styles['CustomHeading']
+        )
+        elements.append(section_title)
+
+        verification_text = f"""
+        <para align=left>
+        Este certificado verifica que el archivo fue preservado digitalmente mediante el
+        <b>Protocolo AEE</b> (Autenticidad, Evidencia y Existencia) en la fecha y hora indicadas.
+        <br/><br/>
+        <b>Hash SHA-256:</b> {self.record.file_hash}
+        <br/><br/>
+        El hash SHA-256 es una huella digital criptográfica única del archivo.
+        Cualquier modificación del archivo original resultará en un hash completamente diferente,
+        garantizando la integridad de la evidencia digital.
+        </para>
+        """
+
+        verification_para = Paragraph(verification_text, self.styles['CustomBody'])
+        elements.append(verification_para)
+        elements.append(Spacer(1, 0.3*inch))
+
+        return elements
+
+    def _create_footer(self):
+        """Crea el pie del certificado"""
+        elements = []
+
+        elements.append(Spacer(1, 0.4*inch))
+
+        footer_text = f"""
+        <para align=center>
+        <font size=8 color="#7f8c8d">
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>
+        <b>PROTOCOLO AEE - CERTIFICADO DE PRESERVACIÓN DIGITAL</b><br/>
+        Hash de Verificación: {self.record.file_hash[:32]}...<br/>
+        Certificado generado el: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}<br/>
+        ID del Registro: {self.record.id} | Versión del Protocolo: 1.0.0<br/>
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        </font>
+        </para>
+        """
+
+        footer = Paragraph(footer_text, self.styles['Normal'])
+        elements.append(footer)
+
+        return elements
+
+    def generate(self):
+        """
+        Genera el certificado PDF
+
         Returns:
-            bytes: Contenido del PDF, o None si hay error
-        
+            Path: Ruta absoluta al archivo PDF generado
+
         Raises:
-            ValueError: Si el registro no existe
-            Exception: Errores de generación de PDF
+            FileNotFoundError: Si el PDF no se generó correctamente
+            Exception: Si hubo error en la generación
         """
         try:
-            # Obtener registro de BD
-            record = DatabaseManager.get_preservation_by_id(preservation_id)
-            
-            if not record:
-                raise ValueError(f"Preservación no encontrada: ID={preservation_id}")
-            
-            logger.info(f"Generando certificado para preservación ID={preservation_id}")
-            
-            # Crear PDF en memoria
-            pdf_buffer = BytesIO()
-            
-            # Documento A4
+            # Nombre del archivo basado en hash
+            filename = f"cert_{self.record.file_hash[:16]}.pdf"
+            output_path = OUTPUT_DIR / filename
+
+            logger.info(f"🔧 Generando PDF: {output_path}")
+
+            # Crear documento
             doc = SimpleDocTemplate(
-                pdf_buffer,
-                pagesize=A4,
-                rightMargin=2*cm,
-                leftMargin=2*cm,
-                topMargin=2*cm,
-                bottomMargin=2*cm,
-                title="Certificado de Preservación Digital"
+                str(output_path),
+                pagesize=letter,
+                rightMargin=0.75*inch,
+                leftMargin=0.75*inch,
+                topMargin=0.75*inch,
+                bottomMargin=0.75*inch
             )
-            
+
             # Construir contenido
             story = []
-            styles = CertificateStyles.get_styles()
-            
-            # 1. ENCABEZADO
-            story.append(Paragraph(
-                "CERTIFICADO DE PRESERVACIÓN DIGITAL",
-                styles['CertTitle']
-            ))
-            
-            story.append(Paragraph(
-                "Acta Electrónica de Evidencia - Sistema AEE",
-                styles['CertSubtitle']
-            ))
-            
-            story.append(Spacer(1, 0.3*cm))
-            
-            # Línea separadora
-            story.append(Table(
-                [['']], 
-                colWidths=[17*cm],
-                style=TableStyle([
-                    ('LINEABOVE', (0, 0), (-1, -1), 2, HexColor('#1a1a1a')),
-                ])
-            ))
-            
-            story.append(Spacer(1, 0.3*cm))
-            
-            # 2. INFORMACIÓN GENERAL
-            story.append(Paragraph(
-                "📋 INFORMACIÓN DE LA PRESERVACIÓN",
-                styles['Heading2']
-            ))
-            
-            story.append(Spacer(1, 0.2*cm))
-            
-            # Tabla de metadatos
-            metadata_data = [
-                [
-                    Paragraph("<b>Preservación ID:</b>", styles['MetadataLabel']),
-                    Paragraph(f"<font face='Courier'>{record.id}</font>", styles['MetadataValue'])
-                ],
-                [
-                    Paragraph("<b>Fecha y Hora UTC:</b>", styles['MetadataLabel']),
-                    Paragraph(
-                        f"<font face='Courier'>{record.timestamp_utc.isoformat()}Z</font>",
-                        styles['MetadataValue']
-                    )
-                ],
-                [
-                    Paragraph("<b>Usuario (Telegram ID):</b>", styles['MetadataLabel']),
-                    Paragraph(f"<font face='Courier'>{record.user_id}</font>", styles['MetadataValue'])
-                ],
-            ]
-            
-            metadata_table = Table(metadata_data, colWidths=[5*cm, 11*cm])
-            metadata_table.setStyle(TableStyle([
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('LEFTPADDING', (0, 0), (-1, -1), 5),
-                ('RIGHTPADDING', (0, 0), (-1, -1), 5),
-                ('TOPPADDING', (0, 0), (-1, -1), 3),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
-                ('GRID', (0, 0), (-1, -1), 0.5, HexColor('#dddddd')),
-            ]))
-            
-            story.append(metadata_table)
-            story.append(Spacer(1, 0.3*cm))
-            
-            # 3. BLOQUE DE INTEGRIDAD (El más importante)
-            story.append(Paragraph(
-                "INTEGRIDAD CRIPTOGRÁFICA",
-                styles['Heading2']
-            ))
-            
-            story.append(Spacer(1, 0.2*cm))
-            
-            story.append(Paragraph(
-                "<b>Hash SHA-256:</b>",
-                styles['MetadataLabel']
-            ))
-            
-            story.append(Spacer(1, 0.1*cm))
-            
-            # Hash en bloque destacado
-            story.append(Paragraph(
-                f"<font face='Courier' size='11'><b>{record.file_hash}</b></font>",
-                styles['HashValue']
-            ))
-            
-            story.append(Spacer(1, 0.2*cm))
-            
-            # 4. INFORMACIÓN DEL ARCHIVO
-            story.append(Paragraph(
-                "PROPIEDADES DEL ARCHIVO",
-                styles['Heading2']
-            ))
-            
-            story.append(Spacer(1, 0.2*cm))
-            
-            file_data = [
-                [
-                    Paragraph("<b>Nombre de Archivo:</b>", styles['MetadataLabel']),
-                    Paragraph(f"<font face='Courier'>{record.file_name or 'N/A'}</font>", styles['MetadataValue'])
-                ],
-                [
-                    Paragraph("<b>Tipo MIME:</b>", styles['MetadataLabel']),
-                    Paragraph(f"<font face='Courier'>{record.mime_type or 'N/A'}</font>", styles['MetadataValue'])
-                ],
-                [
-                    Paragraph("<b>Tamaño de Archivo:</b>", styles['MetadataLabel']),
-                    Paragraph(
-                        f"<font face='Courier'>{record.file_size:,} bytes ({record.file_size/1024/1024:.2f} MB)</font>",
-                        styles['MetadataValue']
-                    )
-                ],
-            ]
-            
-            file_table = Table(file_data, colWidths=[5*cm, 11*cm])
-            file_table.setStyle(TableStyle([
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('LEFTPADDING', (0, 0), (-1, -1), 5),
-                ('RIGHTPADDING', (0, 0), (-1, -1), 5),
-                ('TOPPADDING', (0, 0), (-1, -1), 3),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
-                ('GRID', (0, 0), (-1, -1), 0.5, HexColor('#dddddd')),
-            ]))
-            
-            story.append(file_table)
-            story.append(Spacer(1, 0.4*cm))
-            
-            # 5. DISCLAIMER LEGAL
-            story.append(Paragraph(
-                "AVISO LEGAL",
-                styles['Heading2']
-            ))
-            
-            story.append(Spacer(1, 0.15*cm))
-            
-            disclaimer_text = (
-                "<b>Alcance de la Certificación:</b> Este certificado valida exclusivamente "
-                "la <u>integridad del binario</u> del archivo mediante el algoritmo SHA-256. "
-                "NO certifica la <u>veracidad del contenido</u>, autoría, legalidad o contexto "
-                "de la información contenida en el archivo. La integridad se verifica por comparación "
-                "del hash SHA-256 proporcionado. Cualquier alteración del archivo producirá un hash diferente. "
-                "<br/><br/>"
-                "<b>Responsabilidad:</b> El usuario es responsable de mantener confidencial "
-                "el certificado y de validar independientemente la autenticidad del contenido. "
-                "El sistema AEE no es responsable del uso indebido de este certificado."
-            )
-            
-            story.append(Paragraph(disclaimer_text, styles['Disclaimer']))
-            
-            story.append(Spacer(1, 0.4*cm))
-            
-            # 6. ESPECIFICACIONES TÉCNICAS
-            story.append(Paragraph(
-                "ESPECIFICACIONES TÉCNICAS",
-                styles['Heading2']
-            ))
-            
-            story.append(Spacer(1, 0.15*cm))
-            
-            specs_text = (
-                "<b>Algoritmo de Hash:</b> SHA-256 (NIST FIPS 180-4)<br/>"
-                "<b>Resistencia Criptográfica:</b> 256 bits<br/>"
-                "<b>Colisiones Esperadas:</b> 2^256 (teóricamente irrealizables)<br/>"
-                "<b>Estándar:</b> RFC 6234, NIST SP 800-14<br/>"
-                "<b>Sistema de Preservación:</b> AEE v3.0 (Criptografía Estándar)"
-            )
-            
-            story.append(Paragraph(specs_text, styles['Normal']))
-            
-            story.append(Spacer(1, 0.3*cm))
-            
-            # 7. FIRMA DIGITAL (placeholder para futuro)
-            if record.cryptographic_signature:
-                story.append(Paragraph(
-                    "FIRMA CRIPTOGRÁFICA",
-                    styles['Heading2']
-                ))
-                
-                story.append(Spacer(1, 0.15*cm))
-                
-                sig_text = f"<font face='Courier' size='8'>{record.cryptographic_signature[:100]}...</font>"
-                story.append(Paragraph(sig_text, styles['Normal']))
-            else:
-                story.append(Paragraph(
-                    "Firma Criptográfica: (Reservada para implementación futura)",
-                    styles['Disclaimer']
-                ))
-            
-            story.append(Spacer(1, 0.4*cm))
-            
-            # 8. PIE DE PÁGINA
-            timestamp_now = datetime.utcnow().isoformat()
-            footer_text = (
-                f"Certificado generado: {timestamp_now}Z<br/>"
-                f"Sistema: Acta de Evidencia Electrónica (AEE) v3.0<br/>"
-                f"Plataforma: Telegram Bot - python-telegram-bot v20.7"
-            )
-            
-            story.append(Paragraph(footer_text, styles['Disclaimer']))
-            
-            # Construir PDF
+            story.extend(self._create_header())
+            story.extend(self._create_record_info())
+            story.extend(self._create_verification_section())
+            story.extend(self._create_footer())
+
+            # Generar PDF
             doc.build(story)
-            
-            # Obtener contenido del buffer
-            pdf_content = pdf_buffer.getvalue()
-            
-            # Guardar a archivo si se proporciona ruta
-            if output_path:
-                with open(output_path, 'wb') as f:
-                    f.write(pdf_content)
-                logger.info(f"Certificado guardado: {output_path}")
-            
-            logger.info(f"Certificado generado exitosamente (tamaño: {len(pdf_content)} bytes)")
-            
-            return pdf_content
-            
-        except ValueError as e:
-            logger.warning(f"Validación fallida: {e}")
-            raise
-            
+
+            # VERIFICACIÓN CRÍTICA
+            if not output_path.exists():
+                logger.error(f"❌ PDF NO EXISTE después de build(): {output_path}")
+                raise FileNotFoundError(f"PDF no generado en {output_path}")
+
+            file_size = output_path.stat().st_size
+
+            if file_size == 0:
+                logger.error(f"❌ PDF generado pero está vacío: {output_path}")
+                raise ValueError(f"PDF vacío en {output_path}")
+
+            logger.info(f"✅ PDF generado exitosamente: {output_path} ({file_size} bytes)")
+
+            return output_path
+
         except Exception as e:
-            logger.exception(f"Error al generar certificado: {type(e).__name__}: {e}")
-            raise
-    
-    @staticmethod
-    def generate_certificate_by_hash(file_hash: str, output_path: str = None) -> bytes:
-        """
-        Genera certificado a partir de un hash SHA-256.
-        
-        Args:
-            file_hash: Hash SHA-256
-            output_path: Ruta para guardar (opcional)
-        
-        Returns:
-            bytes: Contenido del PDF
-        """
-        try:
-            record = DatabaseManager.get_preservation_by_hash(file_hash)
-            
-            if not record:
-                raise ValueError(f"No se encontró preservación con hash: {file_hash}")
-            
-            return CertificateGenerator.generate_certificate(record.id, output_path)
-            
-        except Exception as e:
-            logger.exception(f"Error en generate_certificate_by_hash: {type(e).__name__}: {e}")
+            logger.error(f"❌ Error al generar PDF: {e}", exc_info=True)
             raise
 
 
-# ============================================================================
-# FUNCIONES AUXILIARES
-# ============================================================================
-
-def create_certificate_file(preservation_id: int, output_dir: str = "./certificates/") -> str:
+def generate_certificate(preservation_record):
     """
-    Crea un certificado PDF y lo guarda en el sistema de archivos.
-    
+    Función de conveniencia para generar un certificado
+
     Args:
-        preservation_id: ID de la preservación
-        output_dir: Directorio de salida
-    
+        preservation_record: Registro de preservación (PreservationRecord)
+
     Returns:
-        str: Ruta del archivo creado
+        Path: Ruta al archivo PDF generado
     """
-    import os
-    
-    try:
-        os.makedirs(output_dir, exist_ok=True)
-        
-        filename = f"AEE_Certificado_{preservation_id}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.pdf"
-        output_path = os.path.join(output_dir, filename)
-        
-        CertificateGenerator.generate_certificate(preservation_id, output_path)
-        
-        logger.info(f"Certificado guardado en: {output_path}")
-        
-        return output_path
-        
-    except Exception as e:
-        logger.exception(f"Error creando archivo de certificado: {type(e).__name__}: {e}")
-        raise
+    generator = CertificateGenerator(preservation_record)
+    return generator.generate()
+
+
+def generate_test_certificate():
+    """Genera un certificado de prueba para testing"""
+    from datetime import datetime
+    from types import SimpleNamespace
+
+    # Crear registro de prueba que simula PreservationRecord
+    test_record = SimpleNamespace(
+        id=9999,
+        file_hash="a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+        file_name="documento_prueba.pdf",
+        mime_type="application/pdf",
+        file_size=1024000,
+        user_id="123456789",
+        timestamp_utc=datetime.now(),
+        cryptographic_signature="sig_test_abc123xyz789"
+    )
+
+    output_path = generate_certificate(test_record)
+    print(f"✅ Certificado de prueba generado: {output_path}")
+    return output_path

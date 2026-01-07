@@ -10,6 +10,7 @@ import re
 import os
 import asyncio
 from datetime import datetime
+from pathlib import Path
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, File
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
@@ -17,7 +18,7 @@ from telegram.ext import (
 )
 
 from aee.database import DatabaseManager
-from aee.certificate import CertificateGenerator
+from aee.certificate import generate_certificate
 
 # Configure logging
 logging.basicConfig(
@@ -386,31 +387,48 @@ async def handle_certificate_download(update: Update, context: ContextTypes.DEFA
         
         logger.info(f"Generando certificado para preservación ID={preservation_id}")
         
-        # Generar PDF
+        # Generar certificado
         try:
-            pdf_bytes = CertificateGenerator.generate_certificate(preservation_id)
+            logger.info("🔧 Iniciando generación de certificado...")
+            pdf_path = generate_certificate(record)
             
+            # Verificación redundante (doble check)
+            if not Path(pdf_path).exists():
+                raise FileNotFoundError(f"PDF no encontrado en {pdf_path}")
+            
+            logger.info(f"📤 Enviando PDF desde: {pdf_path}")
+            
+            # Enviar documento por Telegram (MÉTODO CORRECTO)
+            with open(pdf_path, "rb") as pdf_file:
+                await query.message.reply_document(
+                    document=pdf_file,
+                    filename=f"certificado_{record.file_hash[:8]}.pdf",
+                    caption=(
+                        f"✅ **Certificado de Preservación Digital**\n\n"
+                        f"Hash: `{record.file_hash[:32]}...`\n"
+                        f"Fecha: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+                    ),
+                    parse_mode="Markdown"
+                )
+            
+            logger.info(f"✅ Certificado enviado exitosamente a chat {user_id}")
+            
+        except FileNotFoundError as e:
+            logger.error(f"❌ Archivo no encontrado: {e}")
+            await query.answer("❌ Error: No se pudo generar el certificado PDF", show_alert=True)
+            await query.message.reply_text(
+                "❌ Error: No se pudo generar el certificado PDF. "
+                "Por favor contacta al administrador.",
+                parse_mode="Markdown"
+            )
         except Exception as e:
-            logger.exception(f"Error generando PDF: {type(e).__name__}: {e}")
-            await query.answer(f"Error al generar PDF: {str(e)}", show_alert=True)
-            return
-        
-        # Enviar PDF como documento
-        filename = f"AEE_Certificado_{preservation_id}.pdf"
-        
-        await query.message.reply_document(
-            document=pdf_bytes,
-            filename=filename,
-            caption=(
-                f"**Certificado de Preservación Digital**\n\n"
-                f"ID: {preservation_id}\n"
-                f"Hash: `{record.file_hash[:32]}...`\n"
-                f"Archivo: {record.file_name}"
-            ),
-            parse_mode="Markdown"
-        )
-        
-        logger.info(f"Certificado enviado al usuario: {filename}")
+            logger.error(f"❌ Error crítico al procesar certificado: {e}", exc_info=True)
+            await query.answer("❌ Error inesperado al generar el certificado", show_alert=True)
+            await query.message.reply_text(
+                f"❌ Error inesperado al generar el certificado.\n\n"
+                f"`{type(e).__name__}: {str(e)}`",
+                parse_mode="Markdown"
+            )
         
     except ValueError as e:
         logger.warning(f"Validación fallida: {e}")
@@ -453,7 +471,7 @@ def main():
     from aee.database import init_database
     init_database()
     
-    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "tu_bot_token_aqui")
+    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8551824212:AAHk_Yuo333K6Kl_fj3tVu8uV72_s0wjKtc")
     
     logger.info(f"Iniciando AEE Bot con token: {TOKEN[:20]}...")
     
