@@ -34,16 +34,17 @@ def calculate_file_hash(file_content: bytes, timestamp: datetime, user_id: str, 
     Returns:
         Hash SHA-256 hexadecimal (64 caracteres)
     """
-    # Serializar metadata de forma determinista
+    # Serializar metadata de forma determinista y normalizada
     metadata = {
         "timestamp": timestamp.isoformat() + 'Z',
         "user_id": user_id,
         "device_id": device_id or ""
     }
-    metadata_json = json.dumps(metadata, sort_keys=True, separators=(',', ':'))
+    metadata_json = json.dumps(metadata, sort_keys=True, ensure_ascii=False, separators=(',', ':'))
+    metadata_bytes = metadata_json.encode('utf-8')
     
-    # Concatenar contenido + metadata
-    combined = file_content + metadata_json.encode('utf-8')
+    # Concatenación binaria con delimitador nulo para prevenir colisiones
+    combined = metadata_bytes + b'\x00' + file_content
     
     # Calcular hash
     return hashlib.sha256(combined).hexdigest()
