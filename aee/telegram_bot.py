@@ -1,15 +1,9 @@
-"""
-aee/telegram_bot.py
-Bot de Telegram para AEE - Acta de Evidencia Electrónica
-Preservación digital con certificación criptográfica.
-"""
-
 import logging
 import hashlib
 import re
 import os
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, File
@@ -18,7 +12,7 @@ from telegram.ext import (
     filters, ContextTypes
 )
 
-from aee.database import DatabaseManager
+from aee.database import DatabaseManager, calculate_file_hash
 from aee.certificate import generate_certificate
 
 # Configure logging
@@ -40,96 +34,72 @@ PRESERVATION_CACHE = {}  # Para vincular callbacks con preservaciones
 # ============================================================================
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Maneja el comando /start.
-    Presenta el bot y sus capacidades.
-    """
-    logger.info(f"Usuario {update.effective_user.id} envió /start")
-    
-    start_message = (
-        "**Bienvenido a AEE Bot - Acta de Evidencia Electrónica**\n\n"
-        "Soy un bot especializado en certificación criptográfica digital.\n\n"
-        "**¿Qué puedo hacer?**\n"
-        "Genero hashes SHA-256 de tus archivos (fotos, documentos)\n"
-        "Emito certificados PDF profesionales de preservación\n"
-        "Valido la integridad comparando archivos\n\n"
-        "**Comandos disponibles:**\n"
-        "`/start` - Muestra este mensaje\n"
-        "`/verificar` - Compara integridad de dos archivos\n"
-        "`/historial` - Lista tus preservaciones recientes\n\n"
-        "**Cómo empezar:**\n"
-        "1. Envía una foto o documento\n"
-        "2. Recibirás el hash SHA-256\n"
-        "3. Descarga tu certificado PDF\n"
-        "4. Usa `/verificar` para validar otros archivos\n\n"
-        "*Sistema de preservación digital con firma criptográfica*"
+    await update.message.reply_text(
+        "**AEE Bot - Preservación Digital**\n\n"
+        "Envía archivos para calcular hash SHA-256 con metadata.\n"
+        "Usa `/verificar` respondiendo a un mensaje con hash.\n"
+        "Comandos: `/start`, `/verificar`, `/historial`",
+        parse_mode="Markdown"
     )
-    
-    await update.message.reply_text(start_message, parse_mode="Markdown")
 
 
 async def verify_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Verifica la integridad de un archivo comparándolo con uno anterior.
-    """
-    logger.info(f"Usuario {update.effective_user.id} envió comando /verificar")
+    logger.info(f"Usuario {update.effective_user.id} envió /verificar")
     
     try:
         message = update.message
         
-        # VALIDACIÓN 1: ¿Está respondiendo a un mensaje previo?
         if not message.reply_to_message:
-            logger.warning("verify_command: No hay mensaje anterior")
-            await message.reply_text(
-                "Debes responder a un mensaje anterior con el comando `/verificar`.\n\n"
-                "Ejemplo: Responde el mensaje que contiene el hash con `/verificar`.",
-                parse_mode="Markdown"
-            )
+            await message.reply_text("Responde a un mensaje con hash usando `/verificar`.", parse_mode="Markdown")
             return
         
         original_text = message.reply_to_message.text
-        logger.debug(f"Texto del mensaje anterior: {original_text[:100]}...")
+        hash_match = re.search(r'([a-fA-F0-9]{64})', re.sub(r'\s+', '', original_text))
         
-        # VALIDACIÓN 2: ¿El mensaje anterior contiene un hash?
-        # Extraer cualquier hash SHA-256 válido aunque esté partido en líneas
-        clean_text = re.sub(r'\s+', '', original_text)
-        hash_match = re.search(r'([a-fA-F0-9]{64})', clean_text)
-
         if not hash_match:
-            logger.warning("verify_command: No se encontró patrón de hash")
-            await message.reply_text(
-                "No se encontró un hash SHA-256 válido en el mensaje original.",
-                parse_mode="Markdown"
-            )
+            await message.reply_text("No se encontró hash SHA-256 válido.", parse_mode="Markdown")
             return
-
+        
         original_hash = hash_match.group(1)
-        logger.info(f"Hash original reconstruido correctamente: {original_hash}")
         
-        # VALIDACIÓN 3: ¿El mensaje actual contiene una foto?
-        if not message.photo:
-            logger.warning("verify_command: Sin foto en mensaje actual")
-            await message.reply_text(
-                "Debes enviar una foto o documento junto con `/verificar`.",
-                parse_mode="Markdown"
-            )
+        # VALIDACIÓN 3: ¿El mensaje actual contiene archivo?
+        if not (message.photo or message.document):
+            await message.reply_text("Envía una foto o documento para verificar.", parse_mode="Markdown")
             return
         
-        # VALIDACIÓN 4: Descargar y calcular hash
+        # Descargar archivo
         try:
-            file_id = message.photo[-1].file_id
+            if message.photo:
+                file_id = message.photo[-1].file_id
+            else:
+                file_id = message.document.file_id
+            
             new_file = await context.bot.get_file(file_id)
             file_content = await new_file.download_as_bytearray()
-            new_hash = hashlib.sha256(file_content).hexdigest()
-            
-            logger.info(f"Hash nuevo calculado: {new_hash}")
             
         except Exception as e:
-            logger.exception(f"Error descargando archivo: {type(e).__name__}: {e}")
-            await message.reply_text(
-                f"Error al descargar el archivo: {str(e)}",
-                parse_mode="Markdown"
+            logger.exception(f"Error descargando: {e}")
+            await message.reply_text(f"Error al descargar: {str(e)}", parse_mode="Markdown")
+            return
+        
+        # Buscar registro original por hash
+        original_record = DatabaseManager.get_preservation_by_hash(original_hash)
+        if not original_record:
+            await message.reply_text("Hash no encontrado en registros.", parse_mode="Markdown")
+            return
+        
+        # Calcular hash del nuevo archivo con metadata original
+        try:
+            new_hash = calculate_file_hash(
+                file_content=file_content,
+                timestamp=original_record.timestamp_utc,
+                user_id=original_record.user_id,
+                device_id=original_record.device_id
             )
+            
+        except Exception as e:
+            logger.exception(f"Error calculando hash: {e}")
+            await message.reply_text(f"Error al procesar: {str(e)}", parse_mode="Markdown")
             return
         
         # VERIFICACIÓN FINAL
@@ -204,122 +174,52 @@ async def historial_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ============================================================================
 
 async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Preserva un archivo (foto o documento) calculando su hash SHA-256.
-    Registra en BD y ofrece descargar certificado PDF.
-    """
     logger.info(f"Usuario {update.effective_user.id} envió archivo")
     
     try:
         message = update.message
         user_id = str(update.effective_user.id)
         
-        # VALIDACIÓN 1: No procesar comandos
         if message.text and message.text.startswith('/'):
-            logger.debug(f"Ignorando comando: {message.text}")
             return
         
-        # VALIDACIÓN 2: Determinar tipo de archivo
-        file_id = None
-        file_type = None
-        file_name = None
-        mime_type = None
-        
+        # Determinar tipo de archivo
         if message.document:
             file_id = message.document.file_id
-            file_type = "documento"
             file_name = message.document.file_name
             mime_type = message.document.mime_type
-            logger.debug(f"Tipo: Documento - MIME: {mime_type}")
-            
         elif message.photo:
-            if len(message.photo) == 0:
-                logger.warning("photo existe pero está vacía")
-                await message.reply_text("No se recibió imagen válida.")
-                return
-            
             file_id = message.photo[-1].file_id
-            file_type = "foto"
-            file_name = f"photo_{datetime.utcnow().isoformat()}.jpg"
+            file_name = f"photo_{datetime.now(timezone.utc).isoformat()}.jpg"
             mime_type = "image/jpeg"
-            logger.debug(f"Tipo: Foto")
-            
         else:
-            logger.info("Mensaje sin foto ni documento")
-            await message.reply_text(
-                "Por favor, envía una **foto** o **documento**.",
-                parse_mode="Markdown"
-            )
+            await message.reply_text("Envía una foto o documento.", parse_mode="Markdown")
             return
         
-        if not file_id:
-            logger.error("file_id es None")
-            await message.reply_text("Error: No se pudo extraer el ID del archivo.")
-            return
-        
-        logger.info(f"File ID: {file_id[:20]}... (tipo: {file_type})")
-        
-        # VALIDACIÓN 3: Descargar archivo
+        # Descargar archivo
         try:
             new_file = await context.bot.get_file(file_id)
             file_content = await new_file.download_as_bytearray()
-            logger.info(f"Archivo descargado - Tamaño: {len(file_content)} bytes")
-            
-        except FileNotFoundError as e:
-            logger.error(f"Archivo no encontrado: {e}")
-            await message.reply_text(
-                "El archivo no está disponible en los servidores de Telegram.",
-                parse_mode="Markdown"
-            )
-            return
-            
         except Exception as e:
-            logger.exception(f"Error descargando archivo: {type(e).__name__}: {e}")
-            await message.reply_text(
-                f"Error al descargar: {type(e).__name__}",
-                parse_mode="Markdown"
-            )
+            logger.exception(f"Error descargando: {e}")
+            await message.reply_text(f"Error al descargar: {str(e)}", parse_mode="Markdown")
             return
         
-        # VALIDACIÓN 4: Calcular hash SHA-256
-        try:
-            file_hash = hashlib.sha256(file_content).hexdigest()
-            logger.info(f"Hash SHA-256 calculado: {file_hash}")
-            
-        except Exception as e:
-            logger.exception(f"Error calculando SHA-256: {type(e).__name__}: {e}")
-            await message.reply_text(f"Error al procesar el archivo: {str(e)}")
-            return
-        
-        # VALIDACIÓN 5: Registrar en BD
+        # Registrar preservación
         try:
             preservation = DatabaseManager.add_preservation(
-                file_hash=file_hash,
+                file_content=file_content,
                 file_name=file_name,
                 mime_type=mime_type,
-                file_size=len(file_content),
                 user_id=user_id
             )
-            
-            logger.info(f"Preservación registrada: ID={preservation.id}")
-            
-            # Guardar en cache para callbacks
-            PRESERVATION_CACHE[f"cert_{preservation.id}"] = preservation.id
-            
+            file_hash = preservation.file_hash
         except ValueError as e:
-            logger.warning(f"Validación fallida: {e}")
-            await message.reply_text(
-                f"⚠️ {str(e)}",
-                parse_mode="Markdown"
-            )
+            await message.reply_text(f"⚠️ {str(e)}", parse_mode="Markdown")
             return
-            
         except Exception as e:
-            logger.exception(f"Error en BD: {type(e).__name__}: {e}")
-            await message.reply_text(
-                f"Error al registrar preservación: {str(e)}",
-                parse_mode="Markdown"
-            )
+            logger.exception(f"Error registro: {e}")
+            await message.reply_text(f"Error: {str(e)}", parse_mode="Markdown")
             return
         
         # ÉXITO: Enviar reporte con botón de certificado
@@ -327,7 +227,7 @@ async def preserve_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"**PRESERVACIÓN TÉCNICA REGISTRADA**\n\n"
             f"**Tipo de archivo:** {file_type.upper()}\n"
             f"**Tamaño:** {len(file_content):,} bytes\n"
-            f"**Timestamp:** {datetime.utcnow().isoformat()}Z\n"
+            f"**Timestamp:** {datetime.now(timezone.utc).isoformat()}Z\n"
             f"**Algoritmo:** SHA-256\n\n"
             f"**Hash:** `{file_hash}`\n\n"
             f"*Puedes usar `/verificar` para comparar integridad*"

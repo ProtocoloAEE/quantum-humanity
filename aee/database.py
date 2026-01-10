@@ -1,16 +1,12 @@
-"""
-aee/database.py
-Módulo de persistencia de datos usando SQLAlchemy y SQLite.
-Gestiona almacenamiento de preservaciones digitales con integridad.
-"""
-
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import SQLAlchemyError
 import os
+import hashlib
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -22,23 +18,41 @@ DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
 Base = declarative_base()
 
 # ============================================================================
+# FUNCIONES DE HASHING
+# ============================================================================
+
+def calculate_file_hash(file_content: bytes, timestamp: datetime, user_id: str, device_id: str = None) -> str:
+    """
+    Calcula hash SHA-256 determinista de archivo + metadata crítica.
+    
+    Args:
+        file_content: Contenido del archivo en bytes
+        timestamp: Timestamp de preservación
+        user_id: ID del autor
+        device_id: ID del dispositivo (opcional)
+    
+    Returns:
+        Hash SHA-256 hexadecimal (64 caracteres)
+    """
+    # Serializar metadata de forma determinista
+    metadata = {
+        "timestamp": timestamp.isoformat() + 'Z',
+        "user_id": user_id,
+        "device_id": device_id or ""
+    }
+    metadata_json = json.dumps(metadata, sort_keys=True, separators=(',', ':'))
+    
+    # Concatenar contenido + metadata
+    combined = file_content + metadata_json.encode('utf-8')
+    
+    # Calcular hash
+    return hashlib.sha256(combined).hexdigest()
+
+# ============================================================================
 # MODELO DE TABLA: Preservations
 # ============================================================================
 
 class PreservationRecord(Base):
-    """
-    Modelo de registro de preservación digital.
-    
-    Campos:
-        id: Identificador único del registro
-        file_hash: Hash SHA-256 del archivo (64 caracteres hexadecimales)
-        file_name: Nombre original del archivo (ej: documento.pdf)
-        mime_type: Tipo MIME del archivo (ej: image/jpeg)
-        file_size: Tamaño del archivo en bytes
-        user_id: ID del usuario de Telegram que subió el archivo
-        timestamp_utc: Marca de tiempo UTC de la preservación (RFC 3339)
-        cryptographic_signature: Campo reservado para firma criptográfica futura
-    """
     __tablename__ = 'preservations'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -47,21 +61,13 @@ class PreservationRecord(Base):
     mime_type = Column(String(100), nullable=True)
     file_size = Column(Integer, nullable=False)
     user_id = Column(String(20), nullable=False, index=True)
-    timestamp_utc = Column(DateTime, nullable=False, default=datetime.utcnow)
-    cryptographic_signature = Column(Text, nullable=True)  # Campo reservado para firma criptográfica
+    timestamp_utc = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
+    device_id = Column(String(100), nullable=True)
     
     def __repr__(self):
-        return (
-            f"<PreservationRecord("
-            f"id={self.id}, "
-            f"hash={self.file_hash[:16]}..., "
-            f"size={self.file_size}, "
-            f"timestamp={self.timestamp_utc}"
-            f")>"
-        )
+        return f"<PreservationRecord(id={self.id}, hash={self.file_hash[:16]}..., size={self.file_size})>"
     
     def to_dict(self) -> dict:
-        """Convierte el registro a diccionario para serialización."""
         return {
             'id': self.id,
             'file_hash': self.file_hash,
@@ -70,7 +76,7 @@ class PreservationRecord(Base):
             'file_size': self.file_size,
             'user_id': self.user_id,
             'timestamp_utc': self.timestamp_utc.isoformat() + 'Z',
-            'cryptographic_signature': self.cryptographic_signature
+            'device_id': self.device_id
         }
 
 
@@ -133,67 +139,64 @@ class DatabaseManager:
         return cls._SessionLocal()
     
     @classmethod
-    def add_preservation(cls, file_hash: str, file_name: str, mime_type: str,
-                        file_size: int, user_id: str) -> PreservationRecord:
+    def add_preservation(cls, file_content: bytes, file_name: str, mime_type: str,
+                        user_id: str, device_id: str = None) -> PreservationRecord:
         """
-        Registra una preservación digital en la base de datos.
+        Registra una preservación digital calculando hash de contenido + metadata.
         
         Args:
-            file_hash: Hash SHA-256 del archivo (64 caracteres)
+            file_content: Contenido del archivo en bytes
             file_name: Nombre del archivo
             mime_type: Tipo MIME
-            file_size: Tamaño en bytes
-            user_id: ID del usuario (Telegram)
+            user_id: ID del usuario
+            device_id: ID del dispositivo (opcional)
         
         Returns:
-            PreservationRecord: El registro creado
+            PreservationRecord creado
         
         Raises:
             ValueError: Si el hash ya existe
-            SQLAlchemyError: Si hay error en la BD
         """
         session = None
         try:
             session = cls.get_session()
             
-            # Validar que el hash sea válido (64 caracteres hexadecimales)
-            if not isinstance(file_hash, str) or len(file_hash) != 64:
-                raise ValueError(f"Hash inválido: debe ser 64 caracteres hex, recibido: {file_hash}")
+            # Calcular timestamp
+            timestamp = datetime.now(timezone.utc)
             
-            # Verificar si el hash ya existe
+            # Calcular hash determinista
+            file_hash = calculate_file_hash(file_content, timestamp, user_id, device_id)
+            
+            # Verificar duplicado
             existing = session.query(PreservationRecord).filter_by(file_hash=file_hash).first()
             if existing:
-                logger.warning(f"Hash duplicado detectado: {file_hash}")
-                raise ValueError(f"El archivo ya ha sido preservado: {file_hash}")
+                raise ValueError(f"Archivo ya preservado: {file_hash}")
             
-            # Crear nuevo registro
+            # Crear registro
             preservation = PreservationRecord(
                 file_hash=file_hash,
                 file_name=file_name,
                 mime_type=mime_type,
-                file_size=file_size,
+                file_size=len(file_content),
                 user_id=user_id,
-                timestamp_utc=datetime.utcnow()
+                timestamp_utc=timestamp,
+                device_id=device_id
             )
             
             session.add(preservation)
             session.commit()
             
-            logger.info(
-                f"Preservación registrada: ID={preservation.id}, "
-                f"Hash={file_hash[:16]}..., User={user_id}"
-            )
+            logger.info(f"Preservación registrada: ID={preservation.id}, Hash={file_hash[:16]}...")
             
             return preservation
             
-        except ValueError as e:
-            logger.warning(f"Validación fallida: {e}")
+        except ValueError:
             if session:
                 session.rollback()
             raise
             
         except SQLAlchemyError as e:
-            logger.exception(f"Error de base de datos: {type(e).__name__}: {e}")
+            logger.exception(f"Error BD: {e}")
             if session:
                 session.rollback()
             raise

@@ -1,6 +1,3 @@
-"""
-Módulo de generación de certificados PDF de preservación digital
-"""
 import os
 from pathlib import Path
 from datetime import datetime
