@@ -1,7 +1,7 @@
 # Protocolo AEE (v1.2.0)
 ### Deterministic Integrity Anchor for Critical Data & AI Pipelines
 
-El Protocolo AEE es un **primitive criptográfico** diseñado para crear anclajes de integridad deterministas. Vincula contenido binario con metadatos contextuales mediante una ejecución reproducible y verificable.
+Protocolo de Soberanía Digital y Anclaje Determinista de Integridad.
 
 > **Filosofía de Diseño:** En sistemas dominados por procesos probabilísticos (IA), la integridad del dato de entrada debe ser determinista. AEE actúa como una aduana de integridad previa al procesamiento.
 
