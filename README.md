@@ -32,3 +32,32 @@ No garantiza autoría legal (requiere PKI / firma digital externa).
 No es resistente a computación cuántica (usa SHA-256 estándar).
 
 Certifica integridad (el dato no cambió), no veracidad del contenido.
+
+---
+
+## Examples: Composing AEE with External Systems
+
+AEE puede componerse con sistemas externos para capacidades adicionales. Estos ejemplos son composiciones externas, no parte del core AEE.
+
+### Example: Digital Signature (PKI)
+```python
+# 1. Generate deterministic integrity anchor
+anchor = aee.generate_anchor("document.pdf", metadata)
+
+# 2. Sign anchor with external private key (PKI)
+signature = private_key.sign(anchor.encode())
+
+# 3. Verify signature with public key
+public_key.verify(signature, anchor.encode())
+```
+
+### Example: Trusted Timestamp (TSA / RFC 3161)
+```python
+# 1. Generate anchor
+anchor = aee.generate_anchor("dataset.parquet", metadata)
+
+# 2. Send anchor to external TSA
+timestamp_token = tsa_client.timestamp(anchor)
+```
+
+**Nota**: AEE NO implementa PKI ni TSA. Estas capacidades son responsabilidad de capas externas.
