@@ -2,7 +2,7 @@
 ### Deterministic Integrity Primitive
 
 **Status:** Stable  
-**Version:** 1.2.0  
+**Version:** 1.2.1  
 **Audience:** Software Architects, Security Engineers, Auditors
 
 ---

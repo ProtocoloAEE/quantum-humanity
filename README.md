@@ -1,4 +1,4 @@
-# Protocolo AEE (v1.2.0)
+# Protocolo AEE (v1.2.1)
 ### Deterministic Integrity Anchor for Critical Data & AI Pipelines
 
 Protocolo de Soberanía Digital y Anclaje Determinista de Integridad.
