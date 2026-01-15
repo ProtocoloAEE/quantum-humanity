@@ -36,8 +36,7 @@ AEE es una **capa base de preservación**, no un sistema legal ni un framework d
 - **Auditabilidad:** Verificación manual y reproducible
 - **Sin dependencias externas:** Solo Python estándar
 
-📜 [Architecture Overview](./ARCHITECTURE.md)  
-🛡️ [Threat Model](./THREAT_MODEL.md)
+Para detalles técnicos de la implementación, revisa `aee/protocol.py` que contiene docstrings completos.
 
 ---
 
@@ -82,7 +81,7 @@ AEE - Integrity Verification
 Expected Anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
 Current Anchor : 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
 
-Timestamp: 2026-01-14T23:12:04Z
+Timestamp: 2026-01-15T03:16:50.670939Z
 ════════════════════════════════════════════
 ```
 
@@ -94,9 +93,9 @@ AEE - Integrity Verification
 ✖ Status: MISMATCH
 
 Expected Anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
-Current Anchor : a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0
+Current Anchor : c9c81b9162dc76edcdc4f81a856e8258fdf463f62bacf0a3f25fdf6b995f28ba
 
-Timestamp: 2026-01-14T23:12:05Z
+Timestamp: 2026-01-15T03:15:47.872629Z
 ════════════════════════════════════════════
 ```
 
@@ -264,16 +263,11 @@ bash run_test.sh  # Linux/macOS
 
 Expected output:
 ```
+AEE - Integrity Audit Test
+---
 ✔ INTEGRITY ANCHOR GENERATED
-Anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
-Status: VERIFIED
-```
-
-### Test Automatizado (pytest)
-
-```bash
-pip install pytest
-pytest tests/ -v
+✔ Status: VERIFIED
+Test Results: PASSED
 ```
 
 ---
@@ -290,10 +284,10 @@ pytest tests/ -v
 
 ## 📚 Documentación
 
-- 📖 [Architecture Overview](./ARCHITECTURE.md)
-- 🛡️ [Threat Model](./THREAT_MODEL.md)
-- 🔐 [Security Best Practices](./SECURITY.md)
-- 🛠️ [Integration Guide](./INTEGRATION.md)
+Para detalles técnicos de la implementación, revisa:
+- `aee/protocol.py` — Código completo con docstrings
+- `main.py` — CLI con argumentos y manejo de errores
+- `examples/audit-dataset/` — Ejemplo reproducible
 
 ---
 
@@ -315,6 +309,6 @@ Para reportar bugs o sugerir features:
 ## 📧 Contact
 
 Protocol Architect: Franco Carricondo  
-Email: [tu email]  
-GitHub: [tu repo]  
-Zenodo DOI: https://zenodo.org/records/18239613
+GitHub: https://github.com/ProtocoloAEE/quantum-humanity  
+Version: 1.2.1  
+Last Updated: January 15, 2026
