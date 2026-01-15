@@ -315,6 +315,6 @@ Para reportar bugs o sugerir features:
 ## 📧 Contact
 
 Protocol Architect: Franco Carricondo  
-Email: [tu email]  
-GitHub: [tu repo]  
+Email: [francocarricondo@gmail.com]  
+GitHub: [https://github.com/ProtocoloAEE/quantum-humanity]  
 Zenodo DOI: https://zenodo.org/records/18239613
