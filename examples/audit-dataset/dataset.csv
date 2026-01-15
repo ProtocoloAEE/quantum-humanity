@@ -1,0 +1,4 @@
+id,name,value,timestamp
+1,record_a,100.5,2026-01-14T12:00:00Z
+2,record_b,200.3,2026-01-14T12:15:00Z
+3,record_c,150.7,2026-01-14T12:30:00Z

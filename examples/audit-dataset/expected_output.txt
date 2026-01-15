@@ -1,0 +1,34 @@
+STEP 1: Generate Integrity Anchor
+==================================
+════════════════════════════════════════════
+AEE - Integrity Audit Test
+════════════════════════════════════════════
+File  : dataset.csv
+User  : audit-test
+
+✔ INTEGRITY ANCHOR GENERATED
+════════════════════════════════════════════
+Anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
+Status: GENERATED
+════════════════════════════════════════════
+
+Extracted anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
+
+STEP 2: Verify Integrity
+==================================
+════════════════════════════════════════════
+AEE - Integrity Verification
+════════════════════════════════════════════
+✔ Status: VERIFIED
+
+Expected Anchor: 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
+Current Anchor : 13ac0b6d7c175349477a9ae65a0ab348be712c01a7c46e8ba2489e60b7332bbc
+
+Timestamp: 2026-01-14T23:12:04Z
+════════════════════════════════════════════
+
+✔ Test finished successfully.
+
+==================================
+Test Results: PASSED
+==================================
